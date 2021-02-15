@@ -1,0 +1,105 @@
+{
+  "name": "zedcoin",
+  "version": "2.0.0",
+  "title": "zedcoin",
+  "homepage": "",
+  "description": "Easy to customize application inspired by the cryptocurrency products niche. Start working on your product today with this amazing, clean and feature-packed niche template.",
+  "author": {
+    "name": "UiFort.com",
+    "url": "https://uifort.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "dependencies": {
+    "react-dom": "16.13.1",
+    "react-router": "5.1.2",
+    "react-router-dom": "5.1.2",
+    "react-redux": "7.2.0",
+    "redux": "4.0.5",
+    "clsx": "1.1.0",
+    "react-scripts": "3.4.1",
+    "@material-ui/core": "4.9.14",
+    "@material-ui/lab": "4.0.0-alpha.53",
+    "@material-ui/icons": "4.5.1",
+    "framer-motion": "1.10.3",
+    "react-apexcharts": "1.3.7",
+    "apexcharts": "3.19.0",
+    "react-dropzone": "11.0.1",
+    "react-draft-wysiwyg": "1.14.5",
+    "draft-js": "0.11.5",
+    "draftjs-to-html": "0.9.1",
+    "html-to-draftjs": "1.5.0",
+    "react-quill": "1.3.5",
+    "react-gauge-chart": "0.2.5",
+    "react-joyride": "2.2.1",
+    "react-big-calendar": "0.24.6",
+    "react-slick": "0.26.0",
+    "react-chartjs-2": "2.9.0",
+    "chart.js": "2.9.3",
+    "react-contextmenu": "2.13.0",
+    "react-countup": "4.3.3",
+    "immutability-helper": "3.0.2",
+    "react-dnd": "10.0.2",
+    "react-dnd-html5-backend": "10.0.2",
+    "react-color": "2.18.1",
+    "react-copy-to-clipboard": "5.0.2",
+    "react-text-mask": "5.4.3",
+    "react-cropper": "1.3.0",
+    "react-block-ui": "1.3.3",
+    "react-spinners": "0.8.3",
+    "react-leaflet": "2.6.1",
+    "leaflet": "1.6.0",
+    "google-map-react": "1.1.7",
+    "@fortawesome/free-regular-svg-icons": "5.13.0",
+    "@fortawesome/free-solid-svg-icons": "5.13.0",
+    "@fortawesome/free-brands-svg-icons": "5.13.0",
+    "@fortawesome/react-fontawesome": "0.1.9",
+    "@fortawesome/fontawesome-svg-core": "1.2.28",
+    "react-ionicons": "3.1.4",
+    "react-flag-kit": "0.3.1",
+    "react-circular-progressbar": "2.0.3",
+    "react-perfect-scrollbar": "1.5.8",
+    "hamburgers": "1.1.3",
+    "react-trend": "1.2.5",
+    "react-sparklines": "1.7.0",
+    "date-fns": "2.9.0",
+    "@date-io/date-fns": "1.3.13",
+    "@material-ui/pickers": "3.2.10",
+    "formik": "2.1.4",
+    "yup": "0.28.5",
+    "react": "16.13.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "format": "./node_modules/.bin/eslint --fix --ignore-path .gitignore ."
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "eslint-plugin-prettier": "3.1.3",
+    "eslint-plugin-react": "7.19.0",
+    "eslint-plugin-unused-imports": "0.1.3",
+    "prettier": "2.0.5",
+    "prettier-eslint": "9.0.1",
+    "prettier-eslint-cli": "5.0.0",
+    "node-sass": "4.14.1"
+  }
+}

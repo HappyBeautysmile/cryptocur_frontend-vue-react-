@@ -1,0 +1,79 @@
+// Material UI Helpers
+body {
+  .MuiButtonBase-root {
+    min-width: 0;
+    outline: none !important;
+  }
+
+  .MuiButton-root {
+    line-height: initial;
+
+    &:focus {
+      outline: none;
+    }
+  }
+
+  .MuiPaper-root {
+    color: $body-color;
+  }
+}
+
+
+.MuiGrid-item,
+.MuiPaper-root {
+  position: relative;
+}
+@include media-breakpoint-down(lg) {
+  .MuiGrid-item {
+    width: 100%;
+  }
+}
+
+.MuiCard-root {
+  transition: $transition-base;
+}
+
+a.MuiButton-outlined:hover {
+  color: initial;
+}
+
+.min-w-auto {
+  min-width: 5px !important;
+}
+
+.overflow-visible {
+  overflow: visible !important;
+}
+
+.overflow-hidden {
+  outline: none !important;
+}
+
+.MuiButton-root.btn-inverse:hover {
+  background-color: rgba(255,255,255,.07);
+}
+
+// Custom spacing
+
+.mb-spacing-6 {
+  margin-bottom: 24px;
+}
+
+.mb-spacing-6-x2 {
+  margin-bottom: 48px;
+}
+
+// Forms
+
+body {
+
+  .MuiOutlinedInput-notchedOutline {
+    transition: $transition-base;
+  }
+
+  .MuiOutlinedInput-root:hover {
+    .MuiOutlinedInput-notchedOutline {
+      border-color: $primary;
+    }
+  }
+}

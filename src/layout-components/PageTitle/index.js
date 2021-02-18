@@ -49,11 +49,11 @@ const PageTitle = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  pageTitleStyle: state.ThemeOptions.pageTitleStyle,
-  pageTitleBackground: state.ThemeOptions.pageTitleBackground,
-  pageTitleShadow: state.ThemeOptions.pageTitleShadow,
-  pageTitleIconBox: state.ThemeOptions.pageTitleIconBox,
-  pageTitleDescription: state.ThemeOptions.pageTitleDescription
+  pageTitleStyle: state.pagetitle.pageTitleStyle,
+  pageTitleBackground: state.pagetitle.pageTitleBackground,
+  pageTitleShadow: state.pagetitle.pageTitleShadow,
+  pageTitleIconBox: state.pagetitle.pageTitleIconBox,
+  pageTitleDescription: state.pagetitle.pageTitleDescription
 });
 
 export default connect(mapStateToProps)(PageTitle);

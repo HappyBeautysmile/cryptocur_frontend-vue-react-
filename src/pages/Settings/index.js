@@ -2,8 +2,8 @@ import React from 'react';
 
 import { PageTitle } from '../../layout-components';
 
-import SettingsProfileForms from '../../example-components/Settings/SettingsProfileForms';
-import SettingsPageTitleActions from '../../example-components/Settings/SettingsPageTitleActions';
+import SettingsProfileForms from '../../components/Settings/SettingsProfileForms';
+import SettingsPageTitleActions from '../../components/Settings/SettingsPageTitleActions';
 export default function Settings() {
   return (
     <>

@@ -7,7 +7,7 @@ import { Collapse } from '@material-ui/core';
 import { connect } from 'react-redux';
 
 import { NavLink } from 'react-router-dom';
-import { setSidebarToggleMobile } from '../../reducers/ThemeOptions';
+import { setSidebarToggleMobile } from '../../reduxs/actions/sidebar';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
 import ChevronRightTwoToneIcon from '@material-ui/icons/ChevronRightTwoTone';
@@ -194,14 +194,14 @@ const SidebarMenu = (props) => {
                   <li>
                     <NavLink
                       onClick={toggleSidebarMobile}
-                      to="/PageRegisterCover">
+                      to="/Register">
                       Register
                     </NavLink>
                   </li>
                   <li>
                     <NavLink
                       onClick={toggleSidebarMobile}
-                      to="/PageRecoverCover">
+                      to="/Register">
                       Recover Password
                     </NavLink>
                   </li>
@@ -221,11 +221,11 @@ const SidebarMenu = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  sidebarToggleMobile: state.ThemeOptions.sidebarToggleMobile
+  sidebarToggleMobile: state.sidebar.sidebarToggleMobile
 });
 
-const mapDispatchToProps = (dispatch) => ({
-  setSidebarToggleMobile: (enable) => dispatch(setSidebarToggleMobile(enable))
+const mapDispatchToProps = () => ({
+  setSidebarToggleMobile 
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SidebarMenu);

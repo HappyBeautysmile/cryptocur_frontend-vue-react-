@@ -59,9 +59,9 @@ const Footer = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  footerFixed: state.ThemeOptions.footerFixed,
-  footerShadow: state.ThemeOptions.footerShadow,
-  footerBgTransparent: state.ThemeOptions.footerBgTransparent
+  footerFixed: state.footer.footerFixed,
+  footerShadow: state.footer.footerShadow,
+  footerBgTransparent: state.footer.footerBgTransparent
 });
 
 export default connect(mapStateToProps)(Footer);

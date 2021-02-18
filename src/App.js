@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import configureStore from './config/configureStore';
+// import configureStore from './redux/configureStore';
 import { Provider } from 'react-redux';
 import Routes from './Routes';
 import ScrollToTop from './utils/ScrollToTop';
 import './assets/base.scss';
+import { store } from "./store"
+import { Layout } from "./utility/Layout"
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
@@ -255,16 +257,19 @@ library.add(
   faSignOutAlt,
   faLink
 );
-const store = configureStore();
+// const store = configureStore();
+
 class App extends Component {
   render() {
     return (
       <Provider store={store}>
+         <Layout>
         <BrowserRouter basename="/">
           <ScrollToTop>
             <Routes />
           </ScrollToTop>
         </BrowserRouter>
+         </Layout>
       </Provider>
     );
   }

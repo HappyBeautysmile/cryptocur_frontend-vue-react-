@@ -2,10 +2,10 @@ import React from 'react';
 
 import { PageTitle } from '../../layout-components';
 
-import AccountsList from '../../example-components/Accounts/AccountsList';
-import AccountsListDeactivated from '../../example-components/Accounts/AccountsListDeactivated';
-import AccountsTransactions from '../../example-components/Accounts/AccountsTransactions';
-import AccountsPageTitleActions from '../../example-components/Accounts/AccountsPageTitleActions';
+import AccountsList from '../../components/Accounts/AccountsList';
+import AccountsListDeactivated from '../../components/Accounts/AccountsListDeactivated';
+import AccountsTransactions from '../../components/Accounts/AccountsTransactions';
+import AccountsPageTitleActions from '../../components/Accounts/AccountsPageTitleActions';
 export default function Accounts() {
   return (
     <>

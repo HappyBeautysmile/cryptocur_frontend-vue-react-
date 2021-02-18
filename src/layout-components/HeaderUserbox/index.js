@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Badge, Menu, Button, List, ListItem } from '@material-ui/core';
-
 import avatar3 from '../../assets/images/avatars/avatar3.jpg';
 import CountUp from 'react-countup';
-
 import BusinessCenterTwoToneIcon from '@material-ui/icons/BusinessCenterTwoTone';
 import SettingsTwoToneIcon from '@material-ui/icons/SettingsTwoTone';
 import VerifiedUserTwoToneIcon from '@material-ui/icons/VerifiedUserTwoTone';
 import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
-
 import { withStyles } from '@material-ui/core/styles';
+import {history} from "../../history"
+import { connect } from 'react-redux'
+import {logout} from "../../reduxs/actions/login"
 
 const StyledBadge = withStyles({
   badge: {
@@ -42,7 +41,7 @@ const StyledBadge = withStyles({
   }
 })(Badge);
 
-const HeaderUserbox = () => {
+const HeaderUserbox = (props) => {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -52,6 +51,15 @@ const HeaderUserbox = () => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const handleNavigation = (e,path) =>{
+    e.preventDefault();
+    history.push(path)
+  }
+
+  const logout = () =>{
+    props.logout()
+  }
 
   return (
     <>
@@ -181,7 +189,7 @@ const HeaderUserbox = () => {
               component="a"
               button
               href="#/"
-              onClick={(e) => e.preventDefault()}>
+              onClick={(e) => logout()}>
               <div className="mr-2">
                 <ExitToAppTwoToneIcon />
               </div>
@@ -194,4 +202,13 @@ const HeaderUserbox = () => {
   );
 };
 
-export default HeaderUserbox;
+const mapStateToProps = (state) => ({
+  
+})
+
+const mapDispatchToProps = {
+  logout
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderUserbox)
+

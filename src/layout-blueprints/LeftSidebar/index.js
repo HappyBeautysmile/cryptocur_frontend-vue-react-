@@ -52,17 +52,22 @@ LeftSidebar.propTypes = {
   children: PropTypes.node
 };
 
-const mapStateToProps = (state) => ({
-  sidebarToggle: state.ThemeOptions.sidebarToggle,
-  sidebarToggleMobile: state.ThemeOptions.sidebarToggleMobile,
-  sidebarFixed: state.ThemeOptions.sidebarFixed,
-  headerFixed: state.ThemeOptions.headerFixed,
-  headerSearchHover: state.ThemeOptions.headerSearchHover,
-  headerDrawerToggle: state.ThemeOptions.headerDrawerToggle,
+const mapStateToProps = state =>{
 
-  footerFixed: state.ThemeOptions.footerFixed,
+  return {
+    sidebarToggle: state.sidebar.sidebarToggle,
+    sidebarToggleMobile: state.sidebar.sidebarToggleMobile,
+    sidebarFixed: state.sidebar.sidebarFixed,
 
-  contentBackground: state.ThemeOptions.contentBackground
-});
+    headerFixed: state.header.headerFixed,
+    headerSearchHover: state.header.headerSearchHover,
+    headerDrawerToggle: state.header.headerDrawerToggle,
+
+    footerFixed: state.footer.footerFixed,
+
+    contentBackground: state.maincontent.contentBackground
+  }
+}
+
 
 export default connect(mapStateToProps)(LeftSidebar);

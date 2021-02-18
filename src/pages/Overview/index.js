@@ -3,14 +3,14 @@ import React from 'react';
 import { PageTitle } from '../../layout-components';
 import { Grid } from '@material-ui/core';
 
-import OverviewPortfolio from '../../example-components/Overview/OverviewPortfolio';
-import OverviewActivity from '../../example-components/Overview/OverviewActivity';
-import OverviewNews from '../../example-components/Overview/OverviewNews';
-import OverviewVerification from '../../example-components/Overview/OverviewVerification';
-import OverviewWatchlist from '../../example-components/Overview/OverviewWatchlist';
-import OverviewPriceWatch from '../../example-components/Overview/OverviewPriceWatch';
-import OverviewWallets from '../../example-components/Overview/OverviewWallets';
-import OverviewPageTitleActions from '../../example-components/Overview/OverviewPageTitleActions';
+import OverviewPortfolio from '../../components/Overview/OverviewPortfolio';
+import OverviewActivity from '../../components/Overview/OverviewActivity';
+import OverviewNews from '../../components/Overview/OverviewNews';
+import OverviewVerification from '../../components/Overview/OverviewVerification';
+import OverviewWatchlist from '../../components/Overview/OverviewWatchlist';
+import OverviewPriceWatch from '../../components/Overview/OverviewPriceWatch';
+import OverviewWallets from '../../components/Overview/OverviewWallets';
+import OverviewPageTitleActions from '../../components/Overview/OverviewPageTitleActions';
 export default function Overview() {
   return (
     <>

@@ -1,1 +1,1 @@
-# cryptocur_stellar_customer_frontend
+# cryptocur_stellar_admin_frontend

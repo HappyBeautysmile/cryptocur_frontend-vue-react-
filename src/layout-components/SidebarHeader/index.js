@@ -11,11 +11,13 @@ import { NavLink } from 'react-router-dom';
 import {
   setSidebarToggle,
   setSidebarToggleMobile
-} from '../../reducers/ThemeOptions';
+} from '../../reduxs/actions/sidebar';
 
 import projectLogo from '../../assets/images/react.svg';
 
 const SidebarHeader = (props) => {
+
+
   const toggleSidebarMobile = () => {
     setSidebarToggleMobile(!sidebarToggleMobile);
   };
@@ -81,8 +83,8 @@ const SidebarHeader = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  sidebarToggle: state.ThemeOptions.sidebarToggle,
-  sidebarToggleMobile: state.ThemeOptions.sidebarToggleMobile
+  sidebarToggle: state.sidebar.sidebarToggle,
+  sidebarToggleMobile: state.sidebar.sidebarToggleMobile
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -91,3 +93,4 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SidebarHeader);
+

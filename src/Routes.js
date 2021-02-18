@@ -1,39 +1,77 @@
-import React, { lazy, Suspense, useState, useEffect } from 'react';
-import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'framer-motion';
-import { ClimbingBoxLoader } from 'react-spinners';
-
+import React, { lazy, Suspense ,useEffect } from 'react';
+import { Switch, Route,Router,Redirect } from 'react-router-dom';
+import { AnimatePresence, motion ,} from 'framer-motion';
+import { connect } from 'react-redux';
 import { ThemeProvider } from '@material-ui/styles';
-
 import MuiTheme from './theme';
-
-// Layout Blueprints
-
-import {
-  LeftSidebar,
-  MinimalLayout,
-  PresentationLayout
-} from './layout-blueprints';
-
+import { history } from "./history"
+import { ContextLayout } from "./utility/Layout"
+import SuspenseLoading from "./utility/loading"
+import {is_session,fake_session,sessionchecking,getSession} from "./reduxs/actions"
 //Pages
 
-import Overview from './pages/Overview';
+// import Overview from './pages/Overview';
 import Accounts from './pages/Accounts';
 import Wallets from './pages/Wallets';
 import BuySell from './pages/BuySell';
 import Transactions from './pages/Transactions';
 import Profile from './pages/Profile';
 import Settings from './pages/Settings';
-// import PageLoginCover from './pages/PageLoginCover';
-import PageLoginBasic from './pages/PageLoginBasic';
-import PageRegisterCover from './pages/PageRegisterCover';
 import PageRecoverCover from './pages/PageRecoverCover';
 import PageError404 from './pages/PageError404';
 
 const Homepage = lazy(() => import('./pages/Homepage'));
+const Overview = lazy(() => import('./pages/Overview'));
 
-const Routes = () => {
-  const location = useLocation();
+const RouteConfig = ({ component: Component, LeftSidebar,MinimalLayout,PresentationLayout, ...rest }) =>{
+  
+  return(
+    <Route
+      {...rest}
+      render={props => {
+        return (
+          <ContextLayout.Consumer>
+            {context => {
+              console.log(context)
+              let LayoutTag =
+              PresentationLayout === true ? context.PresentationLayout : MinimalLayout === true ? context.MinimalLayout :  context.LeftSidebar
+              return (
+                <LayoutTag {...props}  >
+                  <Suspense fallback={<SuspenseLoading />}>
+                    <Component {...props} />
+                  </Suspense>
+                </LayoutTag>
+              )
+            }}
+          </ContextLayout.Consumer>
+        )
+      }}
+    />
+  )
+}
+const AppRoute = connect()(RouteConfig)
+
+
+const RequireAuth = (data) => {
+  if (!is_session()){
+    fake_session();
+    return <Redirect to={"/"} />;
+  }
+  if(data.children){
+    let items = data.children;
+      for(var i in items){
+        if( items[i] && items[i].props.path === data.location.pathname){
+          return items.slice(0, items.length-1);
+        }
+      }
+      return items.slice(items.length-1, data.children.length);
+  }else{
+    return false;
+  }
+};
+
+
+const Routes = (props) => {
 
   const pageVariants = {
     initial: {
@@ -52,129 +90,49 @@ const Routes = () => {
     ease: 'linear',
     duration: 0.3
   };
+  useEffect(() => {
+    let get_sess =  getSession();
+    if(get_sess){
+      props.sessionchecking(get_sess);
+    }
+  });
 
-  const SuspenseLoading = () => {
-    const [show, setShow] = useState(false);
-    useEffect(() => {
-      let timeout = setTimeout(() => setShow(true), 300);
-      return () => {
-        clearTimeout(timeout);
-      };
-    }, []);
 
-    return (
-      <>
-        <AnimatePresence>
-          {show && (
-            <motion.div
-              key="loading"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}>
-              <div className="d-flex align-items-center flex-column vh-100 justify-content-center text-center py-3">
-                <div className="d-flex align-items-center flex-column px-4">
-                  <ClimbingBoxLoader color={'#3c44b1'} loading={true} />
-                </div>
-                <div className="text-muted font-size-xl text-center pt-3">
-                  Please wait while we load the live preview examples
-                  <span className="font-size-lg d-block text-dark">
-                    This live preview instance can be slower than a real
-                    production build!
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </>
-    );
-  };
   return (
     <ThemeProvider theme={MuiTheme}>
       <AnimatePresence>
         <Suspense fallback={<SuspenseLoading />}>
-          <Switch>
-            <Redirect exact from="/" to="/Homepage" />
-            <Route path={['/Homepage']}>
-              <PresentationLayout>
-                <Switch location={location} key={location.pathname}>
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={pageTransition}>
-                    <Route path="/Homepage" component={Homepage} />
-                  </motion.div>
-                </Switch>
-              </PresentationLayout>
-            </Route>
-
-            <Route
-              path={[
-                '/Overview',
-                '/Accounts',
-                '/Wallets',
-                '/BuySell',
-                '/Transactions',
-                '/Profile',
-                '/Settings'
-              ]}>
-              <LeftSidebar>
-                <Switch location={location} key={location.pathname}>
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={pageTransition}>
-                    <Route path="/Overview" component={Overview} />
-                    <Route path="/Accounts" component={Accounts} />
-                    <Route path="/Wallets" component={Wallets} />
-                    <Route path="/BuySell" component={BuySell} />
-                    <Route path="/Transactions" component={Transactions} />
-                    <Route path="/Profile" component={Profile} />
-                    <Route path="/Settings" component={Settings} />
-                  </motion.div>
-                </Switch>
-              </LeftSidebar>
-            </Route>
-
-            <Route
-              path={[
-                '/login',
-                '/PageRegisterCover',
-                '/PageRecoverCover',
-                '/PageError404'
-              ]}>
-              <MinimalLayout>
-                <Switch location={location} key={location.pathname}>
-                  <motion.div
-                    initial="initial"
-                    animate="in"
-                    exit="out"
-                    variants={pageVariants}
-                    transition={pageTransition}>
-                    <Route path="/login" component={PageLoginBasic} />
-                    <Route
-                      path="/PageRegisterCover"
-                      component={PageRegisterCover}
-                    />
-                    <Route
-                      path="/PageRecoverCover"
-                      component={PageRecoverCover}
-                    />
-                    <Route path="/PageError404" component={PageError404} />
-                  </motion.div>
-                </Switch>
-              </MinimalLayout>
-            </Route>
-          </Switch>
+          <Router history={history}>
+            <Switch>
+              <motion.div initial="initial" animate="in" exit="out" variants={pageVariants} transition={pageTransition}>
+                <AppRoute exact path="/" component={Homepage} PresentationLayout />
+                <AppRoute exact path="/Homepage" component={Homepage} PresentationLayout />
+                <RequireAuth location={history.location}>
+                  <AppRoute path="/Overview" component={Overview} LeftSidebar />
+                  <AppRoute path="/Accounts" component={Accounts}  LeftSidebar/>
+                  <AppRoute path="/Wallets" component={Wallets}  LeftSidebar/>
+                  <AppRoute path="/BuySell" component={BuySell}  LeftSidebar/>
+                  <AppRoute path="/Transactions" component={Transactions}  LeftSidebar/>
+                  <AppRoute path="/Profile" component={Profile}  LeftSidebar/>
+                  <AppRoute path="/Settings" component={Settings}  LeftSidebar />
+                  <AppRoute path="/PageRecoverCover" component={PageRecoverCover} MinimalLayout />
+                  <AppRoute path="/PageError404" component={PageError404} MinimalLayout />
+                </RequireAuth>
+              </motion.div>
+            </Switch>
+          </Router>
         </Suspense>
       </AnimatePresence>
     </ThemeProvider>
   );
 };
 
-export default Routes;
+const mapStateToProps = (state) => ({
+  
+})
+
+const mapDispatchToProps = {
+  sessionchecking
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Routes)

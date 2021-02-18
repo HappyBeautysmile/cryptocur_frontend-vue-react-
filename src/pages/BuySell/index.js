@@ -3,9 +3,9 @@ import React from 'react';
 import { PageTitle } from '../../layout-components';
 import { Container } from '@material-ui/core';
 
-import BuySellExchange from '../../example-components/BuySell/BuySellExchange';
-import BuySellBankAccount from '../../example-components/BuySell/BuySellBankAccount';
-import BuySellPageTitleActions from '../../example-components/BuySell/BuySellPageTitleActions';
+import BuySellExchange from '../../components/BuySell/BuySellExchange';
+import BuySellBankAccount from '../../components/BuySell/BuySellBankAccount';
+import BuySellPageTitleActions from '../../components/BuySell/BuySellPageTitleActions';
 export default function BuySell() {
   return (
     <>

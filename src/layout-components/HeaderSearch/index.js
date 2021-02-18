@@ -7,7 +7,7 @@ import { TextField } from '@material-ui/core';
 
 import { connect } from 'react-redux';
 
-import { setHeaderSearchHover } from '../../reducers/ThemeOptions';
+import { setHeaderSearchHover } from '../../reduxs/actions/header';
 
 const HeaderSearch = (props) => {
   const { headerSearchHover, setHeaderSearchHover } = props;
@@ -42,7 +42,7 @@ const HeaderSearch = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  headerSearchHover: state.ThemeOptions.headerSearchHover
+  headerSearchHover: state.header.headerSearchHover
 });
 
 const mapDispatchToProps = (dispatch) => ({

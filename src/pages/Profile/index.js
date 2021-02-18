@@ -3,9 +3,9 @@ import React from 'react';
 import { PageTitle } from '../../layout-components';
 import { Container } from '@material-ui/core';
 
-import ProfileUserActions from '../../example-components/Profile/ProfileUserActions';
-import ProfileUserDetails from '../../example-components/Profile/ProfileUserDetails';
-import ProfilePageTitleActions from '../../example-components/Profile/ProfilePageTitleActions';
+import ProfileUserActions from '../../components/Profile/ProfileUserActions';
+import ProfileUserDetails from '../../components/Profile/ProfileUserDetails';
+import ProfilePageTitleActions from '../../components/Profile/ProfilePageTitleActions';
 export default function Profile() {
   return (
     <>

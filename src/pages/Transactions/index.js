@@ -2,9 +2,9 @@ import React from 'react';
 
 import { PageTitle } from '../../layout-components';
 
-import TransactionsHistory from '../../example-components/Transactions/TransactionsHistory';
-import TransactionsOrders from '../../example-components/Transactions/TransactionsOrders';
-import TransactionsPageTitleActions from '../../example-components/Transactions/TransactionsPageTitleActions';
+import TransactionsHistory from '../../components/Transactions/TransactionsHistory';
+import TransactionsOrders from '../../components/Transactions/TransactionsOrders';
+import TransactionsPageTitleActions from '../../components/Transactions/TransactionsPageTitleActions';
 export default function Transactions() {
   return (
     <>

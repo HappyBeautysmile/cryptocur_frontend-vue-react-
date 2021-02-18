@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import { connect } from 'react-redux';
 
-import { setSidebarToggleMobile } from '../../reducers/ThemeOptions';
+import { setSidebarToggleMobile } from '../../reduxs/actions/sidebar';
 
 import HeaderUserbox from '../../layout-components/HeaderUserbox';
 import HeaderSearch from '../../layout-components/HeaderSearch';
@@ -52,9 +52,9 @@ const Header = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  headerShadow: state.ThemeOptions.headerShadow,
-  headerBgTransparent: state.ThemeOptions.headerBgTransparent,
-  sidebarToggleMobile: state.ThemeOptions.sidebarToggleMobile
+  headerShadow: state.header.headerShadow,
+  headerBgTransparent: state.header.headerBgTransparent,
+  sidebarToggleMobile: state.sidebar.sidebarToggleMobile
 });
 
 const mapDispatchToProps = (dispatch) => ({

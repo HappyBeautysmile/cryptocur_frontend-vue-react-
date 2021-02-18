@@ -3,7 +3,7 @@ import clsx from 'clsx';
 
 import { connect } from 'react-redux';
 
-import { setSidebarToggleMobile } from '../../reducers/ThemeOptions';
+import { setSidebarToggleMobile } from '../../reduxs/actions/sidebar';
 
 import {
   SidebarHeader,
@@ -46,10 +46,10 @@ const Sidebar = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  sidebarShadow: state.ThemeOptions.sidebarShadow,
-  sidebarFooter: state.ThemeOptions.sidebarFooter,
-  sidebarStyle: state.ThemeOptions.sidebarStyle,
-  sidebarToggleMobile: state.ThemeOptions.sidebarToggleMobile
+  sidebarShadow: state.sidebar.sidebarShadow,
+  sidebarFooter: state.sidebar.sidebarFooter,
+  sidebarStyle: state.sidebar.sidebarStyle,
+  sidebarToggleMobile: state.sidebar.sidebarToggleMobile
 });
 
 const mapDispatchToProps = (dispatch) => ({

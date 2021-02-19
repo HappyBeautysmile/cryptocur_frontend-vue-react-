@@ -5,7 +5,7 @@ export const regist = (user) =>{
     return async dispatch =>{
         // console.log(user);
         var outdata =  await Apirequest("users/signup",user);
-        console.log(outdata);
+        // console.log(outdata);
         if(outdata.status){
             // setSession(outdata.data);
 

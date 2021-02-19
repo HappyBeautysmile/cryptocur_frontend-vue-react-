@@ -3,9 +3,9 @@ import {history} from "../../history"
 
 export const sign = (user) =>{
     return async dispatch =>{
-        console.log(user);
+        // console.log(user);
         var outdata =  await Apirequest("users/signin",user);
-        console.log(outdata);
+        // console.log(outdata);
         if(outdata.status){
             setSession(outdata.data);
             window.location.assign("/Overview");

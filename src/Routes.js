@@ -32,7 +32,7 @@ const RouteConfig = ({ component: Component, LeftSidebar,MinimalLayout,Presentat
         return (
           <ContextLayout.Consumer>
             {context => {
-              console.log(context)
+              // console.log(context)
               let LayoutTag =
               PresentationLayout === true ? context.PresentationLayout : MinimalLayout === true ? context.MinimalLayout :  context.LeftSidebar
               return (

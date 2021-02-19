@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Badge, Menu, Button, List, ListItem } from '@material-ui/core';
 import avatar3 from '../../assets/images/avatars/avatar3.jpg';
@@ -42,6 +43,8 @@ const StyledBadge = withStyles({
 })(Badge);
 
 const HeaderUserbox = (props) => {
+
+  const {autherdata}  = props;
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
@@ -61,6 +64,12 @@ const HeaderUserbox = (props) => {
     props.logout()
   }
 
+  useEffect(() => {
+    
+ 
+  });
+
+  // console.log(autherdata)
   return (
     <>
       <Button
@@ -87,7 +96,10 @@ const HeaderUserbox = (props) => {
           <span className="text-success">
             <small>Account verified</small>
           </span>
-          <div className="font-weight-bold">Satoshi Nakamoto</div>
+          {autherdata !=null &&
+          <div className="font-weight-bold">{autherdata.firstName} {autherdata.lastName}</div>
+          }
+
         </div>
         <span className="pl-1 pl-xl-3">
           <FontAwesomeIcon icon={['fas', 'angle-down']} className="opacity-5" />
@@ -202,9 +214,11 @@ const HeaderUserbox = (props) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  
-})
+const mapStateToProps = (state) => {
+  return {
+    autherdata: state.auth.user
+  }
+}
 
 const mapDispatchToProps = {
   logout

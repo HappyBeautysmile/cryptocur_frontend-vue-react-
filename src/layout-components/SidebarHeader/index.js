@@ -40,16 +40,21 @@ const SidebarHeader = (props) => {
             to="/"
             title="Bamburgh React Crypto Application with Material-UI PRO"
             className="app-sidebar-logo">
-            <div className="app-sidebar-logo--icon">
+            {/* <div className="app-sidebar-logo--icon">
               <img
                 alt="Bamburgh React Crypto Application with Material-UI PRO"
                 src={projectLogo}
               />
+            </div> */}
+            <div className="app-nav-logo--icon shadow-second-sm bg-secondary border-0" style={{borderRadius:"50%"}}>
+                <img 
+                  alt="Bamburgh React Crypto Application with Material-UI PRO"
+                  src={projectLogo }
+                />
             </div>
             <div className="app-sidebar-logo--text">
               <span>Crypto</span>
-
-              <b>bamburgh</b>
+              <b>Zedcoin</b>
             </div>
           </NavLink>
         </div>

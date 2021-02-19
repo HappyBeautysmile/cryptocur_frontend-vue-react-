@@ -1,5 +1,6 @@
 import axios from "axios"
 import {BaseUrl} from "../../config"
+import {PROFILE_USER} from "../types"
 
 export const Apirequest = async (url,inputdata) =>{
     try{
@@ -43,17 +44,16 @@ export const fake_session = () =>{
 
 export const sessionchecking = (decoded) =>{
     return async dispatch =>{
-        console.log(decoded)
         var user = await Apirequest("users/get_userinfor",{token : decoded});
 		var userdata = user.data;
-		console.log(userdata)
-        dispatch({ type : "PROFILE_USER",data : userdata});
+        dispatch({ type : PROFILE_USER, data : userdata});
         // if(url_path() === "/" ){
             // history.push("/");
 		// }
 
     }
 }
+ 
 
 export const authinstance = axios.create({
     baseURL: BaseUrl,

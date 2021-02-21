@@ -41,7 +41,7 @@ const SidebarMenu = (props) => {
     <>
       <PerfectScrollbar>
         <div className="sidebar-navigation">
-          <SidebarWidget />
+          {/* <SidebarWidget /> */}
           <div className="sidebar-header">
             <span>Navigation</span>
           </div>
@@ -66,6 +66,21 @@ const SidebarMenu = (props) => {
                 onClick={toggleSidebarMobile}
                 activeClassName="active"
                 className="nav-link-simple"
+                to="/Users">
+                <span className="sidebar-icon">
+                  <PeopleAltTwoToneIcon />
+                </span>
+                Users
+                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
+                  <ChevronRightTwoToneIcon />
+                </span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                onClick={toggleSidebarMobile}
+                activeClassName="active"
+                className="nav-link-simple"
                 to="/Overview">
                 <span className="sidebar-icon">
                   <AccountBalanceTwoToneIcon />
@@ -76,7 +91,8 @@ const SidebarMenu = (props) => {
                 </span>
               </NavLink>
             </li>
-            <li>
+           
+            {/* <li>
               <NavLink
                 onClick={toggleSidebarMobile}
                 activeClassName="active"
@@ -90,8 +106,8 @@ const SidebarMenu = (props) => {
                   <ChevronRightTwoToneIcon />
                 </span>
               </NavLink>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <NavLink
                 onClick={toggleSidebarMobile}
                 activeClassName="active"
@@ -165,13 +181,13 @@ const SidebarMenu = (props) => {
                   <ChevronRightTwoToneIcon />
                 </span>
               </NavLink>
-            </li>
+            </li> */}
           </ul>
           <div className="sidebar-header">
             <span>Others</span>
           </div>
           <ul>
-            <li>
+            {/* <li>
               <a
                 href="#/"
                 onClick={togglePages}
@@ -212,7 +228,7 @@ const SidebarMenu = (props) => {
                   </li>
                 </ul>
               </Collapse>
-            </li>
+            </li> */}
           </ul>
         </div>
       </PerfectScrollbar>

@@ -1,17 +1,18 @@
-import React, { useState ,useEffect} from 'react';
+import React, { useState ,useEffect,lazy} from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Badge, Menu, Button, List, ListItem } from '@material-ui/core';
-import avatar3 from '../../assets/images/avatars/avatar3.jpg';
-import CountUp from 'react-countup';
-import BusinessCenterTwoToneIcon from '@material-ui/icons/BusinessCenterTwoTone';
-import SettingsTwoToneIcon from '@material-ui/icons/SettingsTwoTone';
-import VerifiedUserTwoToneIcon from '@material-ui/icons/VerifiedUserTwoTone';
+import avatar3 from '../../assets/images/avatars/avatar1.jpg';
+// import CountUp from 'react-countup';
+// import BusinessCenterTwoToneIcon from '@material-ui/icons/BusinessCenterTwoTone';
+// import SettingsTwoToneIcon from '@material-ui/icons/SettingsTwoTone';
+// import VerifiedUserTwoToneIcon from '@material-ui/icons/VerifiedUserTwoTone';
 import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
 import { withStyles } from '@material-ui/core/styles';
 import {history} from "../../history"
 import { connect } from 'react-redux'
-import {logout} from "../../reduxs/actions/login"
+import {logout} from "../../reduxs/actions/auth/login"
+import RegisterModal from '../../components/Users/RegisterModal';
 
 const StyledBadge = withStyles({
   badge: {
@@ -42,7 +43,7 @@ const StyledBadge = withStyles({
   }
 })(Badge);
 
-const HeaderUserbox = (props) => {
+function LivePreviewExample(props) {
 
   const {autherdata}  = props;
   const [anchorEl, setAnchorEl] = useState(null);
@@ -125,16 +126,18 @@ const HeaderUserbox = (props) => {
             <div className="avatar-icon flex-shrink-0 rounded mr-3">
               <img src={avatar3} alt="..." />
             </div>
-            <div>
-              <h6 className="font-weight-bold mb-1 text-black">
-                Satoshi Nakamoto
-              </h6>
-              <p className="text-black-50 mb-0">satoshi.na@example.com</p>
-            </div>
+            { autherdata !=null &&
+              <div>
+                <h6 className="font-weight-bold mb-1 text-black">
+                {autherdata.firstName} {autherdata.lastName}
+                </h6>
+                <p className="text-black-50 mb-0">{autherdata.email}</p>
+              </div>
+            }
           </div>
           <div className="divider" />
           <div className="divider" />
-          <div className="bg-secondary d-flex align-items-center flex-column py-4">
+          {/* <div className="bg-secondary d-flex align-items-center flex-column py-4">
             <div className="display-3 mb-0 text-center font-weight-bold">
               <small className="opacity-6">$</small>
               <span className="pl-1">
@@ -157,12 +160,12 @@ const HeaderUserbox = (props) => {
             <small className="text-center font-weight-bold opacity-6 text-uppercase">
               Total balance
             </small>
-          </div>
+          </div> */}
           <div className="divider" />
           <List
             component="div"
             className="nav-neutral-first nav-pills-rounded flex-column p-3">
-            <ListItem
+            {/* <ListItem
               component="a"
               button
               href="#/"
@@ -171,18 +174,9 @@ const HeaderUserbox = (props) => {
                 <SettingsTwoToneIcon />
               </div>
               <span className="font-size-md">Settings</span>
-            </ListItem>
-            <ListItem
-              component="a"
-              button
-              href="#/"
-              onClick={(e) => e.preventDefault()}>
-              <div className="mr-2">
-                <VerifiedUserTwoToneIcon />
-              </div>
-              <span className="font-size-md">Profile</span>
-            </ListItem>
-            <ListItem
+            </ListItem> */}
+             { autherdata !=null && <RegisterModal registerTitle="Profile" submitBtnName="Udate Profile" userData={autherdata} />}
+            {/* <ListItem
               component="a"
               button
               href="#/"
@@ -191,7 +185,7 @@ const HeaderUserbox = (props) => {
                 <BusinessCenterTwoToneIcon />
               </div>
               <span className="font-size-md">Wallets</span>
-            </ListItem>
+            </ListItem> */}
           </List>
           <div className="divider" />
           <List
@@ -224,5 +218,5 @@ const mapDispatchToProps = {
   logout
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(HeaderUserbox)
+export default connect(mapStateToProps, mapDispatchToProps)(LivePreviewExample)
 

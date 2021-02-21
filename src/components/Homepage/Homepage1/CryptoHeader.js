@@ -8,8 +8,8 @@ import { Collapse, Container, Button, List, ListItem ,TextField,Dialog,Grid} fro
 import projectLogo from '../../../assets/images/react.svg';
 
 import { NavLink } from 'react-router-dom';
-import LoginModal from '../../LoginModal';
-import RegisterModal from '../../RegisterModal';
+import LoginModal from '../../Users/LoginModal';
+import RegisterModal from '../../Users/RegisterModal';
 
 export default function LivePreviewExample() {
   const [collapse, setCollapse] = useState(false);
@@ -48,6 +48,7 @@ export default function LivePreviewExample() {
             <span className="d-none d-lg-block">              
               <RegisterModal
               registerTitle="Register"
+              submitBtnName ="CREATE ACCOUNT"
                />
             </span>
             <span className="d-block d-lg-none">

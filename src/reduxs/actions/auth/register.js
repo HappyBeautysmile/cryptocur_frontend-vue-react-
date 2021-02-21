@@ -1,5 +1,4 @@
-import {Apirequest,setSession} from "./index"
-
+import {Apirequest} from "../index"
 
 export const regist = (user) =>{
     return async dispatch =>{

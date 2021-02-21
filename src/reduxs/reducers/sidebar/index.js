@@ -5,7 +5,7 @@ const initialState = {
   sidebarFixed: true,
   sidebarFooter: true,
   sidebarShadow: true,
-  sidebarStyle: 'app-sidebar--light',
+  sidebarStyle: 'app-sidebar--dark',
   sidebarToggleMobile: false,
   sidebarToggle: false,
 }

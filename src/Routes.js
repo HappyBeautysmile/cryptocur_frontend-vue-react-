@@ -10,18 +10,19 @@ import SuspenseLoading from "./utility/loading"
 import {is_session,fake_session,sessionchecking,getSession} from "./reduxs/actions"
 //Pages
 
-// import Overview from './pages/Overview';
-import Accounts from './pages/Accounts';
-import Wallets from './pages/Wallets';
-import BuySell from './pages/BuySell';
-import Transactions from './pages/Transactions';
-import Profile from './pages/Profile';
-import Settings from './pages/Settings';
-import PageRecoverCover from './pages/PageRecoverCover';
-import PageError404 from './pages/PageError404';
-
 const Homepage = lazy(() => import('./pages/Homepage'));
+const Users = lazy(() => import('./pages/Users'));
 const Overview = lazy(() => import('./pages/Overview'));
+const Accounts = lazy(() => import('./pages/Accounts'));
+const Wallets = lazy(() => import('./pages/Wallets'));
+const BuySell = lazy(() => import('./pages/BuySell'));
+const Transactions = lazy(() => import('./pages/Transactions'));
+const Profile = lazy(() => import('./pages/Profile'));
+const Settings = lazy(() => import('./pages/Settings'));
+const PageRecoverCover = lazy(() => import('./pages/PageRecoverCover'));
+const PageError404 = lazy(() => import('./pages/PageError404'));
+
+
 
 const RouteConfig = ({ component: Component, LeftSidebar,MinimalLayout,PresentationLayout, ...rest }) =>{
   
@@ -108,6 +109,7 @@ const Routes = (props) => {
                 <AppRoute exact path="/" component={Homepage} PresentationLayout />
                 <AppRoute exact path="/Homepage" component={Homepage} PresentationLayout />
                 <RequireAuth location={history.location}>
+                  <AppRoute path="/Users" component={Users} LeftSidebar />
                   <AppRoute path="/Overview" component={Overview} LeftSidebar />
                   <AppRoute path="/Accounts" component={Accounts}  LeftSidebar/>
                   <AppRoute path="/Wallets" component={Wallets}  LeftSidebar/>
@@ -117,6 +119,8 @@ const Routes = (props) => {
                   <AppRoute path="/Settings" component={Settings}  LeftSidebar />
                   <AppRoute path="/PageRecoverCover" component={PageRecoverCover} MinimalLayout />
                   <AppRoute path="/PageError404" component={PageError404} MinimalLayout />
+
+
                 </RequireAuth>
               </motion.div>
             </Switch>

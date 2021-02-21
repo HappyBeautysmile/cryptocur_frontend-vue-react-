@@ -17,6 +17,5 @@ import {
           return state
       }
     }
-    
     export default auth
     

@@ -1,34 +1,76 @@
-import React, { useState , useRef } from 'react';
+import React, { useState ,lazy ,useEffect} from 'react';
 
-import { Grid, Dialog, Button, TextField } from '@material-ui/core';
+import { Grid, Dialog, Button, TextField,ListItem } from '@material-ui/core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { connect } from 'react-redux';
-import {regist} from "../../reduxs/actions/register"
-import people2 from '../../assets/images/stock-photos/people-1.jpg';
+import {regist} from "../../../reduxs/actions/auth/register"
+import {addUser} from "../../../reduxs/actions/users/users"
+import {editUser} from "../../../reduxs/actions/users/users"
+import people2 from '../../../assets/images/stock-photos/people-1.jpg';
+import VerifiedUserTwoToneIcon from '@material-ui/icons/VerifiedUserTwoTone';
+const AvatarImage = lazy(() => import('../AvatarImage'));
 
-function LivePreviewExample(props) {
+function RegisterModal(props) {
   const [modal1, setModal1] = useState(false);
 
   const toggle1 = () => setModal1(!modal1);
-  const {registerTitle} = props;
   
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastname] = useState("");
 
+  const {registerTitle , submitBtnName ,userData} = props;
+
   const handleSubmit = evt => {
     evt.preventDefault();
     // console.log(email + " " + password + " " + firstName + " " + lastName);
-    props.regist({email : email,password :password ,firstName: firstName , lastName:lastName});
-  };
+    if(registerTitle === "Register")
+    {
+      props.regist({email : email,password :password ,firstName: firstName , lastName:lastName});
+    }
+    if(registerTitle === "Add User")
+    {
+      props.addUser({email : email,password :password ,firstName: firstName , lastName:lastName});
+    }
+    if(registerTitle === "Edit User" || registerTitle ==='Profile')
+    {
+      props.editUser({user_email : email,user_password :password ,user_firstName: firstName , user_lastName:lastName});
 
+    }
+  };
+  
+  useEffect(() => {
+    // console.log(userData);
+    if( userData!=null ){
+      setFirstname(userData.firstName);
+      setLastname(userData.lastName);
+      setEmail(userData.email);
+    }
+   
+  }, []);
+  
   return (
     <>
+     {registerTitle === "Profile" && 
+        <ListItem
+          component="a"
+          button
+          onClick={toggle1}>
+          <div className="mr-2 justify-content-left">
+            <VerifiedUserTwoToneIcon />
+          </div>
+          <span className="font-size-md">Profile</span>
+        </ListItem>
+      }
       <div className="d-flex align-items-center justify-content-center flex-wrap">
-        <Button onClick={toggle1} className="rounded-sm text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm btn-warning">
+        
+        {registerTitle !== "Profile" && registerTitle !== "Edit User" &&
+          <Button onClick={toggle1} className="rounded-sm text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm btn-warning">
           {registerTitle}
-        </Button>
+          </Button>
+        }
         <Dialog
           scroll="body"
           maxWidth="lg"
@@ -51,13 +93,14 @@ function LivePreviewExample(props) {
                     <div className="bg-composed-wrapper--bg bg-slick-carbon opacity-5 rounded br-xl-right-0" />
                     <div className="bg-composed-wrapper--content justify-content-center text-center text-xl-left p-5">
                       <div className="text-white text-center">
+                        {registerTitle === "Profile" && 
+                          <AvatarImage/>
+                        }
                         <h1 className="display-3 my-3 font-weight-bold">
-                          Register
+                          {registerTitle}
                         </h1>
                         <p className="font-size-lg mb-0 px-4 text-white-50">
-                          View any of the 5+ live previews we&#39;ve set up to
-                          learn why this dashboard template is the last one
-                          you&#39;ll ever need!
+                          You can change ASSIGNEE in profile part
                         </p>
                       </div>
                     </div>
@@ -69,40 +112,28 @@ function LivePreviewExample(props) {
                   <div className="bg-white p-4 rounded">
                     <div className="text-center my-4">
                       <h1 className="display-4 mb-1 font-weight-bold">
-                        Create your account
+                      {registerTitle}
                       </h1>
-                      <p className="font-size-lg mb-0 text-black-50">
+                      {/* <p className="font-size-lg mb-0 text-black-50">
                         Start benefiting from our tools right away
-                      </p>
+                      </p> */}
                     </div>
-                    <div className="mb-3">
-                      <label className="font-weight-bold mb-2">
-                        Email address
-                      </label>
-                      <TextField
-                        variant="outlined"
-                        size="small"
-                        fullWidth
-                        placeholder="Enter your email address"
-                        type="email"
-                        value={email}
-                        onChange={(e)=>setEmail(e.target.value)}
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <div className="d-flex justify-content-between">
-                        <label className="font-weight-bold mb-2">Password</label>
-                      </div>
-                      <TextField
-                        variant="outlined"
-                        size="small"
-                        fullWidth
-                        placeholder="Enter your password"
-                        type="password"
-                        value={password}
-                        onChange={(e)=>setPassword(e.target.value)}
-                      />
-                    </div>
+                    {registerTitle !== "Profile" &&  registerTitle !== "Edit User" &&
+                        <div className="mb-3">
+                          <label className="font-weight-bold mb-2">
+                            Email address
+                          </label>
+                          <TextField
+                            variant="outlined"
+                            size="small"
+                            fullWidth
+                            placeholder="Enter your email address"
+                            type="email"
+                            value={email}
+                            onChange={(e)=>setEmail(e.target.value)}
+                          />
+                        </div>
+                    }
                     <Grid container spacing={6}>
                       <Grid item md={6}>
                         <div>
@@ -135,13 +166,27 @@ function LivePreviewExample(props) {
                         </div>
                       </Grid>
                     </Grid>
+                    <div className="mb-3" style={{paddingTop:"10px"}}>
+                      <div className="d-flex justify-content-between">
+                        <label className="font-weight-bold mb-2">Password</label>
+                      </div>
+                      <TextField
+                        variant="outlined"
+                        size="small"
+                        fullWidth
+                        placeholder="Enter your password"
+                        type="password"
+                        value={password}
+                        onChange={(e)=>setPassword(e.target.value)}
+                      />
+                    </div>
                     {/* <div className="form-group my-3">
                       By clicking the <strong>Create account</strong> button below
                       you agree to our terms of service and privacy statement.
                     </div> */}
                     <div className="text-center mb-4">
                       <Button  type = "submit" className="btn-primary text-uppercase font-weight-bold font-size-sm my-3">
-                        Create account
+                        {submitBtnName}
                       </Button>
                     </div>
                   </div>
@@ -150,7 +195,15 @@ function LivePreviewExample(props) {
             </Grid>
             </form>
         </Dialog>
-       </div>
+      </div>
+      {registerTitle === "Edit User" && 
+          <Button className="btn-neutral-first mx-1 shadow-none d-30 border-0 p-0 d-inline-flex align-items-center justify-content-center" onClick={toggle1}>
+          <FontAwesomeIcon
+            icon={['far', 'edit']}
+            className="font-size-sm"
+          />
+        </Button>
+        }
     </>
   );
 }
@@ -159,7 +212,9 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = {
-  regist
+  regist,
+  addUser,
+  editUser
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LivePreviewExample);
+export default connect(mapStateToProps, mapDispatchToProps)(RegisterModal);

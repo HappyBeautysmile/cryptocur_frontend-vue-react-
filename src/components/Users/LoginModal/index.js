@@ -7,10 +7,10 @@ import {
 } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { connect } from 'react-redux';
-import {sign} from "../../reduxs/actions/login"
+import {sign} from "../../../reduxs/actions/auth/login"
 
 
-import people3 from '../../assets/images/stock-photos/people-3.jpg';
+import people3 from '../../../assets/images/stock-photos/people-3.jpg';
 
 function LivePreviewExample(props) {
   const [modal2, setModal2] = useState(false);
@@ -32,12 +32,12 @@ function LivePreviewExample(props) {
     <>
       <div className="d-flex align-items-center  flex-wrap">
       {/* <div className="d-flex align-items-center justify-content-center flex-wrap"> */}
-        { loginTitle =="Login" && 
+        { loginTitle ==="Login" && 
             <Button onClick={toggle2}  className="rounded-sm text-nowrap font-size-xs font-weight-bold text-uppercase shadow-second-sm btn-first">
               {loginTitle} 
             </Button>
         }
-        { loginTitle =="Get Started" &&
+        { loginTitle ==="Get Started" &&
             <Button onClick={toggle2}  size="large" className="justify-content-left rounded-sm font-weight-bold shadow-second-sm btn-first">
               <span className="btn-wrapper--label">
                 {loginTitle} 

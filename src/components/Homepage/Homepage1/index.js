@@ -2,7 +2,7 @@ import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Grid, Container, Card, Button } from '@material-ui/core';
-
+import {history} from "../../../history"
 import Chart from 'react-apexcharts';
 
 import { NavLink } from 'react-router-dom';
@@ -11,7 +11,7 @@ import hero8 from '../../../assets/images/hero-bg/hero-8.jpg';
 import illustration1 from '../../../assets/images/illustrations/pack2/graduation.svg';
 
 import CryptoHeader from './CryptoHeader.js';
-import LoginModal from '../../LoginModal';
+import LoginModal from '../../Users/LoginModal';
 import {is_session} from "../../../reduxs/actions"
 
 export default function LivePreviewExample() {
@@ -176,9 +176,11 @@ export default function LivePreviewExample() {
                     </p>
                     <div className="pt-3">
                       { is_session() == false  && <LoginModal loginTitle="Get Started"/>}
-                      { is_session() && <Button
+                      { is_session() && 
+                      <Button
                         component={NavLink}
-                        to="/Overview"
+                        // onClick={()=>history.push("/Users")}
+                        to="/Users"
                         size="large"
                         className="rounded-sm font-weight-bold shadow-second-sm btn-first">
                         <span className="btn-wrapper--label">

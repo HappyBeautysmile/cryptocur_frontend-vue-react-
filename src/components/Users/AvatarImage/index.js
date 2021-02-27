@@ -1,57 +1,46 @@
 import React, { useEffect, useState } from 'react';
-
-import {
-  Container,
-  Button,
-} from '@material-ui/core';
-
+import {Container, Button, } from '@material-ui/core';
 import { useDropzone } from 'react-dropzone';
 import { connect } from 'react-redux';
-
 import CloseTwoToneIcon from '@material-ui/icons/CloseTwoTone';
 import PublishTwoToneIcon from '@material-ui/icons/PublishTwoTone';
-import AccountCircleTwoToneIcon from '@material-ui/icons/AccountCircleTwoTone';
 import CheckIcon from '@material-ui/icons/Check';
+import {config} from "../../../config"
+const ImgUrl = config.ImgUrl
+function AvatarImage(props) {
+  const [files,setFiles] = useState([]);
+  const {avatar,filechange} = props;
+  const {isDragAccept,isDragReject,isDragActive} = useState([]);
 
-
-function AvatarImage() {
-  const [files, setFiles] = useState([]);
-  const {
-    isDragActive,
-    isDragAccept,
-    isDragReject,
-    open,
-    getRootProps,
-    getInputProps
-  } = useDropzone({
+  const {open,getRootProps,getInputProps,  } = useDropzone({
     noClick: true,
     noKeyboard: true,
     multiple: false,
     accept: 'image/*',
     onDrop: (acceptedFiles) => {
-      setFiles(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file)
-          })
-        )
-      );
+      let files = acceptedFiles;
+      if(files.length > 0 && files[0].size  < 512000){
+        filechange(acceptedFiles);
+        setFiles(
+          acceptedFiles.map((file) =>
+            Object.assign(file, {
+              preview: URL.createObjectURL(file)
+            })
+          )
+        );
+      }else{
+        alert("ff")
+      }
     }
   });
 
   const thumbs = files.map((file) => (
-    <div
-      key={file.name}
+    <div key={file.name}
       className="rounded-circle avatar-image overflow-hidden d-140 bg-neutral-success text-center font-weight-bold text-success d-flex justify-content-center align-items-center">
-      <img
-        className="img-fluid img-fit-container rounded-sm"
-        src={file.preview}
-        alt="..."
-      />
+      <img className="img-fluid img-fit-container rounded-sm" src={file.preview} alt="..." />
     </div>
   ));
-
-  useEffect(
+    useEffect(
     () => () => {
       files.forEach((file) => URL.revokeObjectURL(file.preview));
     },
@@ -86,12 +75,19 @@ function AvatarImage() {
                       </div>
                     )}
                     {!isDragActive && (
-                      <div className="rounded-circle overflow-hidden d-140 bg-second text-center font-weight-bold text-white-50 d-flex justify-content-center align-items-center">
-                        <AccountCircleTwoToneIcon className="d-50" />
-                      </div>
+                      <div
+                        className="rounded-circle overflow-hidden d-140 bg-second text-center font-weight-bold text-white-50 d-flex justify-content-center align-items-center">
+                        <img
+                          className="img-fluid img-fit-container rounded-sm"
+                          src={ImgUrl + avatar} 
+                          alt="..."
+                        />
+                     </div>
                     )}
+
                   </div>
                   {thumbs.length > 0 && <div>{thumbs}</div>}
+                 
                 </div>
               </div>
             </div>

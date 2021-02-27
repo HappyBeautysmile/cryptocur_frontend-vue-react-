@@ -28,7 +28,7 @@ function ActionModal(props) {
       setLastname(userData.lastName);
       setEmail(userData.email);
     }
-  }, []);
+  }, [userData]);
   return (
     <>
      

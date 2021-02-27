@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
+// import React, { useState } from 'react';
 
-import clsx from 'clsx';
+// import clsx from 'clsx';
 
-import { Collapse } from '@material-ui/core';
+// import { Collapse } from '@material-ui/core';
 
 import { connect } from 'react-redux';
 
@@ -11,31 +12,31 @@ import { setSidebarToggleMobile } from '../../reduxs/actions/sidebar';
 import PerfectScrollbar from 'react-perfect-scrollbar';
 
 import ChevronRightTwoToneIcon from '@material-ui/icons/ChevronRightTwoTone';
-import VerifiedUserTwoToneIcon from '@material-ui/icons/VerifiedUserTwoTone';
+// import VerifiedUserTwoToneIcon from '@material-ui/icons/VerifiedUserTwoTone';
 
-import BusinessCenterTwoToneIcon from '@material-ui/icons/BusinessCenterTwoTone';
+// import BusinessCenterTwoToneIcon from '@material-ui/icons/BusinessCenterTwoTone';
 
-import SettingsTwoToneIcon from '@material-ui/icons/SettingsTwoTone';
+// import SettingsTwoToneIcon from '@material-ui/icons/SettingsTwoTone';
 
 import EmojiEventsTwoToneIcon from '@material-ui/icons/EmojiEventsTwoTone';
-import ViewColumnTwoToneIcon from '@material-ui/icons/ViewColumnTwoTone';
+// import ViewColumnTwoToneIcon from '@material-ui/icons/ViewColumnTwoTone';
 import AccountBalanceTwoToneIcon from '@material-ui/icons/AccountBalanceTwoTone';
 import PeopleAltTwoToneIcon from '@material-ui/icons/PeopleAltTwoTone';
-import AttachMoneyTwoToneIcon from '@material-ui/icons/AttachMoneyTwoTone';
-import FilterListTwoToneIcon from '@material-ui/icons/FilterListTwoTone';
+// import AttachMoneyTwoToneIcon from '@material-ui/icons/AttachMoneyTwoTone';
+// import FilterListTwoToneIcon from '@material-ui/icons/FilterListTwoTone';
 
-import { SidebarWidget } from '../../layout-components';
+// import { SidebarWidget } from '../../layout-components';
 
 const SidebarMenu = (props) => {
   const { setSidebarToggleMobile } = props;
 
   const toggleSidebarMobile = () => setSidebarToggleMobile(false);
 
-  const [pagesOpen, setPagesOpen] = useState(false);
-  const togglePages = (event) => {
-    setPagesOpen(!pagesOpen);
-    event.preventDefault();
-  };
+  // const [pagesOpen, setPagesOpen] = useState(false);
+  // const togglePages = (event) => {
+  //   setPagesOpen(!pagesOpen);
+  //   event.preventDefault();
+  // };
 
   return (
     <>

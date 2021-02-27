@@ -1,9 +1,29 @@
 import axios from "axios"
-import {BaseUrl} from "../../config"
+import {config} from "../../config"
 import {PROFILE_USER} from "../types"
+import { store } from 'react-notifications-component';
+
+const BaseUrl = config.BaseUrl
+
+
+
+export const getSession = () =>{
+    var auth =  window.localStorage.getItem("coinauthtoken");
+    return auth;
+}
+
+export const authinstance = axios.create({
+    baseURL: BaseUrl,
+    timeout: 50000,
+    headers: {
+		authorization: `${getSession()}`,
+		"Content-Type": "application/json",
+    },
+});
 
 export const Apirequest = async (url,inputdata) =>{
     try{
+        console.log(inputdata)
 		var	Response =  await authinstance.post( url , inputdata );
 		if(Response.data){
 			if(Response.data.session){
@@ -22,11 +42,6 @@ export const Apirequest = async (url,inputdata) =>{
 
 export const setSession = (authtoken) =>{
     window.localStorage.setItem("coinauthtoken",authtoken)
-}
-
-export const getSession = () =>{
-    var auth =  window.localStorage.getItem("coinauthtoken");
-    return auth;
 }
 
 export const is_session = () =>{
@@ -53,13 +68,18 @@ export const sessionchecking = (decoded) =>{
 
     }
 }
- 
 
-export const authinstance = axios.create({
-    baseURL: BaseUrl,
-    timeout: 50000,
-    headers: {
-		authorization: `${getSession()}`,
-		"Content-Type": "application/json",
-    },
-});
+export const Notification = (title,message,type) =>{
+    store.addNotification({
+        title: title,
+        message: message,
+        type: type,
+        insert: "top",
+        container: "top-right",
+        animationIn: ["animate__animated", "animate__fadeIn"],
+        animationOut: ["animate__animated", "animate__fadeOut"],
+        dismiss: {
+          duration: 3000,
+        }
+    });
+}

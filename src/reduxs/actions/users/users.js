@@ -1,5 +1,7 @@
 import {Apirequest} from "../index"
 import * as Types from "../../types"
+import {history} from '../../../history'
+import {Notification} from "../index"
 
 export const userList = (usersData) =>{
     return async dispatch =>{
@@ -26,9 +28,11 @@ export const addUser = (user) =>{
         // console.log(outdata);
         if(outdata.status){
             // setSession(outdata.data);
+            Notification("Success","New user was successfully added.","success")
             window.location.assign("/Users");
             // console.log(outdata);
         }else{
+            Notification("Error","Sorry...The account already exists.","danger")
             // console.log(outdata);
         }
     }
@@ -36,14 +40,18 @@ export const addUser = (user) =>{
 
 export const editUser = (user) =>{
     return async dispatch =>{
-        // console.log(user);
+        // console.log("guess user adm in I");
         var outdata =  await Apirequest("users/edit_user",user);
-        // console.log(outdata);
+        console.log(outdata);
+
         if(outdata.status){
             // setSession(outdata.data);
+            Notification("Success","Changed personal information.","success")
             window.location.assign("/Users");
+            // history.push("/Users");
             // console.log(outdata);
         }else{
+            Notification("Error","Sorry...unfortunately it is impossible.","danger")
             // console.log(outdata);
         }
     }

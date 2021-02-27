@@ -1,18 +1,21 @@
-import React, { useState ,useEffect,lazy} from 'react';
+import React, { useState ,useEffect} from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Badge, Menu, Button, List, ListItem } from '@material-ui/core';
-import avatar3 from '../../assets/images/avatars/avatar1.jpg';
+// import avatar3 from '../../assets/images/avatars/avatar2.jpg';
 // import CountUp from 'react-countup';
 // import BusinessCenterTwoToneIcon from '@material-ui/icons/BusinessCenterTwoTone';
 // import SettingsTwoToneIcon from '@material-ui/icons/SettingsTwoTone';
 // import VerifiedUserTwoToneIcon from '@material-ui/icons/VerifiedUserTwoTone';
 import ExitToAppTwoToneIcon from '@material-ui/icons/ExitToAppTwoTone';
 import { withStyles } from '@material-ui/core/styles';
-import {history} from "../../history"
+// import {history} from "../../history"
 import { connect } from 'react-redux'
 import {logout} from "../../reduxs/actions/auth/login"
 import RegisterModal from '../../components/Users/RegisterModal';
+
+import {config} from "../../config"
+const ImgUrl = config.ImgUrl
 
 const StyledBadge = withStyles({
   badge: {
@@ -56,10 +59,10 @@ function LivePreviewExample(props) {
     setAnchorEl(null);
   };
 
-  const handleNavigation = (e,path) =>{
-    e.preventDefault();
-    history.push(path)
-  }
+  // const handleNavigation = (e,path) =>{
+  //   e.preventDefault();
+  //   history.push(path)
+  // }
 
   const logout = () =>{
     props.logout()
@@ -88,9 +91,11 @@ function LivePreviewExample(props) {
             badgeContent=" "
             classes={{ badge: 'bg-success badge-circle border-0' }}
             variant="dot">
+          {autherdata !=null &&
             <div className="avatar-icon rounded">
-              <img src={avatar3} alt="..." />
+              <img src={ImgUrl + autherdata.avatar}  alt="..." />
             </div>
+          }
           </StyledBadge>
         </div>
         <div className="d-none d-xl-block pl-2">
@@ -123,16 +128,19 @@ function LivePreviewExample(props) {
         onClose={handleClose}>
         <div className="dropdown-menu-xl overflow-hidden p-0">
           <div className="d-flex p-4">
-            <div className="avatar-icon flex-shrink-0 rounded mr-3">
-              <img src={avatar3} alt="..." />
-            </div>
-            { autherdata !=null &&
+          { autherdata !=null &&
+
+            (<div className="avatar-icon flex-shrink-0 rounded mr-3">
+              <img src={ImgUrl + autherdata.avatar} alt="..." />
+            </div>)}
+          { autherdata !=null &&
+              (
               <div>
                 <h6 className="font-weight-bold mb-1 text-black">
                 {autherdata.firstName} {autherdata.lastName}
                 </h6>
                 <p className="text-black-50 mb-0">{autherdata.email}</p>
-              </div>
+              </div>)
             }
           </div>
           <div className="divider" />

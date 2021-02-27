@@ -1,5 +1,6 @@
 import {Apirequest,setSession,fake_session} from "../index"
 import {history} from "../../../history"
+import {Notification} from "../../../reduxs/actions/index"
 
 export const sign = (user) =>{
     return async dispatch =>{
@@ -8,9 +9,10 @@ export const sign = (user) =>{
         // console.log(outdata);
         if(outdata.status){
             setSession(outdata.data);
+            Notification("Success","Login Success!","success")
             window.location.assign("/Users");
         }else{
-
+            Notification("Error","The email address or password doesn't match any account.","danger")
         }
     }
 }

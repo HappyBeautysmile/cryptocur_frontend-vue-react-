@@ -13,7 +13,7 @@ import {
   setSidebarToggleMobile
 } from '../../reduxs/actions/sidebar';
 
-import projectLogo from '../../assets/images/react.svg';
+import projectLogo from '../../assets/images/zedcoin2_225_225.png';
 
 const SidebarHeader = (props) => {
 
@@ -46,9 +46,9 @@ const SidebarHeader = (props) => {
                 src={projectLogo}
               />
             </div> */}
-            <div className="app-nav-logo--icon shadow-second-sm bg-secondary border-0" style={{borderRadius:"50%"}}>
+            <div className="app-nav-logo--icon shadow-second-sm bg-secondary border-0" >
                 <img 
-                  alt="Bamburgh React Crypto Application with Material-UI PRO"
+                  alt="Bamburgh React Crypto Application with Material-UI PRO" style={{width:"40px",height:"40px",borderRadius:"50%"}}
                   src={projectLogo }
                 />
             </div>

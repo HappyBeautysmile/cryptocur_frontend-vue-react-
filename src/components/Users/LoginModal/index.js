@@ -98,6 +98,7 @@ function LivePreviewExample(props) {
                       variant="outlined"
                       size="small"
                       value={email}
+                      required
                       onChange={(e)=>setEmail(e.target.value)}
                       fullWidth
                       placeholder="yourname@yourmail.com"
@@ -118,6 +119,7 @@ function LivePreviewExample(props) {
                       placeholder="Enter your password"
                       type="password"
                       value={password}
+                      required
                       onChange = {(e)=>setPassword(e.target.value)}
                     />
                   </div>

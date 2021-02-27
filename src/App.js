@@ -264,7 +264,7 @@ class App extends Component {
     return (
       <Provider store={store}>
          <Layout>
-        <BrowserRouter basename="/">
+        <BrowserRouter >
           <ScrollToTop>
             <Routes />
           </ScrollToTop>

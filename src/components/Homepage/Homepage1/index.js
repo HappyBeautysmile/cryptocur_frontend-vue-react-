@@ -2,7 +2,6 @@ import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Grid, Container, Card, Button } from '@material-ui/core';
-import {history} from "../../../history"
 import Chart from 'react-apexcharts';
 
 import { NavLink } from 'react-router-dom';
@@ -160,7 +159,7 @@ export default function LivePreviewExample() {
         <div className="hero-wrapper--content">
           <div
             className="bg-composed-wrapper--image bg-composed-filter-rm"
-            style={{ backgroundImage: 'url(' + hero8 + ')' }}
+            style={{ backgroundImage: 'url(' + "http://localhost/" + ')' }}
           />
           <div className="bg-composed-wrapper--bg bg-second opacity-5" />
           <div className="bg-composed-wrapper--content">
@@ -175,7 +174,7 @@ export default function LivePreviewExample() {
                       Success is right before your eyes.  Don't miss the opportunity!.
                     </p>
                     <div className="pt-3">
-                      { is_session() == false  && <LoginModal loginTitle="Get Started"/>}
+                      { is_session() === false  && <LoginModal loginTitle="Get Started"/>}
                       { is_session() && 
                       <Button
                         component={NavLink}

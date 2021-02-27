@@ -8,8 +8,9 @@ import { history } from "./history"
 import { ContextLayout } from "./utility/Layout"
 import SuspenseLoading from "./utility/loading"
 import {is_session,fake_session,sessionchecking,getSession} from "./reduxs/actions"
+import ReactNotification from 'react-notifications-component'
+import 'react-notifications-component/dist/theme.css'
 //Pages
-
 const Homepage = lazy(() => import('./pages/Homepage'));
 const Users = lazy(() => import('./pages/Users'));
 const Overview = lazy(() => import('./pages/Overview'));
@@ -101,6 +102,7 @@ const Routes = (props) => {
 
   return (
     <ThemeProvider theme={MuiTheme}>
+      <ReactNotification />
       <AnimatePresence>
         <Suspense fallback={<SuspenseLoading />}>
           <Router history={history}>
@@ -127,6 +129,7 @@ const Routes = (props) => {
           </Router>
         </Suspense>
       </AnimatePresence>
+      
     </ThemeProvider>
   );
 };

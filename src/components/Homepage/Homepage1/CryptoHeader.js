@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import clsx from 'clsx';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Collapse, Container, Button, List, ListItem ,TextField,Dialog,Grid} from '@material-ui/core';
+import { Collapse, Container, Button, List, ListItem } from '@material-ui/core';
 
-import projectLogo from '../../../assets/images/react.svg';
+import projectLogo from '../../../assets/images/zedcoin_2_50_50.png';
 
 import { NavLink } from 'react-router-dom';
 import LoginModal from '../../Users/LoginModal';
@@ -26,8 +26,8 @@ export default function LivePreviewExample() {
               to="/Homepage"
               title="Bamburgh React Crypto Application with Material-UI PR"
               className="app-nav-logo app-nav-logo--light">
-              <div className="app-nav-logo--icon shadow-second-sm bg-secondary border-0" style={{borderRadius:"50%"}}>
-                <img style ={{width:"40px",height:"40px" }}
+              <div className="app-nav-logo--icon shadow-second-sm bg-secondary border-0" style={{borderRadius:"50%",border:"0px"}} >
+                <img style ={{width:"40px",height:"40px",borderRadius:"50%" }}
                   alt="Bamburgh React Crypto Application with Material-UI PRO"
                   src={projectLogo }
                 />

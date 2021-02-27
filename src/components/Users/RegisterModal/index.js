@@ -1,44 +1,85 @@
 import React, { useState ,lazy ,useEffect} from 'react';
-
 import { Grid, Dialog, Button, TextField,ListItem } from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-import { connect } from 'react-redux';
 import {regist} from "../../../reduxs/actions/auth/register"
 import {addUser} from "../../../reduxs/actions/users/users"
 import {editUser} from "../../../reduxs/actions/users/users"
 import people2 from '../../../assets/images/stock-photos/people-1.jpg';
 import VerifiedUserTwoToneIcon from '@material-ui/icons/VerifiedUserTwoTone';
+import {  useDispatch } from 'react-redux'
+// import { useSelector, useDispatch } from 'react-redux'
+import {Notification} from "../../../reduxs/actions/index"
+
 const AvatarImage = lazy(() => import('../AvatarImage'));
 
 function RegisterModal(props) {
-  const [modal1, setModal1] = useState(false);
+  const dispatch = useDispatch();
 
+  const [modal1, setModal1] = useState(false);
   const toggle1 = () => setModal1(!modal1);
-  
+  const [files, setFiles] = useState([]);
+ 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastname] = useState("");
+  const [avatar, setAvatar] = useState("");
 
   const {registerTitle , submitBtnName ,userData} = props;
+  const ExceptionHandlingFunc = (exceptionEnv)=>{ 
+    if(exceptionEnv ==="Register" || exceptionEnv ==="Add User")
+    {
+       const exceptionStatus = email !== "" && password !== "" && firstName !=='' && lastName !=="" ;
+       if(exceptionStatus === false)
+       {
+          Notification("Input Error","Please input all information","warning")
+          return false;
+       }
+       if(password !== confirmPassword)
+       {
+          Notification("Password Error","Passwords Don't Match","warning")
+          return false;
+       }
+    }
+    return true;
+  }
 
   const handleSubmit = evt => {
+    
     evt.preventDefault();
-    // console.log(email + " " + password + " " + firstName + " " + lastName);
-    if(registerTitle === "Register")
-    {
-      props.regist({email : email,password :password ,firstName: firstName , lastName:lastName});
-    }
-    if(registerTitle === "Add User")
-    {
-      props.addUser({email : email,password :password ,firstName: firstName , lastName:lastName});
-    }
-    if(registerTitle === "Edit User" || registerTitle ==='Profile')
-    {
-      props.editUser({user_email : email,user_password :password ,user_firstName: firstName , user_lastName:lastName});
 
-    }
+
+    // if(registerTitle === "Edit User" || registerTitle ==='Profile')
+    // {
+    //   dispatch(editUser({user_email : email,user_password :password ,user_firstName: firstName , user_lastName:lastName}));
+    // }
+      let imgfile = files[0];
+      let fpdata = new FormData();
+      fpdata.append('fpImgFile', imgfile);
+      fpdata.append('email', email);
+      fpdata.append('password', password);
+      fpdata.append('firstName', firstName);
+      fpdata.append('lastName', lastName);
+
+      if(ExceptionHandlingFunc(registerTitle)===true)
+      {
+
+        if(registerTitle === "Edit User" || registerTitle ==='Profile')
+        {
+          dispatch(editUser(fpdata));
+        }
+
+        if(registerTitle === "Register")
+        {
+          dispatch(regist({email : email,password :password ,firstName: firstName , lastName:lastName}));
+        }
+    
+        if(registerTitle === "Add User")
+        {
+          dispatch(addUser({email : email,password :password ,firstName: firstName , lastName:lastName}));
+        }
+      }
   };
   
   useEffect(() => {
@@ -47,9 +88,12 @@ function RegisterModal(props) {
       setFirstname(userData.firstName);
       setLastname(userData.lastName);
       setEmail(userData.email);
+      setAvatar(userData.avatar);
     }
-   
-  }, []);
+    else{
+      setAvatar("images/avatars/default.jpg");
+    }
+  }, [userData]);
   
   return (
     <>
@@ -93,8 +137,10 @@ function RegisterModal(props) {
                     <div className="bg-composed-wrapper--bg bg-slick-carbon opacity-5 rounded br-xl-right-0" />
                     <div className="bg-composed-wrapper--content justify-content-center text-center text-xl-left p-5">
                       <div className="text-white text-center">
-                        {registerTitle === "Profile" && 
-                          <AvatarImage/>
+                        {registerTitle !== "Register"  &&  registerTitle !== "Add User"?  
+                          <AvatarImage    avatar={avatar} filechange={(e)=>setFiles(e)}  />
+                          : null
+                          // <AvatarImage files={files}  avatar={avatar} open ={open} getInputProps={getInputProps} getRootProps={getRootProps}/>
                         }
                         <h1 className="display-3 my-3 font-weight-bold">
                           {registerTitle}
@@ -111,9 +157,9 @@ function RegisterModal(props) {
                 <Grid item lg={8} xl={10} className="mx-auto">
                   <div className="bg-white p-4 rounded">
                     <div className="text-center my-4">
-                      <h1 className="display-4 mb-1 font-weight-bold">
+                      {/* <h1 className="display-4 mb-1 font-weight-bold">
                       {registerTitle}
-                      </h1>
+                      </h1> */}
                       {/* <p className="font-size-lg mb-0 text-black-50">
                         Start benefiting from our tools right away
                       </p> */}
@@ -130,6 +176,7 @@ function RegisterModal(props) {
                             placeholder="Enter your email address"
                             type="email"
                             value={email}
+                            required
                             onChange={(e)=>setEmail(e.target.value)}
                           />
                         </div>
@@ -146,6 +193,7 @@ function RegisterModal(props) {
                             fullWidth
                             placeholder="Enter your first name"
                             value={firstName}
+                            required
                             onChange={(e)=>setFirstname(e.target.value)}
                           />
                         </div>
@@ -161,6 +209,7 @@ function RegisterModal(props) {
                             fullWidth
                             placeholder="Enter your last name"
                             value={lastName}
+                            required
                             onChange={(e)=>setLastname(e.target.value)}                            
                           />
                         </div>
@@ -177,7 +226,23 @@ function RegisterModal(props) {
                         placeholder="Enter your password"
                         type="password"
                         value={password}
+                        required
                         onChange={(e)=>setPassword(e.target.value)}
+                      />
+                    </div>
+                    <div className="mb-3" style={{paddingTop:"10px"}}>
+                      <div className="d-flex justify-content-between">
+                        <label className="font-weight-bold mb-2">Confirm Password</label>
+                      </div>
+                      <TextField
+                        variant="outlined"
+                        size="small"
+                        fullWidth
+                        placeholder="Enter your confirm password"
+                        type="password"
+                        value={confirmPassword}
+                        required
+                        onChange={(e)=>setConfirmPassword(e.target.value)}
                       />
                     </div>
                     {/* <div className="form-group my-3">
@@ -207,14 +272,6 @@ function RegisterModal(props) {
     </>
   );
 }
-const mapStateToProps = (state) => ({
-  
-})
 
-const mapDispatchToProps = {
-  regist,
-  addUser,
-  editUser
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(RegisterModal);
+export default RegisterModal;

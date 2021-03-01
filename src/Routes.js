@@ -17,6 +17,8 @@ const Overview = lazy(() => import('./pages/Overview'));
 const Accounts = lazy(() => import('./pages/Accounts'));
 const Wallets = lazy(() => import('./pages/Wallets'));
 const BuySell = lazy(() => import('./pages/BuySell'));
+const Buy = lazy(() => import('./pages/Buy'));
+const Sell = lazy(() => import('./pages/Sell'));
 const Transactions = lazy(() => import('./pages/Transactions'));
 const Profile = lazy(() => import('./pages/Profile'));
 const Settings = lazy(() => import('./pages/Settings'));
@@ -121,6 +123,8 @@ const Routes = (props) => {
                   <AppRoute path="/Accounts" component={Accounts}  LeftSidebar/>
                   <AppRoute path="/Wallets" component={Wallets}  LeftSidebar/>
                   <AppRoute path="/BuySell" component={BuySell}  LeftSidebar/>
+                  <AppRoute path="/Buy" component={Buy}  LeftSidebar/>
+                  <AppRoute path="/Sell" component={Sell}  LeftSidebar/>
                   <AppRoute path="/Transactions" component={Transactions}  LeftSidebar/>
                   <AppRoute path="/Profile" component={Profile}  LeftSidebar/>
                   <AppRoute path="/Settings" component={Settings}  LeftSidebar />

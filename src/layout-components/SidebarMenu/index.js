@@ -1,9 +1,8 @@
-import React from 'react';
-// import React, { useState } from 'react';
+import React, { useState } from 'react';
 
-// import clsx from 'clsx';
+import clsx from 'clsx';
 
-// import { Collapse } from '@material-ui/core';
+import { Collapse } from '@material-ui/core';
 
 import { connect } from 'react-redux';
 
@@ -17,13 +16,13 @@ import ChevronRightTwoToneIcon from '@material-ui/icons/ChevronRightTwoTone';
 // import BusinessCenterTwoToneIcon from '@material-ui/icons/BusinessCenterTwoTone';
 
 // import SettingsTwoToneIcon from '@material-ui/icons/SettingsTwoTone';
-
+import EcoIcon from '@material-ui/icons/Eco';
 import EmojiEventsTwoToneIcon from '@material-ui/icons/EmojiEventsTwoTone';
-// import ViewColumnTwoToneIcon from '@material-ui/icons/ViewColumnTwoTone';
+import ViewColumnTwoToneIcon from '@material-ui/icons/ViewColumnTwoTone';
 import AccountBalanceTwoToneIcon from '@material-ui/icons/AccountBalanceTwoTone';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import PeopleAltTwoToneIcon from '@material-ui/icons/PeopleAltTwoTone';
-// import AttachMoneyTwoToneIcon from '@material-ui/icons/AttachMoneyTwoTone';
+import AttachMoneyTwoToneIcon from '@material-ui/icons/AttachMoneyTwoTone';
 import FilterListTwoToneIcon from '@material-ui/icons/FilterListTwoTone';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import BackupIcon from '@material-ui/icons/Backup';
@@ -34,11 +33,14 @@ const SidebarMenu = (props) => {
 
   const toggleSidebarMobile = () => setSidebarToggleMobile(false);
 
-  // const [pagesOpen, setPagesOpen] = useState(false);
-  // const togglePages = (event) => {
-  //   setPagesOpen(!pagesOpen);
-  //   event.preventDefault();
-  // };
+  const [pagesOpen, setPagesOpen] = useState(false);
+  const [cryptoPageOpen, setCryptoPageOpen] = useState(false);
+  const [fiatPageOpen, setFiatPageOpen] = useState(false);
+  
+  const togglePages = (event) => {
+    setPagesOpen(!pagesOpen);
+    event.preventDefault();
+  };
 
   return (
     <>
@@ -48,7 +50,7 @@ const SidebarMenu = (props) => {
           <div className="sidebar-header">
             <span>Navigation</span>
           </div>
-          <ul>
+          <ul >
             <li>
               <NavLink
                 onClick={toggleSidebarMobile}
@@ -58,27 +60,12 @@ const SidebarMenu = (props) => {
                 <span className="sidebar-icon">
                   <EmojiEventsTwoToneIcon />
                 </span>
-                Homepage
+                Home
                 <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
                   <ChevronRightTwoToneIcon />
                 </span>
               </NavLink>
             </li>
-            {/* <li>
-              <NavLink
-                onClick={toggleSidebarMobile}
-                activeClassName="active"
-                className="nav-link-simple"
-                to="/Users">
-                <span className="sidebar-icon">
-                  <PeopleAltTwoToneIcon />
-                </span>
-                Users
-                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
-                  <ChevronRightTwoToneIcon />
-                </span>
-              </NavLink>
-            </li> */}
             <li>
               <NavLink
                 onClick={toggleSidebarMobile}
@@ -99,36 +86,6 @@ const SidebarMenu = (props) => {
                 onClick={toggleSidebarMobile}
                 activeClassName="active"
                 className="nav-link-simple"
-                to="/Deposit">
-                <span className="sidebar-icon">
-                 <SaveAltIcon/>
-                </span>
-                Deposit
-                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
-                  <ChevronRightTwoToneIcon />
-                </span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                onClick={toggleSidebarMobile}
-                activeClassName="active"
-                className="nav-link-simple"
-                to="/Withdraw">
-                <span className="sidebar-icon">
-                  <BackupIcon />
-                </span>
-                Withdraw
-                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
-                  <ChevronRightTwoToneIcon />
-                </span>
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                onClick={toggleSidebarMobile}
-                activeClassName="active"
-                className="nav-link-simple"
                 to="/Transactions">
                 <span className="sidebar-icon">
                   <FilterListTwoToneIcon />
@@ -139,6 +96,105 @@ const SidebarMenu = (props) => {
                 </span>
               </NavLink>
             </li>
+          
+            <li>
+              <a
+                href="/"
+                onClick={togglePages}
+                className={clsx({ active: pagesOpen })}>
+                <span className="sidebar-icon">
+                  <EcoIcon />
+                </span>
+                <span className="sidebar-item-label">Crypto</span>
+                <span className="sidebar-icon-indicator">
+                  <ChevronRightTwoToneIcon />
+                </span>
+              </a>
+              <Collapse in={pagesOpen}>
+                <ul>
+                  <li>
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      activeClassName="active"
+                      className="nav-link-simple"
+                      to="/Buy">
+                      <span className="sidebar-icon">
+                        <AttachMoneyTwoToneIcon />
+                      </span>
+                      Buy
+                      <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
+                        <ChevronRightTwoToneIcon />
+                      </span>
+                    </NavLink>
+                  </li>
+                  <li>
+                    <NavLink
+                      onClick={toggleSidebarMobile}
+                      activeClassName="active"
+                      className="nav-link-simple"
+                      to="/Sell">
+                      <span className="sidebar-icon">
+                        <AttachMoneyTwoToneIcon />
+                      </span>
+                    Sell
+                      <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
+                        <ChevronRightTwoToneIcon />
+                      </span>
+                    </NavLink>
+                  </li>
+                </ul>
+              </Collapse>
+            </li>
+            <ul>
+              <li>
+                <a
+                  href="/"
+                  onClick={togglePages}
+                  className={clsx({ active: pagesOpen })}>
+                  <span className="sidebar-icon">
+                    <ViewColumnTwoToneIcon />
+                  </span>
+                  <span className="sidebar-item-label">Fiat</span>
+                  <span className="sidebar-icon-indicator">
+                    <ChevronRightTwoToneIcon />
+                  </span>
+                </a>
+                <Collapse in={pagesOpen}>
+                  <ul>
+                    <li>
+                      <NavLink
+                        onClick={toggleSidebarMobile}
+                        activeClassName="active"
+                        className="nav-link-simple"
+                        to="/Deposit">
+                        <span className="sidebar-icon">
+                        <SaveAltIcon/>
+                        </span>
+                        Deposit
+                        <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
+                          <ChevronRightTwoToneIcon />
+                        </span>
+                      </NavLink>
+                    </li>
+                    <li>
+                      <NavLink
+                        onClick={toggleSidebarMobile}
+                        activeClassName="active"
+                        className="nav-link-simple"
+                        to="/Withdraw">
+                        <span className="sidebar-icon">
+                          <BackupIcon />
+                        </span>
+                        Withdraw
+                        <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
+                          <ChevronRightTwoToneIcon />
+                        </span>
+                      </NavLink>
+                    </li>
+                  </ul>
+                </Collapse>
+              </li>
+            </ul>
             <li>
               <NavLink
                 onClick={toggleSidebarMobile}
@@ -149,6 +205,21 @@ const SidebarMenu = (props) => {
                   <AccountBalanceTwoToneIcon />
                 </span>
                 Overview
+                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
+                  <ChevronRightTwoToneIcon />
+                </span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                onClick={toggleSidebarMobile}
+                activeClassName="active"
+                className="nav-link-simple"
+                to="/BuySell">
+                <span className="sidebar-icon">
+                  <AttachMoneyTwoToneIcon />
+                </span>
+                Buy / Sell
                 <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
                   <ChevronRightTwoToneIcon />
                 </span>
@@ -184,21 +255,7 @@ const SidebarMenu = (props) => {
                 </span>
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                onClick={toggleSidebarMobile}
-                activeClassName="active"
-                className="nav-link-simple"
-                to="/BuySell">
-                <span className="sidebar-icon">
-                  <AttachMoneyTwoToneIcon />
-                </span>
-                Buy / Sell
-                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
-                  <ChevronRightTwoToneIcon />
-                </span>
-              </NavLink>
-            </li>
+           
            
             <li>
               <NavLink
@@ -234,8 +291,8 @@ const SidebarMenu = (props) => {
           <div className="sidebar-header">
             <span>Others</span>
           </div>
-          <ul>
-            {/* <li>
+          {/* <ul>
+            <li>
               <a
                 href="#/"
                 onClick={togglePages}
@@ -276,8 +333,8 @@ const SidebarMenu = (props) => {
                   </li>
                 </ul>
               </Collapse>
-            </li> */}
-          </ul>
+            </li>
+          </ul> */}
         </div>
       </PerfectScrollbar>
     </>

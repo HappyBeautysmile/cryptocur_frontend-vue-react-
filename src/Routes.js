@@ -22,7 +22,7 @@ const Profile = lazy(() => import('./pages/Profile'));
 const Settings = lazy(() => import('./pages/Settings'));
 const PageRecoverCover = lazy(() => import('./pages/PageRecoverCover'));
 const PageError404 = lazy(() => import('./pages/PageError404'));
-
+const Fund = lazy(() =>import('./pages/Fund'));
 
 
 const RouteConfig = ({ component: Component, LeftSidebar,MinimalLayout,PresentationLayout, ...rest }) =>{
@@ -112,6 +112,7 @@ const Routes = (props) => {
                 <AppRoute exact path="/Homepage" component={Homepage} PresentationLayout />
                 <RequireAuth location={history.location}>
                   <AppRoute path="/Users" component={Users} LeftSidebar />
+                  <AppRoute path="/Fund" component={Fund} LeftSidebar />
                   <AppRoute path="/Overview" component={Overview} LeftSidebar />
                   <AppRoute path="/Accounts" component={Accounts}  LeftSidebar/>
                   <AppRoute path="/Wallets" component={Wallets}  LeftSidebar/>
@@ -121,8 +122,6 @@ const Routes = (props) => {
                   <AppRoute path="/Settings" component={Settings}  LeftSidebar />
                   <AppRoute path="/PageRecoverCover" component={PageRecoverCover} MinimalLayout />
                   <AppRoute path="/PageError404" component={PageError404} MinimalLayout />
-
-
                 </RequireAuth>
               </motion.div>
             </Switch>

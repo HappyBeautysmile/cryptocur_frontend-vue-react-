@@ -5,12 +5,12 @@ import clsx from 'clsx';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Collapse, Container, Button, List, ListItem } from '@material-ui/core';
 
-import projectLogo from '../../../assets/images/zedcoin_2_50_50.png';
-
+import {config} from '../../../config'
 import { NavLink } from 'react-router-dom';
 import LoginModal from '../../Users/LoginModal';
 import RegisterModal from '../../Users/RegisterModal';
 
+const CoinImg = config.CoinImg ;
 export default function LivePreviewExample() {
   const [collapse, setCollapse] = useState(false);
   const toggle = () => setCollapse(!collapse);
@@ -29,7 +29,7 @@ export default function LivePreviewExample() {
               <div className="app-nav-logo--icon shadow-second-sm bg-secondary border-0" style={{borderRadius:"50%",border:"0px"}} >
                 <img style ={{width:"40px",height:"40px",borderRadius:"50%" }}
                   alt="Bamburgh React Crypto Application with Material-UI PRO"
-                  src={projectLogo }
+                  src={CoinImg + "/" + "zedcoin.png" }
                 />
               </div>
               <div className="app-nav-logo--text">

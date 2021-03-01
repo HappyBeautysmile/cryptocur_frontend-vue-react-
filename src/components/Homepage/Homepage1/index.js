@@ -6,12 +6,14 @@ import Chart from 'react-apexcharts';
 
 import { NavLink } from 'react-router-dom';
 
-import hero8 from '../../../assets/images/hero-bg/hero-8.jpg';
+// import hero8 from '../../../assets/images/hero-bg/hero-8.jpg';
 import illustration1 from '../../../assets/images/illustrations/pack2/graduation.svg';
 
 import CryptoHeader from './CryptoHeader.js';
 import LoginModal from '../../Users/LoginModal';
 import {is_session} from "../../../reduxs/actions"
+import {config} from "../../../config"
+const BgImg = config.BgUrl;
 
 export default function LivePreviewExample() {
   const chartHomepage1AOptions = {
@@ -159,7 +161,7 @@ export default function LivePreviewExample() {
         <div className="hero-wrapper--content">
           <div
             className="bg-composed-wrapper--image bg-composed-filter-rm"
-            style={{ backgroundImage: 'url(' + "http://localhost/" + ')' }}
+            style={{ backgroundImage: 'url(' + BgImg +"fpBg.png"+ ')' ,opacity:".6",width:"100%",height:"100%"}}
           />
           <div className="bg-composed-wrapper--bg bg-second opacity-5" />
           <div className="bg-composed-wrapper--content">

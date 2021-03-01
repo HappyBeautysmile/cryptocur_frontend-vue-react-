@@ -1,10 +1,10 @@
 import React from 'react';
-import Fund from '../../components/Fund';
+import FundComponent from '../../components/Fund';
 
-export default function Users() {
+export default function Fund() {
   return (
     <>
-      <Fund/>
+      <FundComponent/>
     </>
   );
 }

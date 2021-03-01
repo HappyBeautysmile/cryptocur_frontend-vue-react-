@@ -24,7 +24,7 @@ import AccountBalanceTwoToneIcon from '@material-ui/icons/AccountBalanceTwoTone'
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import PeopleAltTwoToneIcon from '@material-ui/icons/PeopleAltTwoTone';
 // import AttachMoneyTwoToneIcon from '@material-ui/icons/AttachMoneyTwoTone';
-// import FilterListTwoToneIcon from '@material-ui/icons/FilterListTwoTone';
+import FilterListTwoToneIcon from '@material-ui/icons/FilterListTwoTone';
 
 // import { SidebarWidget } from '../../layout-components';
 
@@ -108,7 +108,21 @@ const SidebarMenu = (props) => {
                 </span>
               </NavLink>
             </li>
-         
+            <li>
+              <NavLink
+                onClick={toggleSidebarMobile}
+                activeClassName="active"
+                className="nav-link-simple"
+                to="/Transactions">
+                <span className="sidebar-icon">
+                  <FilterListTwoToneIcon />
+                </span>
+                Transactions
+                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
+                  <ChevronRightTwoToneIcon />
+                </span>
+              </NavLink>
+            </li>
             {/* <li>
               <NavLink
                 onClick={toggleSidebarMobile}
@@ -154,21 +168,7 @@ const SidebarMenu = (props) => {
                 </span>
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                onClick={toggleSidebarMobile}
-                activeClassName="active"
-                className="nav-link-simple"
-                to="/Transactions">
-                <span className="sidebar-icon">
-                  <FilterListTwoToneIcon />
-                </span>
-                Transactions
-                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
-                  <ChevronRightTwoToneIcon />
-                </span>
-              </NavLink>
-            </li>
+           
             <li>
               <NavLink
                 onClick={toggleSidebarMobile}

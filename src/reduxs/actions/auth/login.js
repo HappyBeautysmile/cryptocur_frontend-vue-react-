@@ -10,7 +10,7 @@ export const sign = (user) =>{
         if(outdata.status){
             setSession(outdata.data);
             Notification("Success","Login Success!","success")
-            window.location.assign("/Users");
+            window.location.assign("/Fund");
         }else{
             Notification("Error","The email address or password doesn't match any account.","danger")
         }

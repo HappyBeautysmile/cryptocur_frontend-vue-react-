@@ -25,7 +25,8 @@ import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import PeopleAltTwoToneIcon from '@material-ui/icons/PeopleAltTwoTone';
 // import AttachMoneyTwoToneIcon from '@material-ui/icons/AttachMoneyTwoTone';
 import FilterListTwoToneIcon from '@material-ui/icons/FilterListTwoTone';
-
+import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
+import BackupIcon from '@material-ui/icons/Backup';
 // import { SidebarWidget } from '../../layout-components';
 
 const SidebarMenu = (props) => {
@@ -63,7 +64,7 @@ const SidebarMenu = (props) => {
                 </span>
               </NavLink>
             </li>
-            <li>
+            {/* <li>
               <NavLink
                 onClick={toggleSidebarMobile}
                 activeClassName="active"
@@ -77,7 +78,7 @@ const SidebarMenu = (props) => {
                   <ChevronRightTwoToneIcon />
                 </span>
               </NavLink>
-            </li>
+            </li> */}
             <li>
               <NavLink
                 onClick={toggleSidebarMobile}
@@ -85,7 +86,7 @@ const SidebarMenu = (props) => {
                 className="nav-link-simple"
                 to="/Fund">
                 <span className="sidebar-icon">
-                  <SaveAltIcon/>
+                  <AttachMoneyIcon/>
                 </span>
                 Fund
                 <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
@@ -98,11 +99,26 @@ const SidebarMenu = (props) => {
                 onClick={toggleSidebarMobile}
                 activeClassName="active"
                 className="nav-link-simple"
-                to="/Overview">
+                to="/Deposit">
                 <span className="sidebar-icon">
-                  <AccountBalanceTwoToneIcon />
+                 <SaveAltIcon/>
                 </span>
-                Overview
+                Deposit
+                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
+                  <ChevronRightTwoToneIcon />
+                </span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                onClick={toggleSidebarMobile}
+                activeClassName="active"
+                className="nav-link-simple"
+                to="/Withdraw">
+                <span className="sidebar-icon">
+                  <BackupIcon />
+                </span>
+                Withdraw
                 <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
                   <ChevronRightTwoToneIcon />
                 </span>
@@ -118,6 +134,21 @@ const SidebarMenu = (props) => {
                   <FilterListTwoToneIcon />
                 </span>
                 Transactions
+                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
+                  <ChevronRightTwoToneIcon />
+                </span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                onClick={toggleSidebarMobile}
+                activeClassName="active"
+                className="nav-link-simple"
+                to="/Overview">
+                <span className="sidebar-icon">
+                  <AccountBalanceTwoToneIcon />
+                </span>
+                Overview
                 <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
                   <ChevronRightTwoToneIcon />
                 </span>

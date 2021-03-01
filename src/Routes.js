@@ -12,7 +12,7 @@ import ReactNotification from 'react-notifications-component'
 import 'react-notifications-component/dist/theme.css'
 //Pages
 const Homepage = lazy(() => import('./pages/Homepage'));
-const Users = lazy(() => import('./pages/Users'));
+// const Users = lazy(() => import('./pages/Users'));
 const Overview = lazy(() => import('./pages/Overview'));
 const Accounts = lazy(() => import('./pages/Accounts'));
 const Wallets = lazy(() => import('./pages/Wallets'));
@@ -115,7 +115,7 @@ const Routes = (props) => {
                 <AppRoute exact path="/" component={Homepage} PresentationLayout />
                 <AppRoute exact path="/Homepage" component={Homepage} PresentationLayout />
                 <RequireAuth location={history.location}>
-                  <AppRoute path="/Users" component={Users} LeftSidebar />
+                  {/* <AppRoute path="/Users" component={Users} LeftSidebar /> */}
                   <AppRoute path="/Fund" component={Fund} LeftSidebar />
                   <AppRoute path="/Deposit" component={Deposit} LeftSidebar />
                   <AppRoute path="/Withdraw" component={Withdraw} LeftSidebar />

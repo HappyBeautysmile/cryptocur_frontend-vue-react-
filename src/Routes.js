@@ -23,6 +23,8 @@ const Settings = lazy(() => import('./pages/Settings'));
 const PageRecoverCover = lazy(() => import('./pages/PageRecoverCover'));
 const PageError404 = lazy(() => import('./pages/PageError404'));
 const Fund = lazy(() =>import('./pages/Fund'));
+const Deposit = lazy(() =>import('./pages/Deposit'));
+const Withdraw = lazy(() =>import('./pages/Withdraw'));
 
 
 const RouteConfig = ({ component: Component, LeftSidebar,MinimalLayout,PresentationLayout, ...rest }) =>{
@@ -113,6 +115,8 @@ const Routes = (props) => {
                 <RequireAuth location={history.location}>
                   <AppRoute path="/Users" component={Users} LeftSidebar />
                   <AppRoute path="/Fund" component={Fund} LeftSidebar />
+                  <AppRoute path="/Deposit" component={Deposit} LeftSidebar />
+                  <AppRoute path="/Withdraw" component={Withdraw} LeftSidebar />
                   <AppRoute path="/Overview" component={Overview} LeftSidebar />
                   <AppRoute path="/Accounts" component={Accounts}  LeftSidebar/>
                   <AppRoute path="/Wallets" component={Wallets}  LeftSidebar/>

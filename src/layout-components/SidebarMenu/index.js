@@ -9,39 +9,45 @@ import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { setSidebarToggleMobile } from '../../reduxs/actions/sidebar';
 import PerfectScrollbar from 'react-perfect-scrollbar';
-
 import ChevronRightTwoToneIcon from '@material-ui/icons/ChevronRightTwoTone';
-// import VerifiedUserTwoToneIcon from '@material-ui/icons/VerifiedUserTwoTone';
-
-// import BusinessCenterTwoToneIcon from '@material-ui/icons/BusinessCenterTwoTone';
-
-// import SettingsTwoToneIcon from '@material-ui/icons/SettingsTwoTone';
 import EcoIcon from '@material-ui/icons/Eco';
 import EmojiEventsTwoToneIcon from '@material-ui/icons/EmojiEventsTwoTone';
-import ViewColumnTwoToneIcon from '@material-ui/icons/ViewColumnTwoTone';
 import AccountBalanceTwoToneIcon from '@material-ui/icons/AccountBalanceTwoTone';
-import SaveAltIcon from '@material-ui/icons/SaveAlt';
-import PeopleAltTwoToneIcon from '@material-ui/icons/PeopleAltTwoTone';
 import AttachMoneyTwoToneIcon from '@material-ui/icons/AttachMoneyTwoTone';
 import FilterListTwoToneIcon from '@material-ui/icons/FilterListTwoTone';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
-import BackupIcon from '@material-ui/icons/Backup';
+import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
+// import VerifiedUserTwoToneIcon from '@material-ui/icons/VerifiedUserTwoTone';
+// import BusinessCenterTwoToneIcon from '@material-ui/icons/BusinessCenterTwoTone';
+// import SettingsTwoToneIcon from '@material-ui/icons/SettingsTwoTone';
+// import ViewColumnTwoToneIcon from '@material-ui/icons/ViewColumnTwoTone';
+// import SaveAltIcon from '@material-ui/icons/SaveAlt';
+// import PeopleAltTwoToneIcon from '@material-ui/icons/PeopleAltTwoTone';
+// import PlayForWorkIcon from '@material-ui/icons/PlayForWork';
+// import BackupIcon from '@material-ui/icons/Backup';
+// import StoreMallDirectoryIcon from '@material-ui/icons/StoreMallDirectory';
+// import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 // import { SidebarWidget } from '../../layout-components';
+// import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+// import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 const SidebarMenu = (props) => {
   const { setSidebarToggleMobile } = props;
 
   const toggleSidebarMobile = () => setSidebarToggleMobile(false);
 
-  const [pagesOpen, setPagesOpen] = useState(false);
   const [cryptoPageOpen, setCryptoPageOpen] = useState(false);
   const [fiatPageOpen, setFiatPageOpen] = useState(false);
   
   const togglePages = (event) => {
-    setPagesOpen(!pagesOpen);
+    setFiatPageOpen(!fiatPageOpen);
     event.preventDefault();
   };
-
+  const toggleCryptoPages = (event) => {
+    setCryptoPageOpen(!cryptoPageOpen);
+    event.preventDefault();
+  };
+  console.log("cryptoPageOpen : " + cryptoPageOpen);
   return (
     <>
       <PerfectScrollbar>
@@ -98,10 +104,10 @@ const SidebarMenu = (props) => {
             </li>
           
             <li>
-              <a
-                href="/"
-                onClick={togglePages}
-                className={clsx({ active: pagesOpen })}>
+              <NavLink
+                to="/"
+                onClick={toggleCryptoPages}
+                className={clsx({ active: cryptoPageOpen })}>
                 <span className="sidebar-icon">
                   <EcoIcon />
                 </span>
@@ -109,18 +115,18 @@ const SidebarMenu = (props) => {
                 <span className="sidebar-icon-indicator">
                   <ChevronRightTwoToneIcon />
                 </span>
-              </a>
-              <Collapse in={pagesOpen}>
+              </NavLink>
+              <Collapse in={cryptoPageOpen}>
                 <ul>
-                  <li>
+                  <li >
                     <NavLink
                       onClick={toggleSidebarMobile}
                       activeClassName="active"
                       className="nav-link-simple"
                       to="/Buy">
-                      <span className="sidebar-icon">
-                        <AttachMoneyTwoToneIcon />
-                      </span>
+                      {/* <span className="sidebar-icon">
+                        <ArrowDownwardIcon />
+                      </span> */}
                       Buy
                       <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
                         <ChevronRightTwoToneIcon />
@@ -133,10 +139,10 @@ const SidebarMenu = (props) => {
                       activeClassName="active"
                       className="nav-link-simple"
                       to="/Sell">
-                      <span className="sidebar-icon">
-                        <AttachMoneyTwoToneIcon />
-                      </span>
-                    Sell
+                      {/* <span className="sidebar-icon">
+                        <ArrowUpwardIcon />
+                      </span> */}
+                      Sell
                       <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
                         <ChevronRightTwoToneIcon />
                       </span>
@@ -150,16 +156,16 @@ const SidebarMenu = (props) => {
                 <a
                   href="/"
                   onClick={togglePages}
-                  className={clsx({ active: pagesOpen })}>
+                  className={clsx({ active: fiatPageOpen })}>
                   <span className="sidebar-icon">
-                    <ViewColumnTwoToneIcon />
+                    <AccountBalanceIcon />
                   </span>
                   <span className="sidebar-item-label">Fiat</span>
                   <span className="sidebar-icon-indicator">
                     <ChevronRightTwoToneIcon />
                   </span>
                 </a>
-                <Collapse in={pagesOpen}>
+                <Collapse in={fiatPageOpen}>
                   <ul>
                     <li>
                       <NavLink
@@ -167,9 +173,9 @@ const SidebarMenu = (props) => {
                         activeClassName="active"
                         className="nav-link-simple"
                         to="/Deposit">
-                        <span className="sidebar-icon">
-                        <SaveAltIcon/>
-                        </span>
+                        {/* <span className="sidebar-icon">
+                        <CloudDownloadIcon/>
+                        </span> */}
                         Deposit
                         <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
                           <ChevronRightTwoToneIcon />
@@ -182,9 +188,9 @@ const SidebarMenu = (props) => {
                         activeClassName="active"
                         className="nav-link-simple"
                         to="/Withdraw">
-                        <span className="sidebar-icon">
+                        {/* <span className="sidebar-icon">
                           <BackupIcon />
-                        </span>
+                        </span> */}
                         Withdraw
                         <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
                           <ChevronRightTwoToneIcon />

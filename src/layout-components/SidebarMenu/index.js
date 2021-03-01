@@ -21,6 +21,7 @@ import ChevronRightTwoToneIcon from '@material-ui/icons/ChevronRightTwoTone';
 import EmojiEventsTwoToneIcon from '@material-ui/icons/EmojiEventsTwoTone';
 // import ViewColumnTwoToneIcon from '@material-ui/icons/ViewColumnTwoTone';
 import AccountBalanceTwoToneIcon from '@material-ui/icons/AccountBalanceTwoTone';
+import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import PeopleAltTwoToneIcon from '@material-ui/icons/PeopleAltTwoTone';
 // import AttachMoneyTwoToneIcon from '@material-ui/icons/AttachMoneyTwoTone';
 // import FilterListTwoToneIcon from '@material-ui/icons/FilterListTwoTone';
@@ -82,6 +83,21 @@ const SidebarMenu = (props) => {
                 onClick={toggleSidebarMobile}
                 activeClassName="active"
                 className="nav-link-simple"
+                to="/Fund">
+                <span className="sidebar-icon">
+                  <SaveAltIcon/>
+                </span>
+                Fund
+                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
+                  <ChevronRightTwoToneIcon />
+                </span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                onClick={toggleSidebarMobile}
+                activeClassName="active"
+                className="nav-link-simple"
                 to="/Overview">
                 <span className="sidebar-icon">
                   <AccountBalanceTwoToneIcon />
@@ -92,7 +108,7 @@ const SidebarMenu = (props) => {
                 </span>
               </NavLink>
             </li>
-           
+         
             {/* <li>
               <NavLink
                 onClick={toggleSidebarMobile}

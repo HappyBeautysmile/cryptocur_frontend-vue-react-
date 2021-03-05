@@ -8,56 +8,49 @@ import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 function BuySellModal(props) {
     const [anchorEl, setAnchorEl] = useState(null);
-    const {statusModal,statusModalSetting} = props;
+    const {statusModal, statusModalSetting ,cryptoCoin, currentWalletAndRate,initialChoiceMoney} = props;
+    const [choiceMoney ,setChoiceMoney] = useState([]); //we are going to buy coin using that money
+
+    // console.log("cryptoCoin" + cryptoCoin.coinName );
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
+    };
+    const modalClose =() =>{
         statusModalSetting(!statusModal);
-    };
-
-    const [activeTab, setActiveTab] = useState('1');
-
-    const toggle = (tab) => {
-        if (activeTab !== tab) setActiveTab(tab);
-    };
-
-//   const statusToggle = () => setStatusModal(!statusModal);
-
-//   const [deleteModal, setDeleteModal] = useState(false);
-//   const [name , setName] = useState("");
-//   const [exchange_rate , setExchange_rate] = useState(1);
-
-//   const dispatch = useDispatch();
-//   const deleteToggle = () => setDeleteModal(!deleteModal);
-//   const {curCurrency} = props;
-//   const disabledClassNameProps = { className: "Mui-disabled" };
+    }
+    /*
+        tempchocieMoney =
+            { 
+                choiceCurrency: {name:"USD" , quantity:3500 ,exchange_rate: 1 }
+                ,convertCoinPrice:121.212,
+                wantedCoin : {
+                    iconType : "fab", iconName: "bitcoin", marketCap: 112314 , coinFullName:"Bitcoin", coinName:"BTC", coinPrice:48465.20, currencyType:"$", trending:"up",backgroundColor:"bg-warning"
+                }
+            },
+    */
+    const handleCurrentChange = (evt)=>()=>{
+        let tempchocieMoney = choiceMoney ;
+        if( evt.quantity)
+            tempchocieMoney.convertCoinPrice = evt.quantity * evt.exchange_rate / tempchocieMoney.wantedCoin.coinPrice;
+        else{
+            tempchocieMoney.convertCoinPrice = 0;
+        }
+        tempchocieMoney.choiceCurrency = evt;
+        setChoiceMoney(tempchocieMoney);
+        setAnchorEl(null);
+        // console.log(evt)
+    }
   useEffect(() => {
-    // console.log(userData);
-    // if( curCurrency!=null ){
-    //   setName(curCurrency.name);
-    //   setExchange_rate(curCurrency.exchange_rate);
-    // }
-  }, []);
+    if(initialChoiceMoney) setChoiceMoney(initialChoiceMoney);
+  }, [initialChoiceMoney]);
 
-//   const handleEditSubmit = evt => {
-//     let fpdata ={
-//       name : name,
-//       exchange_rate : exchange_rate
-//     }
-//     dispatch(editCurrency(fpdata));
-//     editToggle();
-//   };
-//   const handleDeletSubmit = evt =>{
-//     let fpdata ={
-//       name : name,
-//     }
-//     dispatch(deleteCurrency(fpdata));
-//     deleteToggle();
-//   }
-console.log("status : " + statusModal );
+// console.log("initialChoiceMoney : " + initialChoiceMoney);
+// console.log(initialChoiceMoney.choiceCurrency ? initialChoiceMoney.choiceCurrency.quantity : "sss");
+
   return (
     <>
       <div className="d-flex align-items-center justify-content-center flex-wrap">
@@ -80,7 +73,7 @@ console.log("status : " + statusModal );
                     <div className="d-block d-md-flex align-items-center justify-content-center">
                         <FormControl variant="outlined" fullWidth>
                             <OutlinedInput
-                            value="567.34"
+                            value={initialChoiceMoney.choiceCurrency ? initialChoiceMoney.choiceCurrency.quantity : "ERORR"}
                             classes={{
                                 input: 'font-size-lg font-weight-bold p-4 h-auto',
                                 notchedOutline: 'border-2'
@@ -91,7 +84,7 @@ console.log("status : " + statusModal );
                                     onClick={handleClick}
                                     size="small"
                                     className="btn-neutral-dark d-flex align-items-center">
-                                    <span className="btn-wrapper--label">USD</span>
+                                    <span className="btn-wrapper--label">{initialChoiceMoney.choiceCurrency ? initialChoiceMoney.choiceCurrency.name : "ERORR"}</span>
                                     <span className="btn-wrapper--icon d-flex">
                                     <FontAwesomeIcon
                                         icon={['fas', 'chevron-down']}
@@ -115,32 +108,21 @@ console.log("status : " + statusModal );
                                     classes={{ list: 'p-0' }}
                                     onClose={handleClose}>
                                     <div className="p-2">
-                                    <List
-                                        component="div"
-                                        className="nav-pills p-0 m-0 nav-neutral-dark flex-column">
-                                        <ListItem
-                                        button
-                                        href="#/"
-                                        onClick={(e) => e.preventDefault()}
-                                        selected
-                                        className="px-3 mx-2">
-                                        <span>USD</span>
-                                        </ListItem>
-                                        <ListItem
-                                        button
-                                        href="#/"
-                                        onClick={(e) => e.preventDefault()}
-                                        className="px-3 mx-2">
-                                        <span>Euro</span>
-                                        </ListItem>
-                                        <ListItem
-                                        button
-                                        href="#/"
-                                        onClick={(e) => e.preventDefault()}
-                                        className="px-3 mx-2">
-                                        <span>Yen</span>
-                                        </ListItem>
-                                    </List>
+                                        <List
+                                            component="div"
+                                            className="nav-pills p-0 m-0 nav-neutral-dark flex-column">
+                                                {currentWalletAndRate.length ? currentWalletAndRate.map((item, i)=>(
+                                                    <ListItem
+                                                        key={i}
+                                                        button
+                                                        href="#/"
+                                                        onClick={handleCurrentChange(item)}
+                                                        selected
+                                                        className="px-3 mx-2">
+                                                        <span>{item.name}</span>
+                                                    </ListItem>
+                                                )):null}
+                                        </List>
                                     </div>
                                 </Menu>
                                 </InputAdornment>
@@ -157,7 +139,7 @@ console.log("status : " + statusModal );
 
                         <FormControl variant="outlined" fullWidth>
                             <OutlinedInput
-                            value="0.549"
+                            value={choiceMoney.convertCoinPrice }
                             classes={{
                                 input: 'font-size-lg font-weight-bold p-4 h-auto',
                                 notchedOutline: 'border-2'
@@ -167,7 +149,7 @@ console.log("status : " + statusModal );
                                 <Button
                                     size="small"
                                     className="btn-neutral-dark d-flex align-items-center">
-                                    <span className="btn-wrapper--label">BTC</span>
+                                    <span className="btn-wrapper--label">{cryptoCoin.coinName}</span>
                                 </Button>
                               
                                 </InputAdornment>
@@ -185,7 +167,7 @@ console.log("status : " + statusModal );
                             </Button>
                         </Grid>
                         <Grid item lg={6}>
-                            <Button  onClick={handleClose} className="btn-dark py-2 mt-3 px-5 font-weight-bold font-size-lg" style={{width:"80%",marginLeft:"10%",marginRight:"10%"}}>Cancel</Button>
+                            <Button  onClick={modalClose} className="btn-dark py-2 mt-3 px-5 font-weight-bold font-size-lg" style={{width:"80%",marginLeft:"10%",marginRight:"10%"}}>Cancel</Button>
                         </Grid>
                     </Grid>
                   

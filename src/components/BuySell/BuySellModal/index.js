@@ -1,17 +1,12 @@
 import React, { useState ,lazy ,useEffect} from 'react';
 import { Grid,Container, Dialog, Button,Card, TextField,ListItem,  FormControl,Menu,List,InputAdornment} from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import {editCurrency} from "../../../reduxs/actions/currencies/currencies"
-// import {deleteCurrency} from "../../../reduxs/actions/currencies/currencies"
-// import {  useDispatch } from 'react-redux'
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 
 function BuySellModal(props) {
     const [anchorEl, setAnchorEl] = useState(null);
     const {statusModal, statusModalSetting ,cryptoCoin, currentWalletAndRate,initialChoiceMoney} = props;
-    const [choiceMoney ,setChoiceMoney] = useState([]); //we are going to buy coin using that money
-
-    // console.log("cryptoCoin" + cryptoCoin.coinName );
+    const [choiceMoney ,setChoiceMoney] = useState({}); //we are going to buy coin using that money
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -44,6 +39,21 @@ function BuySellModal(props) {
         setAnchorEl(null);
         // console.log(evt)
     }
+    const handleChangeChoicePrice =(event)=>{
+        const changePirce =event;
+        let tempconvertCoinPrice = 0;
+        if( changePirce && choiceMoney.wantedCoin)
+            tempconvertCoinPrice = changePirce * choiceMoney.choiceCurrency.exchange_rate / choiceMoney.wantedCoin.coinPrice;
+        setChoiceMoney({...choiceMoney, choiceCurrency:{name:choiceMoney.choiceCurrency.name ,exchange_rate:choiceMoney.choiceCurrency.exchange_rate , quantity: changePirce} ,convertCoinPrice:tempconvertCoinPrice});
+        // console.log(choiceMoney);
+    }
+    const handleChangeChoiceCoinPrice =(event)=>{
+        const changeCoinPirce =event;
+        let tempconvertChanePrice = 0;
+        if( changeCoinPirce && choiceMoney.wantedCoin)
+            tempconvertChanePrice = changeCoinPirce * choiceMoney.wantedCoin.coinPrice / choiceMoney.choiceCurrency.exchange_rate ;
+        setChoiceMoney({...choiceMoney, choiceCurrency:{name:choiceMoney.choiceCurrency.name ,exchange_rate:choiceMoney.choiceCurrency.exchange_rate , quantity: tempconvertChanePrice} ,convertCoinPrice:changeCoinPirce});
+    }
   useEffect(() => {
     if(initialChoiceMoney) setChoiceMoney(initialChoiceMoney);
   }, [initialChoiceMoney]);
@@ -56,7 +66,7 @@ function BuySellModal(props) {
       <div className="d-flex align-items-center justify-content-center flex-wrap">
         <Dialog
           scroll="body"
-          maxWidth="sm"
+          maxWidth="md"
           open={statusModal}
         //   onClose={statusToggle}
           classes={{
@@ -73,18 +83,22 @@ function BuySellModal(props) {
                     <div className="d-block d-md-flex align-items-center justify-content-center">
                         <FormControl variant="outlined" fullWidth>
                             <OutlinedInput
-                            value={initialChoiceMoney.choiceCurrency ? initialChoiceMoney.choiceCurrency.quantity : "ERORR"}
+                            
+                            value={choiceMoney.choiceCurrency ? choiceMoney.choiceCurrency.quantity : 1}
+                            // value={tempMoney}
                             classes={{
                                 input: 'font-size-lg font-weight-bold p-4 h-auto',
                                 notchedOutline: 'border-2'
                             }}
+                            onChange = { (e) =>handleChangeChoicePrice(e.target.value)}
+                            type="Number"
                             endAdornment={
                                 <InputAdornment position="end">
                                 <Button
                                     onClick={handleClick}
                                     size="small"
                                     className="btn-neutral-dark d-flex align-items-center">
-                                    <span className="btn-wrapper--label">{initialChoiceMoney.choiceCurrency ? initialChoiceMoney.choiceCurrency.name : "ERORR"}</span>
+                                    <span className="btn-wrapper--label">{choiceMoney.choiceCurrency ? choiceMoney.choiceCurrency.name : "ERORR"}</span>
                                     <span className="btn-wrapper--icon d-flex">
                                     <FontAwesomeIcon
                                         icon={['fas', 'chevron-down']}
@@ -140,6 +154,8 @@ function BuySellModal(props) {
                         <FormControl variant="outlined" fullWidth>
                             <OutlinedInput
                             value={choiceMoney.convertCoinPrice }
+                            onChange = { (e) =>handleChangeChoiceCoinPrice(e.target.value)}
+                            type="Number"
                             classes={{
                                 input: 'font-size-lg font-weight-bold p-4 h-auto',
                                 notchedOutline: 'border-2'

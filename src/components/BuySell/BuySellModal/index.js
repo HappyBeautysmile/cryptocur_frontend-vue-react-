@@ -14,7 +14,7 @@ function BuySellModal(props) {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
-        // setAnchorEl(null);
+        setAnchorEl(null);
         statusModalSetting(!statusModal);
     };
 
@@ -86,11 +86,64 @@ console.log("status : " + statusModal );
                                 notchedOutline: 'border-2'
                             }}
                             endAdornment={
-                                <Button 
+                                <InputAdornment position="end">
+                                <Button
+                                    onClick={handleClick}
                                     size="small"
                                     className="btn-neutral-dark d-flex align-items-center">
                                     <span className="btn-wrapper--label">USD</span>
+                                    <span className="btn-wrapper--icon d-flex">
+                                    <FontAwesomeIcon
+                                        icon={['fas', 'chevron-down']}
+                                        className="opacity-8 font-size-xs ml-1"
+                                    />
+                                    </span>
                                 </Button>
+                                <Menu
+                                    anchorEl={anchorEl}
+                                    keepMounted
+                                    getContentAnchorEl={null}
+                                    anchorOrigin={{
+                                    vertical: 'center',
+                                    horizontal: 'center'
+                                    }}
+                                    transformOrigin={{
+                                    vertical: 'center',
+                                    horizontal: 'center'
+                                    }}
+                                    open={Boolean(anchorEl)}
+                                    classes={{ list: 'p-0' }}
+                                    onClose={handleClose}>
+                                    <div className="p-2">
+                                    <List
+                                        component="div"
+                                        className="nav-pills p-0 m-0 nav-neutral-dark flex-column">
+                                        <ListItem
+                                        button
+                                        href="#/"
+                                        onClick={(e) => e.preventDefault()}
+                                        selected
+                                        className="px-3 mx-2">
+                                        <span>USD</span>
+                                        </ListItem>
+                                        <ListItem
+                                        button
+                                        href="#/"
+                                        onClick={(e) => e.preventDefault()}
+                                        className="px-3 mx-2">
+                                        <span>Euro</span>
+                                        </ListItem>
+                                        <ListItem
+                                        button
+                                        href="#/"
+                                        onClick={(e) => e.preventDefault()}
+                                        className="px-3 mx-2">
+                                        <span>Yen</span>
+                                        </ListItem>
+                                    </List>
+                                    </div>
+                                </Menu>
+                                </InputAdornment>
                             }
                             labelWidth={0}
                             />

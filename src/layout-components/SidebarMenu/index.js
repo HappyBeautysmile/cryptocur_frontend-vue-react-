@@ -17,12 +17,12 @@ import AttachMoneyTwoToneIcon from '@material-ui/icons/AttachMoneyTwoTone';
 import FilterListTwoToneIcon from '@material-ui/icons/FilterListTwoTone';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
-// import VerifiedUserTwoToneIcon from '@material-ui/icons/VerifiedUserTwoTone';
-// import BusinessCenterTwoToneIcon from '@material-ui/icons/BusinessCenterTwoTone';
-// import SettingsTwoToneIcon from '@material-ui/icons/SettingsTwoTone';
+import VerifiedUserTwoToneIcon from '@material-ui/icons/VerifiedUserTwoTone';
+import BusinessCenterTwoToneIcon from '@material-ui/icons/BusinessCenterTwoTone';
+import SettingsTwoToneIcon from '@material-ui/icons/SettingsTwoTone';
 // import ViewColumnTwoToneIcon from '@material-ui/icons/ViewColumnTwoTone';
 // import SaveAltIcon from '@material-ui/icons/SaveAlt';
-// import PeopleAltTwoToneIcon from '@material-ui/icons/PeopleAltTwoTone';
+import PeopleAltTwoToneIcon from '@material-ui/icons/PeopleAltTwoTone';
 // import PlayForWorkIcon from '@material-ui/icons/PlayForWork';
 // import BackupIcon from '@material-ui/icons/Backup';
 // import StoreMallDirectoryIcon from '@material-ui/icons/StoreMallDirectory';
@@ -47,7 +47,7 @@ const SidebarMenu = (props) => {
     setCryptoPageOpen(!cryptoPageOpen);
     event.preventDefault();
   };
-  console.log("cryptoPageOpen : " + cryptoPageOpen);
+  // console.log("cryptoPageOpen : " + cryptoPageOpen);
   return (
     <>
       <PerfectScrollbar>
@@ -201,7 +201,7 @@ const SidebarMenu = (props) => {
                 </Collapse>
               </li>
             </ul>
-            <li>
+            {/* <li>
               <NavLink
                 onClick={toggleSidebarMobile}
                 activeClassName="active"
@@ -215,8 +215,8 @@ const SidebarMenu = (props) => {
                   <ChevronRightTwoToneIcon />
                 </span>
               </NavLink>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <NavLink
                 onClick={toggleSidebarMobile}
                 activeClassName="active"
@@ -226,21 +226,6 @@ const SidebarMenu = (props) => {
                   <AttachMoneyTwoToneIcon />
                 </span>
                 Buy / Sell
-                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
-                  <ChevronRightTwoToneIcon />
-                </span>
-              </NavLink>
-            </li>
-            {/* <li>
-              <NavLink
-                onClick={toggleSidebarMobile}
-                activeClassName="active"
-                className="nav-link-simple"
-                to="/Accounts">
-                <span className="sidebar-icon">
-                  <PeopleAltTwoToneIcon />
-                </span>
-                Accounts
                 <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
                   <ChevronRightTwoToneIcon />
                 </span>
@@ -262,8 +247,24 @@ const SidebarMenu = (props) => {
               </NavLink>
             </li>
            
-           
             <li>
+              <NavLink
+                onClick={toggleSidebarMobile}
+                activeClassName="active"
+                className="nav-link-simple"
+                to="/Accounts">
+                <span className="sidebar-icon">
+                  <PeopleAltTwoToneIcon />
+                </span>
+                Accounts
+                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
+                  <ChevronRightTwoToneIcon />
+                </span>
+              </NavLink>
+            </li>
+             */}
+           
+            {/* <li>
               <NavLink
                 onClick={toggleSidebarMobile}
                 activeClassName="active"
@@ -277,8 +278,8 @@ const SidebarMenu = (props) => {
                   <ChevronRightTwoToneIcon />
                 </span>
               </NavLink>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <NavLink
                 onClick={toggleSidebarMobile}
                 activeClassName="active"

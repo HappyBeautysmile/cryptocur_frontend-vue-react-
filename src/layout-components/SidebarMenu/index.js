@@ -105,51 +105,19 @@ const SidebarMenu = (props) => {
           
             <li>
               <NavLink
-                to="/"
-                onClick={toggleCryptoPages}
-                className={clsx({ active: cryptoPageOpen })}>
+                to="/Buy"
+                activeClassName="active"
+                onClick={toggleSidebarMobile}
+                className="nav-link-simple"
+                >
                 <span className="sidebar-icon">
                   <EcoIcon />
                 </span>
-                <span className="sidebar-item-label">Crypto</span>
+                <span className="sidebar-item-label">Crypto Buy/Sell</span>
                 <span className="sidebar-icon-indicator">
                   <ChevronRightTwoToneIcon />
                 </span>
               </NavLink>
-              <Collapse in={cryptoPageOpen}>
-                <ul>
-                  <li >
-                    <NavLink
-                      onClick={toggleSidebarMobile}
-                      activeClassName="active"
-                      className="nav-link-simple"
-                      to="/Buy">
-                      {/* <span className="sidebar-icon">
-                        <ArrowDownwardIcon />
-                      </span> */}
-                      Buy
-                      <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
-                        <ChevronRightTwoToneIcon />
-                      </span>
-                    </NavLink>
-                  </li>
-                  <li>
-                    <NavLink
-                      onClick={toggleSidebarMobile}
-                      activeClassName="active"
-                      className="nav-link-simple"
-                      to="/Sell">
-                      {/* <span className="sidebar-icon">
-                        <ArrowUpwardIcon />
-                      </span> */}
-                      Sell
-                      <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
-                        <ChevronRightTwoToneIcon />
-                      </span>
-                    </NavLink>
-                  </li>
-                </ul>
-              </Collapse>
             </li>
             <ul>
               <li>

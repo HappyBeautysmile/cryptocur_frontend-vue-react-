@@ -6,14 +6,14 @@ const prod = {
     BaseUrl : "https://cms.zedcoin.org/api/",
     BgUrl : "https://cms.zedcoin.org/upload/bg/",
     ImgUrl : "https://cms.zedcoin.org/upload/avatar/",
-    CoinImg: "https://cms.zedcoin.org/upload/coin_img/"
+    CoinImgUrl: "https://cms.zedcoin.org/upload/coin_img/"
 }
 
 const local = {
     BaseUrl : "http://localhost:3030/api/",
     BgUrl : "http://localhost:3030/upload/bg/",
     ImgUrl: "http://localhost:3030/upload/avatar/",
-    CoinImg: "http://localhost:3030/upload/coin_img/"
+    CoinImgUrl: "http://localhost:3030/upload/coin_img/"
 }
 
 export const config = local;

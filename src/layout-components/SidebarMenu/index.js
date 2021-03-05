@@ -105,7 +105,7 @@ const SidebarMenu = (props) => {
           
             <li>
               <NavLink
-                to="/Buy"
+                to="/BuySell"
                 activeClassName="active"
                 onClick={toggleSidebarMobile}
                 className="nav-link-simple"

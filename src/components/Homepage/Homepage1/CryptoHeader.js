@@ -10,7 +10,7 @@ import { NavLink } from 'react-router-dom';
 import LoginModal from '../../Users/LoginModal';
 import RegisterModal from '../../Users/RegisterModal';
 
-const CoinImg = config.CoinImg ;
+const CoinImgUrl = config.CoinImgUrl ;
 export default function LivePreviewExample() {
   const [collapse, setCollapse] = useState(false);
   const toggle = () => setCollapse(!collapse);
@@ -29,7 +29,7 @@ export default function LivePreviewExample() {
               <div className="app-nav-logo--icon shadow-second-sm bg-secondary border-0" style={{borderRadius:"50%",border:"0px"}} >
                 <img style ={{width:"40px",height:"40px",borderRadius:"50%" }}
                   alt="Bamburgh React Crypto Application with Material-UI PRO"
-                  src={CoinImg + "/" + "zedcoin.png" }
+                  src={CoinImgUrl + "/" + "zedcoin.png" }
                 />
               </div>
               <div className="app-nav-logo--text">

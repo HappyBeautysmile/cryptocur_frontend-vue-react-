@@ -9,11 +9,11 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 import TrendingUpTwoToneIcon from '@material-ui/icons/TrendingUpTwoTone';
 import TrendingDownTwoToneIcon from '@material-ui/icons/TrendingDownTwoTone';
 import { DataGrid } from '@material-ui/data-grid';
-import {config} from "../../config"
+import {config} from "../../../config"
 
 const CoinImgUrl = config.CoinImgUrl;
 
-export default function LivePreviewExample() {
+export default function BuySell() {
   
   const coinList=[
     {iconType : "fab", iconName: "bitcoin", marketCap: 112314 , coinFullName:"Bitcoin", coinName:"BTC", coinPrice:16497, currencyType:"$", trending:"up",backgroundColor:"bg-warning"},
@@ -69,7 +69,7 @@ export default function LivePreviewExample() {
       </div>
       ),
     },
-  {field:"marketCap", headerName:"MARKET CAP" , flex:3,
+  {field:"marketCap", headerName:"MARKET CAP" , flex:2,
     renderCell: (params) => (
       <div className="text-right mr-3">
         <div className="font-weight-bold font-size-lg text-black" style={{color:"#40456e"}}>
@@ -93,53 +93,44 @@ export default function LivePreviewExample() {
             }
         </div>
       ),
+    },
+    { field: 'action', headerName: "ACTION" ,  flex:2,
+      renderCell: (params) => (
+          <div className="d-flex align-items-center mr-4">
+            <Tooltip
+              classes={{ tooltip: 'text-center p-3 tooltip-success' }}
+              arrow
+              placement="top"
+              title="We can buy coin we want !">
+              <Button className="btn-success m-2">Buy</Button>
+            </Tooltip>
+            <Tooltip
+              classes={{ tooltip: 'text-center p-3 tooltip-warning' }}
+              arrow
+              placement="top"
+              title="We can sell coin we want !">
+              <Button className="btn-warning m-2">Sell</Button>
+            </Tooltip>
+          </div>
+        ),
     }
   ]
+ 
+
   return (
     <>
-      <Card className="w-100 mb-5" >
-        <div className="card-header d-flex align-items-center justify-content-between card-header-alt p-4">
-          <div>
-            <h6 className="font-weight-bold font-size-lg mb-1 text-black">
-              CryptoCoinList
-            </h6>
-            <p className="text-black-50 mb-0">Status of My crypto assets.</p>
-          </div>
-          <div className="d-flex align-items-center">
-            <Tooltip title="View stats for last week" arrow placement="top">
-              <Button className="btn-link mx-1 px-1 py-2 font-weight-bold text-primary">
-                <span>1W</span>
-              </Button>
-            </Tooltip>
-            <Tooltip title="View stats for last month" arrow placement="top">
-              <Button className="btn-link mx-1 px-1 py-2 font-weight-bold text-dark opacity-5">
-                <span>1M</span>
-              </Button>
-            </Tooltip>
-            <Tooltip title="View stats for last year" arrow placement="top">
-              <Button className="btn-link ml-1 px-1 py-2 font-weight-bold text-dark opacity-5">
-                <span>1Y</span>
-              </Button>
-            </Tooltip>
-          </div>
-        </div>
-        <div className="scroll-area-lm shadow-overflow">
-          <div style={{ height: 400}}>
-            <PerfectScrollbar>
-              <DataGrid 
-                rows={coinList ? coinList.map((item,i)=>({
-                  id: i+1, 
-                  cryptoCurrency:item,
-                  price:{coinPrice:item.coinPrice ,currencyType:item.currencyType},
-                  during:item.trending,
-                  marketCap: {marketCapCurrency: item.currencyType,marketCap:item.marketCap}
-                })):[]}
-                columns={columns} pageSize={10} rowsPerPageOptions={[10, 15, 20]} pagination  rowHeight="20"
-              />
-            </PerfectScrollbar>
-          </div>
-        </div>
-      </Card>
+        <PerfectScrollbar>
+            <DataGrid 
+            rows={coinList ? coinList.map((item,i)=>({
+                id: i+1, 
+                cryptoCurrency:item,
+                price:{coinPrice:item.coinPrice ,currencyType:item.currencyType},
+                during:item.trending,
+                marketCap: {marketCapCurrency: item.currencyType,marketCap:item.marketCap}
+            })):[]}
+            columns={columns} pageSize={10} rowsPerPageOptions={[10, 15, 20]} pagination  rowHeight="20"
+            />
+        </PerfectScrollbar>
     </>
   );
 }

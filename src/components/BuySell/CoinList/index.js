@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState,useEffect} from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card, Button, List, ListItem, Tooltip } from '@material-ui/core';
@@ -15,16 +15,78 @@ const CoinImgUrl = config.CoinImgUrl;
 
 export default function BuySell() {
   
-    const [statusModal, setStatusModal] = useState(false);
+const [statusModal, setStatusModal] = useState(false);
+const [currentWalletAndRate , setCurrentWalletAndRate] = useState([]);
+const [initialChoiceMoney,setinitialChoiceMoney] =useState([]);
 
   const statusToggle = () => setStatusModal(!statusModal);
-
   const coinList=[
-    {iconType : "fab", iconName: "bitcoin", marketCap: 112314 , coinFullName:"Bitcoin", coinName:"BTC", coinPrice:16497, currencyType:"$", trending:"up",backgroundColor:"bg-warning"},
-    {iconType : "fab", iconName: "ethereum", marketCap: 8000 , coinFullName:"Ethereum", coinName:"ETH", coinPrice:6398, currencyType:"$", trending:"up",backgroundColor:"bg-first"},
+    {iconType : "fab", iconName: "bitcoin", marketCap: 112314 , coinFullName:"Bitcoin", coinName:"BTC", coinPrice:48465.20, currencyType:"$", trending:"up",backgroundColor:"bg-warning"},
+    {iconType : "fab", iconName: "ethereum", marketCap: 8000 , coinFullName:"Ethereum", coinName:"ETH", coinPrice:1506.29, currencyType:"$", trending:"up",backgroundColor:"bg-first"},
     {iconType : "fas", iconName: "dollar-sign",  marketCap: 10000 ,coinFullName:"Dollar", coinName:"USD", coinPrice:1, currencyType:"$", trending:"down",backgroundColor:"bg-success"},
     {iconType : "fas", iconName: "dollar-sign",  marketCap: 200000 ,coinFullName:"ZedCoin", coinName:"ZDC", coinPrice:50, currencyType:"$", trending:"up",backgroundColor:"bg-success"}
   ]
+  const currentWallet =[
+    { name:"USD" , quantity:3500 },
+    { name:"EUR" , quantity:2300 },
+    { name:"YEN" , quantity:15000 },
+    { name:"GBP" , quantity:0}
+  ]
+
+  const currencyRate =[
+    { name:"USD" , exchange_rate: 1},
+    { name:"EUR" , exchange_rate: 1.2},
+    { name:"YEN" , exchange_rate: 0.0092},
+    { name:"GBP" , quantity:1.38 }
+  ]
+
+  const AddCurrencylWalletAndRate =() =>{
+    let tempWalletAndRate =[];
+    for(var i = 0 ; i < currencyRate.length ; i++)
+    {
+        tempWalletAndRate[i] = currencyRate[i] ;
+        for(var t = 0 ; t < currentWallet.length ; t++)
+        {
+            if(tempWalletAndRate[i].name === currentWallet[t].name)
+            {
+                tempWalletAndRate[i].quantity = currentWallet[t].quantity ;
+                break ;
+            }
+        }
+        if(t === currentWallet.length )
+        {
+            tempWalletAndRate[i].quantity = 0;
+        }
+    }
+    setCurrentWalletAndRate(tempWalletAndRate);
+    // console.log(currentWalletAndRate);
+  }   
+
+  const [selectedCrypt , setSelectedCrypt] = useState({});
+  const  buyCryptoFunc =(cryptoCoin)=>() =>
+  {
+
+    setSelectedCrypt(cryptoCoin);
+    let curMoney =[] ;
+    curMoney.wantedCoin = cryptoCoin;
+    curMoney.choiceCurrency =currentWalletAndRate[0] ;
+    curMoney.convertCoinPrice =  currentWalletAndRate[0].quantity/cryptoCoin.coinPrice;
+  /*
+            curMoney =
+                { 
+                    choiceCurrency: {name:"USD" , quantity:3500 ,exchange_rate: 1 }
+                    ,convertCoinPrice:121.212,
+                    wantedCoin : {
+                        iconType : "fab", iconName: "bitcoin", marketCap: 112314 , coinFullName:"Bitcoin", coinName:"BTC", coinPrice:48465.20, currencyType:"$", trending:"up",backgroundColor:"bg-warning"
+                    }
+                },
+        */
+    // setinitialChoiceMoney(curMoney);
+    setinitialChoiceMoney(curMoney)
+
+    statusToggle();
+
+  }
   const columns = [
     { field: 'id', headerName: 'ID', flex: 0.8,
       renderCell: (params) => (
@@ -106,7 +168,7 @@ export default function BuySell() {
               arrow
               placement="top"
               title="We can buy coin we want !">
-              <Button className="btn-success m-2"  onClick={statusToggle}>Buy</Button>
+              <Button className="btn-success m-2"  onClick={buyCryptoFunc(params.value)}>Buy</Button>
             </Tooltip>
             <Tooltip
               classes={{ tooltip: 'text-center p-3 tooltip-warning' }}
@@ -119,8 +181,11 @@ export default function BuySell() {
         ),
     }
   ]
- 
 
+  useEffect(() => {
+    AddCurrencylWalletAndRate();
+    }, []);
+  
   return (
     <>
         <PerfectScrollbar>
@@ -130,12 +195,13 @@ export default function BuySell() {
                 cryptoCurrency:item,
                 price:{coinPrice:item.coinPrice ,currencyType:item.currencyType},
                 during:item.trending,
-                marketCap: {marketCapCurrency: item.currencyType,marketCap:item.marketCap}
+                marketCap: {marketCapCurrency: item.currencyType,marketCap:item.marketCap},
+                action: item
             })):[]}
             columns={columns} pageSize={10} rowsPerPageOptions={[10, 15, 20]} pagination  rowHeight="20"
             />
         </PerfectScrollbar>
-        <BuySellModal statusModal={statusModal}  statusModalSetting={(e)=>setStatusModal(e)}/>
+        <BuySellModal statusModal={statusModal} initialChoiceMoney ={initialChoiceMoney} currentWalletAndRate={currentWalletAndRate} statusModalSetting={(e)=>setStatusModal(e)} cryptoCoin = {selectedCrypt} />
     </>
   );
 }

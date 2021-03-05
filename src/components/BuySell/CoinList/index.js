@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card, Button, List, ListItem, Tooltip } from '@material-ui/core';
@@ -10,11 +10,15 @@ import TrendingUpTwoToneIcon from '@material-ui/icons/TrendingUpTwoTone';
 import TrendingDownTwoToneIcon from '@material-ui/icons/TrendingDownTwoTone';
 import { DataGrid } from '@material-ui/data-grid';
 import {config} from "../../../config"
-
+import BuySellModal from "../BuySellModal"
 const CoinImgUrl = config.CoinImgUrl;
 
 export default function BuySell() {
   
+    const [statusModal, setStatusModal] = useState(false);
+
+  const statusToggle = () => setStatusModal(!statusModal);
+
   const coinList=[
     {iconType : "fab", iconName: "bitcoin", marketCap: 112314 , coinFullName:"Bitcoin", coinName:"BTC", coinPrice:16497, currencyType:"$", trending:"up",backgroundColor:"bg-warning"},
     {iconType : "fab", iconName: "ethereum", marketCap: 8000 , coinFullName:"Ethereum", coinName:"ETH", coinPrice:6398, currencyType:"$", trending:"up",backgroundColor:"bg-first"},
@@ -102,7 +106,7 @@ export default function BuySell() {
               arrow
               placement="top"
               title="We can buy coin we want !">
-              <Button className="btn-success m-2">Buy</Button>
+              <Button className="btn-success m-2"  onClick={statusToggle}>Buy</Button>
             </Tooltip>
             <Tooltip
               classes={{ tooltip: 'text-center p-3 tooltip-warning' }}
@@ -131,6 +135,7 @@ export default function BuySell() {
             columns={columns} pageSize={10} rowsPerPageOptions={[10, 15, 20]} pagination  rowHeight="20"
             />
         </PerfectScrollbar>
+        <BuySellModal statusModal={statusModal}  statusModalSetting={(e)=>setStatusModal(e)}/>
     </>
   );
 }

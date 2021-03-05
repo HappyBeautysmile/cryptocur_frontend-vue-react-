@@ -38,6 +38,7 @@ export default function BuySell() {
             <CoinList/>
           </div>
         </div>
+        
     </Card>
     </>
   );

@@ -2,10 +2,11 @@ import React, { useState ,lazy ,useEffect} from 'react';
 import { Grid,Container, Dialog, Button,Card, TextField,ListItem,  FormControl,Menu,List,InputAdornment} from '@material-ui/core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
+import {Notification} from "../../../reduxs/actions"
 
 function BuySellModal(props) {
     const [anchorEl, setAnchorEl] = useState(null);
-    const {statusModal, statusModalSetting ,cryptoCoin, currentWalletAndRate,initialChoiceMoney} = props;
+    const {statusModal, statusModalSetting , currentWalletAndRate,initialChoiceMoney,modalCssSetting} = props;
     const [choiceMoney ,setChoiceMoney] = useState({}); //we are going to buy coin using that money
 
     const handleClick = (event) => {
@@ -20,7 +21,7 @@ function BuySellModal(props) {
     /*
         tempchocieMoney =
             { 
-                choiceCurrency: {name:"USD" , quantity:3500 ,exchange_rate: 1 }
+                choiceCurrency: {name:"USD" , quantity:3500 ,totalQuantity:3500,exchange_rate: 1 }
                 ,convertCoinPrice:121.212,
                 wantedCoin : {
                     iconType : "fab", iconName: "bitcoin", marketCap: 112314 , coinFullName:"Bitcoin", coinName:"BTC", coinPrice:48465.20, currencyType:"$", trending:"up",backgroundColor:"bg-warning"
@@ -40,11 +41,25 @@ function BuySellModal(props) {
         // console.log(evt)
     }
     const handleChangeChoicePrice =(event)=>{
+
         const changePirce =event;
         let tempconvertCoinPrice = 0;
         if( changePirce && choiceMoney.wantedCoin)
             tempconvertCoinPrice = changePirce * choiceMoney.choiceCurrency.exchange_rate / choiceMoney.wantedCoin.coinPrice;
-        setChoiceMoney({...choiceMoney, choiceCurrency:{name:choiceMoney.choiceCurrency.name ,exchange_rate:choiceMoney.choiceCurrency.exchange_rate , quantity: changePirce} ,convertCoinPrice:tempconvertCoinPrice});
+
+        if(changePirce > choiceMoney.choiceCurrency.totalQuantity)
+        {
+            Notification("Warning","Total is " + choiceMoney.choiceCurrency.totalQuantity,"warning");
+        }
+        if(changePirce < 0)
+        {
+            Notification("Warning","Please input correctly. Price is Essence Number" ,"warning");
+        }
+        if(changePirce >=0 && changePirce <= choiceMoney.choiceCurrency.totalQuantity)
+        {
+            setChoiceMoney({...choiceMoney, choiceCurrency:{...choiceMoney.choiceCurrency, quantity: changePirce} ,convertCoinPrice:tempconvertCoinPrice});
+                // setChoiceMoney({...choiceMoney, choiceCurrency:{name:choiceMoney.choiceCurrency.name ,exchange_rate:choiceMoney.choiceCurrency.exchange_rate , quantity: changePirce} ,convertCoinPrice:tempconvertCoinPrice});
+        }
         // console.log(choiceMoney);
     }
     const handleChangeChoiceCoinPrice =(event)=>{
@@ -52,7 +67,18 @@ function BuySellModal(props) {
         let tempconvertChanePrice = 0;
         if( changeCoinPirce && choiceMoney.wantedCoin)
             tempconvertChanePrice = changeCoinPirce * choiceMoney.wantedCoin.coinPrice / choiceMoney.choiceCurrency.exchange_rate ;
-        setChoiceMoney({...choiceMoney, choiceCurrency:{name:choiceMoney.choiceCurrency.name ,exchange_rate:choiceMoney.choiceCurrency.exchange_rate , quantity: tempconvertChanePrice} ,convertCoinPrice:changeCoinPirce});
+        if(tempconvertChanePrice > choiceMoney.choiceCurrency.totalQuantity)
+        {
+            Notification("Warning","Total is " + choiceMoney.choiceCurrency.totalQuantity,"warning");
+        }   
+        if(changeCoinPirce < 0)
+        {
+            Notification("Warning","Please input correctly. Price is Essence Number" ,"warning");
+        }
+        if(tempconvertChanePrice >=0 && tempconvertChanePrice <= choiceMoney.choiceCurrency.totalQuantity)
+        {
+            setChoiceMoney({...choiceMoney, choiceCurrency:{...choiceMoney.choiceCurrency,quantity: tempconvertChanePrice} ,convertCoinPrice:changeCoinPirce});
+        }
     }
   useEffect(() => {
     if(initialChoiceMoney) setChoiceMoney(initialChoiceMoney);
@@ -165,7 +191,7 @@ function BuySellModal(props) {
                                 <Button
                                     size="small"
                                     className="btn-neutral-dark d-flex align-items-center">
-                                    <span className="btn-wrapper--label">{cryptoCoin.coinName}</span>
+                                    <span className="btn-wrapper--label">{choiceMoney.wantedCoin ? choiceMoney.wantedCoin.coinName : 1 }</span>
                                 </Button>
                               
                                 </InputAdornment>
@@ -177,9 +203,10 @@ function BuySellModal(props) {
                     <Grid container >
                         <Grid item lg={6} >
                             <Button
-                                className="btn-success py-2 mt-3 px-5 font-weight-bold font-size-lg" style={{width:"80%",marginLeft:"10%",marginRight:"10%"}}
+                                className={modalCssSetting.modalFormBtnBgColor ==="btn-success" ? "btn-success py-2 mt-3 px-5 font-weight-bold font-size-lg" : "btn-warning py-2 mt-3 px-5 font-weight-bold font-size-lg"} style={{width:"80%",marginLeft:"10%",marginRight:"10%"}}
                                 >
-                                Buy Bitcoin
+                                    {modalCssSetting.modalTitle +" " }
+                                    { choiceMoney.wantedCoin ? choiceMoney.wantedCoin.coinFullName : ""} 
                             </Button>
                         </Grid>
                         <Grid item lg={6}>

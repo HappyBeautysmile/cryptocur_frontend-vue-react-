@@ -16,5 +16,5 @@ const local = {
     CoinImgUrl: "http://localhost:3030/upload/coin_img/"
 }
 
-export const config = local;
+export const config = prod;
 

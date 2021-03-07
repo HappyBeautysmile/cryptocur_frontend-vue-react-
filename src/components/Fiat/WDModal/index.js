@@ -3,12 +3,16 @@ import { Grid,Container, Dialog, Button,Card, TextField,ListItem,  FormControl,M
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import {Notification} from "../../../reduxs/actions"
-
+import InputLabel from '@material-ui/core/InputLabel';
+import {  useDispatch } from 'react-redux'
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 function WithdrawDepositModal(props) {
     const [anchorEl, setAnchorEl] = useState(null);
-    const {statusModal, statusModalSetting , currentWalletAndRate,initialChoiceMoney,modalCssSetting} = props;
+    const {statusModal, statusModalSetting , currentFiatAndRate,initialChoiceMoney,modalCssSetting} = props;
     const [choiceMoney ,setChoiceMoney] = useState({}); //we are going to buy coin using that money
-
+    const [ownerBankAccount, setOwnerBankAccount] = useState("");
+    const [sitebankAccount ] = useState("123123123123123");
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -16,26 +20,20 @@ function WithdrawDepositModal(props) {
         setAnchorEl(null);
     };
     const modalClose =() =>{
+        setOwnerBankAccount("");
+        setChoiceMoney(initialChoiceMoney);
         statusModalSetting(!statusModal);
     }
     /*
         tempchocieMoney =
-            { 
-                choiceCurrency: {name:"USD" , quantity:3500 ,totalQuantity:3500,exchange_rate: 1 }
-                ,convertCoinPrice:121.212,
-                wantedCoin : {
-                    iconType : "fab", iconName: "bitcoin", marketCap: 112314 , coinFullName:"Bitcoin", coinName:"BTC", coinPrice:48465.20, currencyType:"$", trending:"up",backgroundColor:"bg-warning"
-                }
-            },
+        {name:"USD" , quantity:3500 ,totalQuantity:3500,exchange_rate: 1 }
+             
+        },
     */
     const handleCurrentChange = (evt)=>()=>{
         let tempchocieMoney = choiceMoney ;
-        if( evt.quantity)
-            tempchocieMoney.convertCoinPrice = evt.quantity * evt.exchange_rate / tempchocieMoney.wantedCoin.coinPrice;
-        else{
-            tempchocieMoney.convertCoinPrice = 0;
-        }
-        tempchocieMoney.choiceCurrency = evt;
+  
+        tempchocieMoney = evt;
         setChoiceMoney(tempchocieMoney);
         setAnchorEl(null);
         // console.log(evt)
@@ -43,49 +41,39 @@ function WithdrawDepositModal(props) {
     const handleChangeChoicePrice =(event)=>{
 
         const changePirce =event;
-        let tempconvertCoinPrice = 0;
-        if( changePirce && choiceMoney.wantedCoin)
-            tempconvertCoinPrice = changePirce * choiceMoney.choiceCurrency.exchange_rate / choiceMoney.wantedCoin.coinPrice;
-
-        if(changePirce > choiceMoney.choiceCurrency.totalQuantity)
+        if(Number(changePirce) <= 0)
         {
-            Notification("Warning","Total is " + choiceMoney.choiceCurrency.totalQuantity,"warning");
+            Notification("Warning","Please input correctly. Quantity is Essence Number" ,"warning");
         }
-        if(changePirce < 0)
+        if(modalCssSetting.modalTitle !=="Deposit" && changePirce > choiceMoney.totalQuantity)
         {
-            Notification("Warning","Please input correctly. Price is Essence Number" ,"warning");
+            Notification("Warning","We can't withdraw than our quantity of fiat." ,"warning");
         }
-        if(changePirce >=0 && changePirce <= choiceMoney.choiceCurrency.totalQuantity)
-        {
-            setChoiceMoney({...choiceMoney, choiceCurrency:{...choiceMoney.choiceCurrency, quantity: changePirce} ,convertCoinPrice:tempconvertCoinPrice});
-                // setChoiceMoney({...choiceMoney, choiceCurrency:{name:choiceMoney.choiceCurrency.name ,exchange_rate:choiceMoney.choiceCurrency.exchange_rate , quantity: changePirce} ,convertCoinPrice:tempconvertCoinPrice});
+        else{
+            setChoiceMoney({...choiceMoney, quantity: changePirce});
         }
         // console.log(choiceMoney);
     }
-    const handleChangeChoiceCoinPrice =(event)=>{
-        const changeCoinPirce =event;
-        let tempconvertChanePrice = 0;
-        if( changeCoinPirce && choiceMoney.wantedCoin)
-            tempconvertChanePrice = changeCoinPirce * choiceMoney.wantedCoin.coinPrice / choiceMoney.choiceCurrency.exchange_rate ;
-        if(tempconvertChanePrice > choiceMoney.choiceCurrency.totalQuantity)
-        {
-            Notification("Warning","Total is " + choiceMoney.choiceCurrency.totalQuantity,"warning");
-        }   
-        if(changeCoinPirce < 0)
-        {
-            Notification("Warning","Please input correctly. Price is Essence Number" ,"warning");
-        }
-        if(tempconvertChanePrice >=0 && tempconvertChanePrice <= choiceMoney.choiceCurrency.totalQuantity)
-        {
-            setChoiceMoney({...choiceMoney, choiceCurrency:{...choiceMoney.choiceCurrency,quantity: tempconvertChanePrice} ,convertCoinPrice:changeCoinPirce});
-        }
-    }
+    
   useEffect(() => {
     if(initialChoiceMoney) setChoiceMoney(initialChoiceMoney);
   }, [initialChoiceMoney]);
 
 // console.log("initialChoiceMoney : " + initialChoiceMoney);
 // console.log(initialChoiceMoney.choiceCurrency ? initialChoiceMoney.choiceCurrency.quantity : "sss");
+
+const handleDepositSubmit = evt => {
+    if(ownerBankAccount ==="")
+    {
+        Notification("Warning","Please input bank account correctly." ,"warning");
+    }
+    if(Number(choiceMoney.quantity)===0)
+    {
+        Notification("Warning","Please input curency's quantity  correctly." ,"warning");
+    }
+    
+    evt.preventDefault();
+  };
 
   return (
     <>
@@ -102,19 +90,63 @@ function WithdrawDepositModal(props) {
                 <Card>
                     <div className="d-flex align-items-center justify-content-between mb-2 mt-4">
                         <div className="font-weight-bold font-size-xl text-primary">
-                            Amount
+                            Honey
                         </div>
                     </div>
                     <div className="divider mb-4" />
+                    
                     <div className="d-block d-md-flex align-items-center justify-content-center">
                         <FormControl variant="outlined" fullWidth>
-                            <OutlinedInput
-                            
-                            value={choiceMoney.choiceCurrency ? choiceMoney.choiceCurrency.quantity : 1}
+                            <InputLabel htmlFor="outlined-adornment-amount">My Bank Account</InputLabel>
+                            <OutlinedInput                            
+                            variant="outlined"
+                            label="My Bank Account"
+                            value={ownerBankAccount}
                             // value={tempMoney}
                             classes={{
                                 input: 'font-size-lg font-weight-bold p-4 h-auto',
                                 notchedOutline: 'border-2'
+                                
+                            }}
+                            onChange = { (e) =>setOwnerBankAccount(e.target.value)}
+                            labelWidth={0}
+                            required
+                            />
+                        </FormControl>
+                        <div className="my-3 mx-auto my-md-0 d-60 d-flex align-items-center justify-content-center px-4">
+                            
+                            {modalCssSetting.modalTitle ==="Deposit" ? <ArrowForwardIosIcon/> : <ArrowBackIosIcon/>}
+                        </div>
+
+                        <FormControl variant="outlined" fullWidth>
+                            <InputLabel htmlFor="outlined-adornment-amount">Site Bank Account</InputLabel>
+                            <OutlinedInput
+                            value={sitebankAccount}
+                            label="Site Bank Account"
+                            readOnly
+                            classes={{
+                                input: 'font-size-lg font-weight-bold p-4 h-auto',
+                                notchedOutline: 'border-2'
+                            }}
+                            labelWidth={0}
+                            disabled
+                            />
+                        </FormControl>
+                    </div>
+                    <div className="divider mb-4" />
+
+                    <div className="d-block d-md-flex align-items-center justify-content-center">
+                        <FormControl variant="outlined" fullWidth>
+                            <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+                            <OutlinedInput                            
+                            variant="outlined"
+                            label="Amount"
+                            value={choiceMoney ? choiceMoney.quantity : 1}
+                            // value={tempMoney}
+                            classes={{
+                                input: 'font-size-lg font-weight-bold p-4 h-auto',
+                                notchedOutline: 'border-2'
+                                
                             }}
                             onChange = { (e) =>handleChangeChoicePrice(e.target.value)}
                             type="Number"
@@ -124,7 +156,7 @@ function WithdrawDepositModal(props) {
                                     onClick={handleClick}
                                     size="small"
                                     className="btn-neutral-dark d-flex align-items-center">
-                                    <span className="btn-wrapper--label">{choiceMoney.choiceCurrency ? choiceMoney.choiceCurrency.name : "ERORR"}</span>
+                                    <span className="btn-wrapper--label">{choiceMoney ? choiceMoney.name : "ERORR"}</span>
                                     <span className="btn-wrapper--icon d-flex">
                                     <FontAwesomeIcon
                                         icon={['fas', 'chevron-down']}
@@ -151,7 +183,7 @@ function WithdrawDepositModal(props) {
                                         <List
                                             component="div"
                                             className="nav-pills p-0 m-0 nav-neutral-dark flex-column">
-                                                {currentWalletAndRate.length ? currentWalletAndRate.map((item, i)=>(
+                                                {currentFiatAndRate.length ? currentFiatAndRate.map((item, i)=>(
                                                     <ListItem
                                                         key={i}
                                                         button
@@ -171,17 +203,13 @@ function WithdrawDepositModal(props) {
                             />
                         </FormControl>
                         <div className="my-3 mx-auto my-md-0 d-60 d-flex align-items-center justify-content-center px-4">
-                            <FontAwesomeIcon
-                            icon={['fas', 'exchange-alt']}
-                            className="opacity-8 font-size-xl"
-                            />
                         </div>
 
                         <FormControl variant="outlined" fullWidth>
+                            <InputLabel htmlFor="outlined-adornment-amount">Hone's fiat quantity</InputLabel>
                             <OutlinedInput
-                            value={choiceMoney.convertCoinPrice }
-                            onChange = { (e) =>handleChangeChoiceCoinPrice(e.target.value)}
-                            type="Number"
+                            value={modalCssSetting.modalTitle ==="Deposit" ? Number(choiceMoney.quantity) + Number(choiceMoney.totalQuantity) :  Number(choiceMoney.totalQuantity) - Number(choiceMoney.quantity) }
+                            label="Hone fiat quantity"
                             classes={{
                                 input: 'font-size-lg font-weight-bold p-4 h-auto',
                                 notchedOutline: 'border-2'
@@ -191,22 +219,23 @@ function WithdrawDepositModal(props) {
                                 <Button
                                     size="small"
                                     className="btn-neutral-dark d-flex align-items-center">
-                                    <span className="btn-wrapper--label">{choiceMoney.wantedCoin ? choiceMoney.wantedCoin.coinName : 1 }</span>
+                                    <span className="btn-wrapper--label">{choiceMoney.name}</span>
                                 </Button>
                               
                                 </InputAdornment>
                             }
                             labelWidth={0}
+                            disabled
+
                             />
                         </FormControl>
                     </div>
                     <Grid container >
                         <Grid item lg={6} >
-                            <Button
-                                className={modalCssSetting.modalFormBtnBgColor ==="btn-success" ? "btn-success py-2 mt-3 px-5 font-weight-bold font-size-lg" : "btn-warning py-2 mt-3 px-5 font-weight-bold font-size-lg"} style={{width:"80%",marginLeft:"10%",marginRight:"10%"}}
+                            <Button type= "submit" onClick={handleDepositSubmit}
+                                className={modalCssSetting.modalFormBtnBgColor ==="btn-success" ? "btn-success py-2 mt-3 px-5 font-weight-bold font-size-lg" : "btn-danger py-2 mt-3 px-5 font-weight-bold font-size-lg"} style={{width:"80%",marginLeft:"10%",marginRight:"10%"}}
                                 >
-                                    {modalCssSetting.modalTitle +" " }
-                                    { choiceMoney.wantedCoin ? choiceMoney.wantedCoin.coinFullName : ""} 
+                                    {modalCssSetting.modalTitle +" to Honey " }
                             </Button>
                         </Grid>
                         <Grid item lg={6}>

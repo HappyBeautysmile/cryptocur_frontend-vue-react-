@@ -27,22 +27,31 @@ import PeopleAltTwoToneIcon from '@material-ui/icons/PeopleAltTwoTone';
 // import BackupIcon from '@material-ui/icons/Backup';
 // import StoreMallDirectoryIcon from '@material-ui/icons/StoreMallDirectory';
 // import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
-// import { SidebarWidget } from '../../layout-components';
+import { SidebarWidget } from '../../layout-components';
 // import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 // import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 const SidebarMenu = (props) => {
   const { setSidebarToggleMobile } = props;
 
-  const toggleSidebarMobile = () => setSidebarToggleMobile(false);
-
+  const toggleSidebarMobile = (event) => 
+  {
+    setSidebarToggleMobile(false);
+    // event.preventDefault();
+  }
   const [cryptoPageOpen, setCryptoPageOpen] = useState(false);
   const [fiatPageOpen, setFiatPageOpen] = useState(false);
   
   const togglePages = (event) => {
+    // alert("first");
     setFiatPageOpen(!fiatPageOpen);
     event.preventDefault();
   };
+  const toggleFiatSidebarMobile =(event)=>{
+    // alert("child");
+    setFiatPageOpen(true);
+    setSidebarToggleMobile(false);
+  }
   const toggleCryptoPages = (event) => {
     setCryptoPageOpen(!cryptoPageOpen);
     event.preventDefault();
@@ -77,7 +86,7 @@ const SidebarMenu = (props) => {
                 onClick={toggleSidebarMobile}
                 activeClassName="active"
                 className="nav-link-simple"
-                to="/Fund">
+                to="/fund">
                 <span className="sidebar-icon">
                   <AttachMoneyIcon/>
                 </span>
@@ -119,10 +128,25 @@ const SidebarMenu = (props) => {
                 </span>
               </NavLink>
             </li>
-            <ul>
+            <li>
+              <NavLink
+                onClick={toggleFiatSidebarMobile}
+                activeClassName="active"
+                className="nav-link-simple"
+                to="/fiat">
+                <span className="sidebar-icon">
+                <AccountBalanceIcon/>
+                </span>
+                Fiat
+                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
+                  <ChevronRightTwoToneIcon />
+                </span>
+              </NavLink>
+            </li>
+            {/* <ul>
               <li>
-                <a
-                  href="/"
+                <NavLink
+                  to="/fiat"
                   onClick={togglePages}
                   className={clsx({ active: fiatPageOpen })}>
                   <span className="sidebar-icon">
@@ -132,34 +156,19 @@ const SidebarMenu = (props) => {
                   <span className="sidebar-icon-indicator">
                     <ChevronRightTwoToneIcon />
                   </span>
-                </a>
+                </NavLink>
                 <Collapse in={fiatPageOpen}>
                   <ul>
                     <li>
                       <NavLink
-                        onClick={toggleSidebarMobile}
+                        onClick={toggleFiatSidebarMobile}
                         activeClassName="active"
                         className="nav-link-simple"
-                        to="/Deposit">
-                        {/* <span className="sidebar-icon">
+                        to="/fiat">
+                        <span className="sidebar-icon">
                         <CloudDownloadIcon/>
-                        </span> */}
-                        Deposit
-                        <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
-                          <ChevronRightTwoToneIcon />
                         </span>
-                      </NavLink>
-                    </li>
-                    <li>
-                      <NavLink
-                        onClick={toggleSidebarMobile}
-                        activeClassName="active"
-                        className="nav-link-simple"
-                        to="/Withdraw">
-                        {/* <span className="sidebar-icon">
-                          <BackupIcon />
-                        </span> */}
-                        Withdraw
+                        Fiat
                         <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
                           <ChevronRightTwoToneIcon />
                         </span>
@@ -168,7 +177,7 @@ const SidebarMenu = (props) => {
                   </ul>
                 </Collapse>
               </li>
-            </ul>
+            </ul> */}
             {/* <li>
               <NavLink
                 onClick={toggleSidebarMobile}

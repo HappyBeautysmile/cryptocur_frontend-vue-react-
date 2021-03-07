@@ -6,6 +6,7 @@ import sidebar from "./sidebar"
 import maincontent from "./maincontent"
 import auth from "./auth"
 import users from "./users"
+import fiats from "./fiats"
 
 
 const rootReducer = combineReducers({
@@ -15,7 +16,8 @@ const rootReducer = combineReducers({
   sidebar : sidebar,
   maincontent : maincontent,
   auth : auth,
-  users: users
+  users: users,
+  fiats: fiats
 })
 
 export default rootReducer

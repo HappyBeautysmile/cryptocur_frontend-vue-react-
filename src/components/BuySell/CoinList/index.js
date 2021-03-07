@@ -26,7 +26,7 @@ export default function BuySell() {
         {iconType : "fas", iconName: "dollar-sign",  marketCap: 10000 ,coinFullName:"Dollar", coinName:"USD", coinPrice:1, currencyType:"$", trending:"down",backgroundColor:"bg-success"},
         {iconType : "fas", iconName: "dollar-sign",  marketCap: 200000 ,coinFullName:"ZedCoin", coinName:"ZDC", coinPrice:50, currencyType:"$", trending:"up",backgroundColor:"bg-success"}
     ]
-    const currentWallet =[
+    const currentFiat =[
         { name:"USD" , quantity:3500 },
         { name:"EUR" , quantity:2300 },
         { name:"YEN" , quantity:15000 },
@@ -45,16 +45,16 @@ export default function BuySell() {
         for(var i = 0 ; i < currencyRate.length ; i++)
         {
             tempWalletAndRate[i] = currencyRate[i] ;
-            for(var t = 0 ; t < currentWallet.length ; t++)
+            for(var t = 0 ; t < currentFiat.length ; t++)
             {
-                if(tempWalletAndRate[i].name === currentWallet[t].name)
+                if(tempWalletAndRate[i].name === currentFiat[t].name)
                 {
-                    tempWalletAndRate[i].quantity = currentWallet[t].quantity ; //exchange money
-                    tempWalletAndRate[i].totalQuantity = currentWallet[t].quantity ; //total money
+                    tempWalletAndRate[i].quantity = currentFiat[t].quantity ; //exchange money
+                    tempWalletAndRate[i].totalQuantity = currentFiat[t].quantity ; //total money
                     break ;
                 }
             }
-            if(t === currentWallet.length )
+            if(t === currentFiat.length )
             {
                 tempWalletAndRate[i].quantity = 0;
             }

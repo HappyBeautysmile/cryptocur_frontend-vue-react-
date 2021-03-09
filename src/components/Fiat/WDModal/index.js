@@ -7,10 +7,25 @@ import InputLabel from '@material-ui/core/InputLabel';
 import {  useDispatch } from 'react-redux'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
+
 function WithdrawDepositModal(props) {
     const [anchorEl, setAnchorEl] = useState(null);
-    const {statusModal, statusModalSetting , currentFiatAndRate,initialChoiceMoney,modalCssSetting} = props;
-    const [choiceMoney ,setChoiceMoney] = useState({}); //we are going to buy coin using that money
+    const {statusModal, statusModalSetting , choosedfiat,modalCssSetting} = props;
+
+// choosedfiat
+    //   {
+  //     createdAt: 2021-03-06T11:54:36.648Z,
+  //     _id: 60436e52164d7159d08c5cf5,
+  //     owner: 'admin@gmail.com',
+  //     name: 'Love',
+  //     __v: 0,
+  //     current_status: [
+            // { name : USD:,  exchange_rate: 1, quantity: 0 ,exchangeQuantity:0},
+            // { name : EUR:, exchange_rate: 1.2, quantity: 0 ,exchangeQuantity:0}
+  //     ]
+  //   },
+    const [choiceMoneyQuantity ,setChoiceMoneyQuantity] = useState(0); //we are going to buy coin using that money
+    const [chocieCurrencyIndex ,setChoiceCurrencyIndex] = useState(0);  
     const [ownerBankAccount, setOwnerBankAccount] = useState("");
     const [sitebankAccount ] = useState("123123123123123");
     const handleClick = (event) => {
@@ -21,62 +36,60 @@ function WithdrawDepositModal(props) {
     };
     const modalClose =() =>{
         setOwnerBankAccount("");
-        setChoiceMoney(initialChoiceMoney);
+        setChoiceMoneyQuantity(0);
+        setChoiceCurrencyIndex(0);
         statusModalSetting(!statusModal);
     }
-    /*
-        tempchocieMoney =
-        {name:"USD" , quantity:3500 ,totalQuantity:3500,exchange_rate: 1 }
-             
-        },
-    */
     const handleCurrentChange = (evt)=>()=>{
-        let tempchocieMoney = choiceMoney ;
-  
-        tempchocieMoney = evt;
-        setChoiceMoney(tempchocieMoney);
+        setChoiceCurrencyIndex(evt);
         setAnchorEl(null);
-        // console.log(evt)
     }
-    const handleChangeChoicePrice =(event)=>{
 
+    const handleChangeChoicePrice =(event)=>{
         const changePirce =event;
         if(Number(changePirce) <= 0)
         {
             Notification("Warning","Please input correctly. Quantity is Essence Number" ,"warning");
         }
-        if(modalCssSetting.modalTitle !=="Deposit" && changePirce > choiceMoney.totalQuantity)
+        if(modalCssSetting.modalTitle !=="Deposit" && changePirce > choiceMoneyQuantity)
         {
             Notification("Warning","We can't withdraw than our quantity of fiat." ,"warning");
         }
         else{
-            setChoiceMoney({...choiceMoney, quantity: changePirce});
+            // setChoiceMoneyQuantity({...choiceMoneyQuantity, quantity: changePirce});
+            setChoiceMoneyQuantity( changePirce);
         }
-        // console.log(choiceMoney);
     }
+
     
   useEffect(() => {
-    if(initialChoiceMoney) setChoiceMoney(initialChoiceMoney);
-  }, [initialChoiceMoney]);
-
-// console.log("initialChoiceMoney : " + initialChoiceMoney);
-// console.log(initialChoiceMoney.choiceCurrency ? initialChoiceMoney.choiceCurrency.quantity : "sss");
+  }, []);
 
 const handleDepositSubmit = evt => {
     if(ownerBankAccount ==="")
     {
         Notification("Warning","Please input bank account correctly." ,"warning");
     }
-    if(Number(choiceMoney.quantity)===0)
+    else if(Number(choiceMoneyQuantity)===0)
     {
         Notification("Warning","Please input curency's quantity  correctly." ,"warning");
     }
-    
+    else{
+        let fpdata = {
+            email : choosedfiat.owner,
+            name : choosedfiat.name,
+            currencyIndex :chocieCurrencyIndex,
+            choiceMoneyQuantity:choiceMoneyQuantity,
+        }
+    }
     evt.preventDefault();
   };
 
   return (
     <>
+    {
+    choosedfiat.current_status &&
+
       <div className="d-flex align-items-center justify-content-center flex-wrap">
         <Dialog
           scroll="body"
@@ -90,7 +103,7 @@ const handleDepositSubmit = evt => {
                 <Card>
                     <div className="d-flex align-items-center justify-content-between mb-2 mt-4">
                         <div className="font-weight-bold font-size-xl text-primary">
-                            Honey
+                            {choosedfiat.name}
                         </div>
                     </div>
                     <div className="divider mb-4" />
@@ -141,7 +154,7 @@ const handleDepositSubmit = evt => {
                             <OutlinedInput                            
                             variant="outlined"
                             label="Amount"
-                            value={choiceMoney ? choiceMoney.quantity : 1}
+                            value={choiceMoneyQuantity}
                             // value={tempMoney}
                             classes={{
                                 input: 'font-size-lg font-weight-bold p-4 h-auto',
@@ -156,7 +169,7 @@ const handleDepositSubmit = evt => {
                                     onClick={handleClick}
                                     size="small"
                                     className="btn-neutral-dark d-flex align-items-center">
-                                    <span className="btn-wrapper--label">{choiceMoney ? choiceMoney.name : "ERORR"}</span>
+                                    <span className="btn-wrapper--label">{ choosedfiat.current_status[chocieCurrencyIndex].name  }</span>
                                     <span className="btn-wrapper--icon d-flex">
                                     <FontAwesomeIcon
                                         icon={['fas', 'chevron-down']}
@@ -183,12 +196,12 @@ const handleDepositSubmit = evt => {
                                         <List
                                             component="div"
                                             className="nav-pills p-0 m-0 nav-neutral-dark flex-column">
-                                                {currentFiatAndRate.length ? currentFiatAndRate.map((item, i)=>(
+                                                {choosedfiat.current_status ? choosedfiat.current_status.map((item, i)=>(
                                                     <ListItem
                                                         key={i}
                                                         button
                                                         href="#/"
-                                                        onClick={handleCurrentChange(item)}
+                                                        onClick={handleCurrentChange(i)}
                                                         selected
                                                         className="px-3 mx-2">
                                                         <span>{item.name}</span>
@@ -208,7 +221,7 @@ const handleDepositSubmit = evt => {
                         <FormControl variant="outlined" fullWidth>
                             <InputLabel htmlFor="outlined-adornment-amount">Hone's fiat quantity</InputLabel>
                             <OutlinedInput
-                            value={modalCssSetting.modalTitle ==="Deposit" ? Number(choiceMoney.quantity) + Number(choiceMoney.totalQuantity) :  Number(choiceMoney.totalQuantity) - Number(choiceMoney.quantity) }
+                            value={modalCssSetting.modalTitle ==="Deposit" ? Number(choiceMoneyQuantity) +  Number(choosedfiat.current_status[chocieCurrencyIndex].quantity) :  Number(choosedfiat.current_status[chocieCurrencyIndex].quantity) - Number(choiceMoneyQuantity) }
                             label="Hone fiat quantity"
                             classes={{
                                 input: 'font-size-lg font-weight-bold p-4 h-auto',
@@ -219,7 +232,7 @@ const handleDepositSubmit = evt => {
                                 <Button
                                     size="small"
                                     className="btn-neutral-dark d-flex align-items-center">
-                                    <span className="btn-wrapper--label">{choiceMoney.name}</span>
+                                    <span className="btn-wrapper--label">{ choosedfiat.current_status[chocieCurrencyIndex].name }</span>
                                 </Button>
                               
                                 </InputAdornment>
@@ -247,8 +260,10 @@ const handleDepositSubmit = evt => {
             </form>
         </Dialog>
       </div>
+        }
     </>
   );
+  
 }
 
 

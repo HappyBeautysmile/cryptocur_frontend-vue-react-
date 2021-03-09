@@ -7,6 +7,7 @@ import maincontent from "./maincontent"
 import auth from "./auth"
 import users from "./users"
 import fiats from "./fiats"
+import currencies from "./currencies"
 
 
 const rootReducer = combineReducers({
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   maincontent : maincontent,
   auth : auth,
   users: users,
-  fiats: fiats
+  fiats: fiats,
+  currencies: currencies
 })
 
 export default rootReducer

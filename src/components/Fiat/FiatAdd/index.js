@@ -6,7 +6,7 @@ import {  useSelector, useDispatch } from 'react-redux'
 function FiatAdd() {
   const [addModal, setaddModal] = useState(false);
   const [name , setName] = useState("");
-  const [email ,setEmail] = useState("");
+  // const [email ,setEmail] = useState("");
   
   const dispatch = useDispatch();
   const authprops = useSelector(state => state.auth.user);

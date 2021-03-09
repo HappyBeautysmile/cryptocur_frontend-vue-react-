@@ -30,7 +30,7 @@ function FiatEdit(props) {
     evt.preventDefault();
     let fpdata ={
       name : name,
-      email : owner,
+      email : curFiat.owner,
       oldName : curFiat.name,
       oldEmail :curFiat.owner,
     }
@@ -86,7 +86,7 @@ function FiatEdit(props) {
                     please edit here!
                   </p>
                   <Grid container spacing={6}>
-                    <Grid item md={6}>
+                    <Grid item md={12}>
                       <TextField
                         fullWidth
                         label="Name"
@@ -96,7 +96,7 @@ function FiatEdit(props) {
                         style={{color:"rgba(0, 0, 0, 0.54)!important"}}                        
                       />
                     </Grid>
-                    <Grid item md={6}>
+                    {/* <Grid item md={6}>
                       <TextField
                         fullWidth
                         label="Owner"
@@ -105,7 +105,7 @@ function FiatEdit(props) {
                         onChange = {(e)=>setOwner(e.target.value)}
                         required
                       />
-                    </Grid>
+                    </Grid> */}
                   </Grid>
                   <Grid container spacing={6}>
                     <Grid item md={6}>

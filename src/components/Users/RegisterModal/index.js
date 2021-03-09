@@ -25,7 +25,7 @@ function RegisterModal(props) {
   const [firstName, setFirstname] = useState("");
   const [lastName, setLastname] = useState("");
   const [avatar, setAvatar] = useState("");
-
+  const [role, setRole] = useState("2") ;
   const {registerTitle , submitBtnName ,userData} = props;
   const ExceptionHandlingFunc = (exceptionEnv)=>{ 
     if(exceptionEnv ==="Register" || exceptionEnv ==="Add User")
@@ -61,7 +61,7 @@ function RegisterModal(props) {
       fpdata.append('password', password);
       fpdata.append('firstName', firstName);
       fpdata.append('lastName', lastName);
-
+      fpdata.append("role",role) ;
       if(ExceptionHandlingFunc(registerTitle)===true)
       {
 
@@ -89,6 +89,7 @@ function RegisterModal(props) {
       setLastname(userData.lastName);
       setEmail(userData.email);
       setAvatar(userData.avatar);
+      setRole(userData.role);
     }
     else{
       setAvatar("images/avatars/default.jpg");

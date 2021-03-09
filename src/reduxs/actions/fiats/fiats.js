@@ -5,7 +5,7 @@ import {Notification} from "../index"
 
 export const UserFiatList = (fiatsData) =>{
     return async dispatch =>{
-        console.log("fiatsData : " + fiatsData);
+        // console.log("fiatsData : " + fiatsData);
         var outdata =  await Apirequest("fiats/userfiatlist",fiatsData);
         // console.log(outdata);
         if(outdata.status === "get_success"){

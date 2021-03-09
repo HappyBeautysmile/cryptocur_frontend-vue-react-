@@ -9,6 +9,7 @@ import {config} from "../../../config";
 import Moment from 'react-moment';
 import VerifiedUserTwoToneIcon from '@material-ui/icons/VerifiedUserTwoTone';
 import {UserFiatList} from "../../../reduxs/actions/fiats/fiats"
+
 import FiatEdit from "../FiatEdit"
 import WithdrawDepositModal from "../WDModal"
 
@@ -19,71 +20,37 @@ export default function LivePreviewExample() {
 
   const dispatch = useDispatch();
   const fiatsprops = useSelector(state => state.fiats.fiatsData) ;
+  // console.log(fiats);
+  // [
+  //   {
+  //     createdAt: 2021-03-06T11:54:36.648Z,
+  //     _id: 60436e52164d7159d08c5cf5,
+  //     owner: 'admin@gmail.com',
+  //     name: 'Love',
+  //     __v: 0,
+  //     current_status: {
+            // {
+            //   USD: { exchange_rate: 1, quantity: 0 ,exchangeQuantity:0},
+            //   EUR: { exchange_rate: 1.2, quantity: 0 ,exchangeQuantity:0}
+            // }
+  //     }
+  //   },
+  // ]
   const authprops = useSelector(state => state.auth.user);
-
+  
   //withdraw and deposite part ******************************************* start ****************************
   const [withdrawDepositStatusModal, setWithdrawDepositStatusModal] = useState(false);
-  const [currentFiatAndRate , setCurrentWalletAndRate] = useState([]);
-  const [initialChoiceMoney,setinitialChoiceMoney] =useState([]);
+  // const [currentFiatAndRate , setCurrentWalletAndRate] = useState([]);
+  const [choosedfiat,setChoosedFiat] =useState({});
   const [modalCssSetting,setModalCssSetting] = useState([]);
   const depositStatusToggle = () => setWithdrawDepositStatusModal(!withdrawDepositStatusModal);
 
-  const currentFiat =[
-      { name:"USD" , quantity:3500 },
-      { name:"EUR" , quantity:2300 },
-      { name:"YEN" , quantity:15000 },
-      { name:"GBP" , quantity:0}
-  ]
-
-  const currencyRate =[
-      { name:"USD" , exchange_rate: 1},
-      { name:"EUR" , exchange_rate: 1.2},
-      { name:"YEN" , exchange_rate: 0.0092},
-      { name:"GBP" , quantity:1.38 }
-  ]
-  const AddCurrencylWalletAndRate =() =>{
-    let tempWalletAndRate =[];
-    for(var i = 0 ; i < currencyRate.length ; i++)
-    {
-        tempWalletAndRate[i] = currencyRate[i] ;
-        for(var t = 0 ; t < currentFiat.length ; t++)
-        {
-            if(tempWalletAndRate[i].name === currentFiat[t].name)
-            {
-                tempWalletAndRate[i].quantity = 0 ; //exchange money
-                tempWalletAndRate[i].totalQuantity = currentFiat[t].quantity ; //total money
-                break ;
-            }
-        }
-        if(t === currentFiat.length )
-        {
-            tempWalletAndRate[i].quantity = 0;
-        }
-    }
-    setCurrentWalletAndRate(tempWalletAndRate);
-// console.log(currentFiatAndRate);
-}   
-
-  const modalSettingFunc =(cryptoCoin) =>{
-    let curMoney =[] ;
-    curMoney =currentFiatAndRate[0] ;
-    /*
-        tempchocieMoney =
-        {name:"USD" , quantity:3500 ,totalQuantity:3500,exchange_rate: 1 }
-             
-        },
-    */
-    // setinitialChoiceMoney(curMoney);
-    setinitialChoiceMoney(curMoney);
-    
-      // console.log("currentFiatAndRate " );
-      // console.log(currentFiatAndRate[0] );
-  }
   const  WithdrawFunc =(cryptoCoin)=>() =>
   {
 
-      modalSettingFunc(cryptoCoin)
+      // modalSettingFunc(cryptoCoin)
       //We can choose buy modal .
+      setChoosedFiat(cryptoCoin);
       setModalCssSetting({modalTitle:"Withdraw",modalFormBtnBgColor:"btn-success"});
       depositStatusToggle();
 
@@ -91,9 +58,7 @@ export default function LivePreviewExample() {
 
   const  DepositFunc =(cryptoCoin)=>() =>
   {
-
-      modalSettingFunc(cryptoCoin)
-      //We can choose buy modal .
+      setChoosedFiat(cryptoCoin);
       setModalCssSetting({modalTitle:"Deposit",modalFormBtnBgColor:"btn-danger"});
       depositStatusToggle();
 
@@ -103,13 +68,10 @@ export default function LivePreviewExample() {
   // dispatch(UserFiatList({email:authprops.email}));
 
   useEffect(() => {
-    AddCurrencylWalletAndRate()
+    // AddCurrencylWalletAndRate()
     if(authprops)
       dispatch(UserFiatList({email:authprops.email}));
-    // usersprops = useSelector(state => state)
-    // const userTableRows = usersprops.data
   }, [dispatch])
-  // console.log(fiatsprops);
 
   const fiatColumns = [
     { field: 'id', headerName: 'ID', flex: 0.8,
@@ -131,15 +93,6 @@ export default function LivePreviewExample() {
       </div>
       ),
     },
-  // {field:"email", headerName:"Owner" , flex:1,
-  //   renderCell: (params) => (
-  //     <div className="text-right mr-3">
-  //       <div className="font-weight-bold font-size-lg text-black opacity-4">
-  //         {params.value }
-  //       </div>
-  //   </div>
-  //   ),
-  // },
   { field: 'createdAt', headerName: "CreatedAt" ,  flex:1,
     renderCell: (params) => (
         <div className="d-flex align-items-center mr-4">
@@ -148,7 +101,7 @@ export default function LivePreviewExample() {
       ),
     }, 
     {
-      field: 'action', headerName: "ACTION" , flex:1.5,
+      field: 'withdrawDeposite', headerName: "ACTION" , flex:1.5,
       renderCell: (params) => (
           <div className="d-flex align-items-center mr-4">
             <Tooltip
@@ -195,7 +148,7 @@ export default function LivePreviewExample() {
         })):[]}
         columns={fiatColumns} pageSize={10} rowsPerPageOptions={[10, 15, 20]} pagination  rowHeight="70"
       />
-      <WithdrawDepositModal statusModal={withdrawDepositStatusModal} initialChoiceMoney ={initialChoiceMoney} currentFiatAndRate={currentFiatAndRate} statusModalSetting={(e)=>setWithdrawDepositStatusModal(e)} modalCssSetting={modalCssSetting} />
+      <WithdrawDepositModal statusModal={withdrawDepositStatusModal}  statusModalSetting={(e)=>setWithdrawDepositStatusModal(e)} choosedfiat ={choosedfiat}  modalCssSetting={modalCssSetting} />
     </>
   );
 }

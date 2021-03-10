@@ -29,7 +29,7 @@ export const addWDTransaction = (wdtransaction) =>{
         var outdata =  await Apirequest("wdtransactions/add",wdtransaction);
         if(outdata.status){
             Notification("Success","New Withdraw/Deposite transaction was successfully added.","success")
-            dispatch(UserFiatList(wdtransaction));
+            // dispatch(UserFiatList(wdtransaction));
         }else{
             Notification("Error","Sorry...The Withdraw/Deposite transaction already exists.","danger")
         }

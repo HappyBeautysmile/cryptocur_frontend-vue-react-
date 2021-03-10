@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Grid, Container, Card, Button } from '@material-ui/core';
+import { Grid, Container, Card, Button  , List, ListItem} from '@material-ui/core';
 import Chart from 'react-apexcharts';
 
 import { NavLink } from 'react-router-dom';
@@ -13,6 +13,9 @@ import CryptoHeader from './CryptoHeader.js';
 import LoginModal from '../../Users/LoginModal';
 import {is_session} from "../../../reduxs/actions"
 import {config} from "../../../config"
+const CoinImgUrl = config.CoinImgUrl;
+
+
 const BgImg = config.BgUrl;
 
 export default function LivePreviewExample() {
@@ -162,7 +165,7 @@ export default function LivePreviewExample() {
           <div
             className="bg-composed-wrapper--image bg-composed-filter-rm"
             style={{ backgroundImage: 'url(' + BgImg +"fpBg.png"+ ')' ,opacity:".6",width:"100%",height:"100%"}}
-          />
+          />    
           <div className="bg-composed-wrapper--bg bg-second opacity-5" />
           <div className="bg-composed-wrapper--content">
             <Container className="z-over shadow-container-content-5">
@@ -194,13 +197,135 @@ export default function LivePreviewExample() {
                     </div>
                   </div>
                 </Grid>
-                <Grid item lg={6} className="d-flex align-items-center">
+                {/* <Grid item lg={6} className="d-flex align-items-center">
                   <img
                     src={illustration1}
                     alt="..."
                     className="m-5 m-lg-0 img-fit-container"
                   />
-                </Grid>
+                </Grid> */}
+                   <Grid item lg={6} className="d-flex align-items-center">
+                    <Card className="bg-secondary m-5 m-lg-0 object-skew hover-scale-lg shadow-xxl w-100 card-box">
+                      <List component="div" className="list-group-flush">
+                        <ListItem
+                          component="a"
+                          button
+                          href="#/"
+                          onClick={(e) => e.preventDefault()}
+                          className="d-flex rounded-top align-items-center py-3">
+                          <div className="d-flex align-items-center">
+                            <div className="d-50 text-white d-flex align-items-center justify-content-center rounded-pill bg-warning shadow-xxl mr-3">
+                              <FontAwesomeIcon
+                                icon={['fab', 'bitcoin']}
+                                className="font-size-xxl"
+                              />
+                            </div>
+                            <div>
+                              <div className="font-weight-bold text-black">
+                                BitCoin
+                              </div>
+                              <div className="text-black-50">24h Vol.: $239.454</div>
+                            </div>
+                          </div>
+                          <div className="ml-auto">
+                            <div className="px-4">
+                                <div className="text-black py-2 font-size-xxl d-flex align-items-center">
+                                  <div className="display-3 font-weight-bold">$9754</div>
+                                  <small className="text-success pt-1 font-weight-bold font-size-sm ml-2 align-self-start">
+                                    +12.54%
+                                  </small>
+                                </div>
+                                <div className="d-flex mt-1 align-items-center">
+                                  <div className="d-inline-flex font-weight-bold bg-neutral-success text-success font-size-sm px-3 py-1 rounded-sm">
+                                    $9807
+                                  </div>
+                                  <div className="font-size-sm font-weight-bold text-black-50 pl-2">
+                                    Last 24h
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                        </ListItem>
+                        <ListItem
+                          component="a"
+                          button
+                          href="#/"
+                          onClick={(e) => e.preventDefault()}
+                          className="d-flex rounded-top align-items-center py-3">
+                          <div className="d-flex align-items-center">
+                            <div className="d-50 text-white d-flex align-items-center justify-content-center rounded-pill bg-first shadow-xxl mr-3">
+                              <FontAwesomeIcon
+                                icon={['fab', 'ethereum']}
+                                className="font-size-xxl"
+                              />
+                            </div>
+                            <div>
+                              <div className="font-weight-bold text-black">
+                                Ethereum
+                              </div>
+                              <div className="text-black-50">24h Vol.: $174.345</div>
+                            </div>
+                          </div>
+                          <div className="ml-auto">
+                            <div className="px-4">
+                                <div className="text-black py-2 font-size-xxl d-flex align-items-center">
+                                  <div className="display-3 font-weight-bold">$2392</div>
+                                  <small className="text-success pt-1 font-weight-bold font-size-sm ml-2 align-self-start">
+                                    +21.5.54%
+                                  </small>
+                                </div>
+                                <div className="d-flex mt-1 align-items-center">
+                                  <div className="d-inline-flex font-weight-bold bg-neutral-success text-success font-size-sm px-3 py-1 rounded-sm">
+                                    $324
+                                  </div>
+                                  <div className="font-size-sm font-weight-bold text-black-50 pl-2">
+                                    Last 24h
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                        </ListItem>
+                        <ListItem
+                          component="a"
+                          button
+                          href="#/"
+                          onClick={(e) => e.preventDefault()}
+                          className="d-flex rounded-top align-items-center py-3">
+                          <div className="d-flex align-items-center">
+                            <div className="d-50 text-white d-flex align-items-center justify-content-center rounded-pill bg-warning shadow-xxl mr-3">
+                              <img src={CoinImgUrl + "/zedcoin.png"} style={{width:"50px",height:"50px"}}></img>
+
+                            </div>
+                            <div>
+                              <div className="font-weight-bold text-black">
+                                ZedCoin
+                              </div>
+                              <div className="text-black-50">24h Vol.: $123.2354</div>
+                            </div>
+                          </div>
+                          <div className="ml-auto">
+                            <div className="px-4">
+                                <div className="text-black py-2 font-size-xxl d-flex align-items-center">
+                                  <div className="display-3 font-weight-bold">$3754</div>
+                                  <small className="text-success pt-1 font-weight-bold font-size-sm ml-2 align-self-start">
+                                    +12.54%
+                                  </small>
+                                </div>
+                                <div className="d-flex mt-1 align-items-center">
+                                  <div className="d-inline-flex font-weight-bold bg-neutral-success text-success font-size-sm px-3 py-1 rounded-sm">
+                                    $9807
+                                  </div>
+                                  <div className="font-size-sm font-weight-bold text-black-50 pl-2">
+                                    Last 24h
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                        </ListItem>
+                      </List>
+                    </Card>
+                  </Grid>
+                
               </Grid>
               <Grid container spacing={6}>
                 <Grid item lg={4}>
@@ -218,22 +343,6 @@ export default function LivePreviewExample() {
                         </div>
                         <div className="text-dark opacity-7">
                           24h Vol.: $239.454
-                        </div>
-                      </div>
-                    </div>
-                    <div className="px-4">
-                      <div className="text-black py-2 font-size-xxl d-flex align-items-center">
-                        <div className="display-3 font-weight-bold">$9754</div>
-                        <small className="text-success pt-1 font-weight-bold font-size-sm ml-2 align-self-start">
-                          +12.54%
-                        </small>
-                      </div>
-                      <div className="d-flex mt-1 align-items-center">
-                        <div className="d-inline-flex font-weight-bold bg-neutral-success text-success font-size-sm px-3 py-1 rounded-sm">
-                          $9807
-                        </div>
-                        <div className="font-size-sm font-weight-bold text-black-50 pl-2">
-                          Last 24h
                         </div>
                       </div>
                     </div>
@@ -265,23 +374,7 @@ export default function LivePreviewExample() {
                         </div>
                       </div>
                     </div>
-                    <div className="px-4">
-                      <div className="text-black py-2 font-size-xxl d-flex align-items-center">
-                        <div className="display-3 font-weight-bold">$342</div>
-                        <small className="text-success pt-1 font-weight-bold font-size-sm ml-2 align-self-start">
-                          +21.25%
-                        </small>
-                      </div>
-                      <div className="d-flex mt-1 align-items-center">
-                        <div className="d-inline-flex font-weight-bold bg-neutral-success text-success font-size-sm px-3 py-1 rounded-sm">
-                          $327
-                        </div>
-                        <div className="font-size-sm font-weight-bold text-black-50 pl-2">
-                          Last 24h
-                        </div>
-                      </div>
-                    </div>
-                    <div className="mt-4">
+                   <div className="mt-4">
                       <Chart
                         options={chartHomepage1AOptions}
                         series={chartHomepage1CData}
@@ -295,31 +388,12 @@ export default function LivePreviewExample() {
                   <Card className="shadow-xxl card-box-hover-rise mb-5">
                     <div className="d-flex align-items-center p-4">
                       <div className="d-50 text-white d-flex align-items-center justify-content-center rounded-pill bg-success shadow-xxl mr-3">
-                        <FontAwesomeIcon
-                          icon={['fas', 'dollar-sign']}
-                          className="font-size-xxl"
-                        />
+                        <img src={CoinImgUrl + "/zedcoin.png"} style={{width:"50px",height:"50px"}}></img>
                       </div>
                       <div>
-                        <div className="font-weight-bold text-black">USDT</div>
+                        <div className="font-weight-bold text-black">ZedCoin</div>
                         <div className="text-dark opacity-7">
                           24h Vol.: $23.453
-                        </div>
-                      </div>
-                    </div>
-                    <div className="px-4">
-                      <div className="text-black py-2 font-size-xxl d-flex align-items-center">
-                        <div className="display-3 font-weight-bold">$65.34</div>
-                        <small className="text-danger pt-1 font-weight-bold font-size-sm ml-2 align-self-start">
-                          -5.54%
-                        </small>
-                      </div>
-                      <div className="d-flex mt-1 align-items-center">
-                        <div className="d-inline-flex font-weight-bold bg-neutral-danger text-danger font-size-sm px-3 py-1 rounded-sm">
-                          $76.34
-                        </div>
-                        <div className="font-size-sm font-weight-bold text-black-50 pl-2">
-                          Last 24h
                         </div>
                       </div>
                     </div>

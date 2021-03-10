@@ -8,6 +8,7 @@ import auth from "./auth"
 import users from "./users"
 import fiats from "./fiats"
 import currencies from "./currencies"
+import wdtransactions from "./WDTransaction"
 
 
 const rootReducer = combineReducers({
@@ -19,7 +20,8 @@ const rootReducer = combineReducers({
   auth : auth,
   users: users,
   fiats: fiats,
-  currencies: currencies
+  currencies: currencies,
+  wdtransactions:wdtransactions
 })
 
 export default rootReducer

@@ -72,6 +72,7 @@ export default function LivePreviewExample() {
     if(authprops)
       dispatch(UserFiatList({email:authprops.email}));
   }, [dispatch])
+  // console.log(fiatsprops);
 
   const fiatColumns = [
     { field: 'id', headerName: 'ID', flex: 0.8,

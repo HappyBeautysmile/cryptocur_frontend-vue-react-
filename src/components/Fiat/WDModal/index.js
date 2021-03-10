@@ -7,10 +7,11 @@ import InputLabel from '@material-ui/core/InputLabel';
 import {  useDispatch } from 'react-redux'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-
+import {addWDTransaction} from "../../../reduxs/actions/wdtransactions/wdtransactions"
 function WithdrawDepositModal(props) {
     const [anchorEl, setAnchorEl] = useState(null);
     const {statusModal, statusModalSetting , choosedfiat,modalCssSetting} = props;
+    const dispatch = useDispatch();
 
 // choosedfiat
     //   {
@@ -76,12 +77,20 @@ const handleDepositSubmit = evt => {
     }
     else{
         let fpdata = {
-            email : choosedfiat.owner,
-            name : choosedfiat.name,
-            currencyIndex :chocieCurrencyIndex,
+            owner : choosedfiat.owner,
+            fiatName : choosedfiat.name,
+            currency :choosedfiat.current_status[chocieCurrencyIndex].name,
+            quantity : choiceMoneyQuantity,
             choiceMoneyQuantity:choiceMoneyQuantity,
+            actionType:modalCssSetting.modalTitle ,
+            bankAddress:ownerBankAccount
         }
+        dispatch(addWDTransaction(fpdata));
     }
+    setOwnerBankAccount("");
+    setChoiceMoneyQuantity(0);
+    setChoiceCurrencyIndex(0);
+    statusModalSetting(!statusModal);
     evt.preventDefault();
   };
   

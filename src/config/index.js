@@ -15,6 +15,6 @@ const local = {
     ImgUrl: "http://localhost:3030/upload/avatar/",
     CoinImgUrl: "http://localhost:3030/upload/coin_img/"
 }
-
+///
 export const config = local;
 

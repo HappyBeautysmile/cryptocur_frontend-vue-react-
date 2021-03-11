@@ -52,19 +52,22 @@ function WithdrawDepositModal(props) {
         {
             Notification("Warning","Please input correctly. Quantity is Essence Number" ,"warning");
         }
-        if(modalCssSetting.modalTitle !=="Deposit" && changePirce > choiceMoneyQuantity)
+        if(modalCssSetting.modalTitle !=="Deposit" && changePirce  > choosedfiat.current_status[chocieCurrencyIndex].quantity)
         {
+            console.log(choosedfiat.current_status[chocieCurrencyIndex].quantity);
             Notification("Warning","We can't withdraw than our quantity of fiat." ,"warning");
         }
         else{
             // setChoiceMoneyQuantity({...choiceMoneyQuantity, quantity: changePirce});
-            setChoiceMoneyQuantity( changePirce);
+            setChoiceMoneyQuantity(changePirce);
         }
     }
 
     
   useEffect(() => {
-  }, []);
+    //   if(choosedfiat.current_status)
+    //     setChoiceMoneyQuantity(choosedfiat.current_status[0].quantity);
+  }, [choosedfiat]);
 
 const handleDepositSubmit = evt => {
     if(ownerBankAccount ==="")
@@ -81,10 +84,12 @@ const handleDepositSubmit = evt => {
             fiatName : choosedfiat.name,
             currency :choosedfiat.current_status[chocieCurrencyIndex].name,
             quantity : choiceMoneyQuantity,
-            choiceMoneyQuantity:choiceMoneyQuantity,
-            actionType:modalCssSetting.modalTitle ,
-            bankAddress:ownerBankAccount
+            // choiceMoneyQuantity:choiceMoneyQuantity,
+            actiontype:modalCssSetting.modalTitle ,
+            bankAddress:ownerBankAccount,
         }
+        // console.log("fpdata.actionType");
+        // console.log(fpdata.actionType);
         dispatch(addWDTransaction(fpdata));
     }
     setOwnerBankAccount("");

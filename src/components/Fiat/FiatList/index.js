@@ -51,7 +51,7 @@ export default function LivePreviewExample() {
       // modalSettingFunc(cryptoCoin)
       //We can choose buy modal .
       setChoosedFiat(cryptoCoin);
-      setModalCssSetting({modalTitle:"Withdraw",modalFormBtnBgColor:"btn-success"});
+      setModalCssSetting({modalTitle:"Withdraw",modalFormBtnBgColor:"btn-first"});
       depositStatusToggle();
 
   }
@@ -59,7 +59,7 @@ export default function LivePreviewExample() {
   const  DepositFunc =(cryptoCoin)=>() =>
   {
       setChoosedFiat(cryptoCoin);
-      setModalCssSetting({modalTitle:"Deposit",modalFormBtnBgColor:"btn-danger"});
+      setModalCssSetting({modalTitle:"Deposit",modalFormBtnBgColor:"btn-success"});
       depositStatusToggle();
 
   }
@@ -106,19 +106,19 @@ export default function LivePreviewExample() {
       renderCell: (params) => (
           <div className="d-flex align-items-center mr-4">
             <Tooltip
-                classes={{ tooltip: 'text-center p-3 tooltip-danger' }}
-                arrow
-                placement="top"
-                title="We can deposit coin we want !">
-                <Button className="btn-danger m-2" onClick={DepositFunc(params.value)}>DEPOSIT</Button>
-
-            </Tooltip>
-            <Tooltip
                 classes={{ tooltip: 'text-center p-3 tooltip-success' }}
                 arrow
                 placement="top"
+                title="We can deposit coin we want !">
+                <Button className="btn-success m-2" onClick={DepositFunc(params.value)}>DEPOSIT</Button>
+
+            </Tooltip>
+            <Tooltip
+                classes={{ tooltip: 'text-center p-3 tooltip-first' }}
+                arrow
+                placement="top"
                 title="We can withdraw coin we want !">
-                <Button className="btn-success m-2" onClick={WithdrawFunc(params.value)} >WITHDRAW</Button>
+                <Button className="btn-first m-2" onClick={WithdrawFunc(params.value)} >WITHDRAW</Button>
             
             </Tooltip>
             

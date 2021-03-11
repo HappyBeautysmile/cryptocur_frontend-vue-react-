@@ -255,7 +255,7 @@ const handleDepositSubmit = evt => {
                     <Grid container >
                         <Grid item lg={6} >
                             <Button type= "submit" onClick={handleDepositSubmit}
-                                className={modalCssSetting.modalFormBtnBgColor ==="btn-success" ? "btn-success py-2 mt-3 px-5 font-weight-bold font-size-lg" : "btn-danger py-2 mt-3 px-5 font-weight-bold font-size-lg"} style={{width:"80%",marginLeft:"10%",marginRight:"10%"}}
+                                className={modalCssSetting.modalFormBtnBgColor ==="btn-success" ? "btn-success py-2 mt-3 px-5 font-weight-bold font-size-lg" : "btn-first py-2 mt-3 px-5 font-weight-bold font-size-lg"} style={{width:"80%",marginLeft:"10%",marginRight:"10%"}}
                                 >
                                     {modalCssSetting.modalTitle +" to Honey " }
                             </Button>

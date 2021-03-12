@@ -17,19 +17,9 @@ import AttachMoneyTwoToneIcon from '@material-ui/icons/AttachMoneyTwoTone';
 import FilterListTwoToneIcon from '@material-ui/icons/FilterListTwoTone';
 import AttachMoneyIcon from '@material-ui/icons/AttachMoney';
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
-import VerifiedUserTwoToneIcon from '@material-ui/icons/VerifiedUserTwoTone';
-import BusinessCenterTwoToneIcon from '@material-ui/icons/BusinessCenterTwoTone';
-import SettingsTwoToneIcon from '@material-ui/icons/SettingsTwoTone';
-// import ViewColumnTwoToneIcon from '@material-ui/icons/ViewColumnTwoTone';
-// import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import TimelineIcon from '@material-ui/icons/Timeline';
 import PeopleAltTwoToneIcon from '@material-ui/icons/PeopleAltTwoTone';
-// import PlayForWorkIcon from '@material-ui/icons/PlayForWork';
-// import BackupIcon from '@material-ui/icons/Backup';
-// import StoreMallDirectoryIcon from '@material-ui/icons/StoreMallDirectory';
-// import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import { SidebarWidget } from '../../layout-components';
-// import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
-// import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 
 const SidebarMenu = (props) => {
   const { setSidebarToggleMobile } = props;
@@ -101,6 +91,21 @@ const SidebarMenu = (props) => {
                 onClick={toggleSidebarMobile}
                 activeClassName="active"
                 className="nav-link-simple"
+                to="/WDTransactions">
+                <span className="sidebar-icon">
+                  <TimelineIcon />
+                </span>
+                W/D Transactions
+                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
+                  <ChevronRightTwoToneIcon />
+                </span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                onClick={toggleSidebarMobile}
+                activeClassName="active"
+                className="nav-link-simple"
                 to="/Transactions">
                 <span className="sidebar-icon">
                   <FilterListTwoToneIcon />
@@ -111,7 +116,7 @@ const SidebarMenu = (props) => {
                 </span>
               </NavLink>
             </li>
-          
+            
             <li>
               <NavLink
                 to="/BuySell"

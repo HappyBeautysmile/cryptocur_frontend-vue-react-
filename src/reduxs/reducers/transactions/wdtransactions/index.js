@@ -1,6 +1,6 @@
-import * as  Types from "../../types"
+import * as  Types from "../../../types"
   const initialState = {
-    wdTransactionsData : null
+    wdtransactionlistData: null
   }
     
 const wdtransactions = (state = initialState, action) => {
@@ -8,10 +8,11 @@ const wdtransactions = (state = initialState, action) => {
     case Types.GET_OWNERWDTRANSACTIONSLIST:
         return {
         ...state,
-        wdTransactionsData: action.data
+        wdtransactionlistData: action.data
         };
     default:
       return state
   }
 }
+
 export default wdtransactions

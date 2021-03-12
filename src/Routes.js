@@ -19,6 +19,7 @@ const Wallets = lazy(() => import('./pages/Wallets'));
 const BuySell = lazy(() => import('./pages/BuySell'));
 const Fiat = lazy(() => import('./pages/Fiat'));
 const Transactions = lazy(() => import('./pages/Transactions'));
+const WDTransactions = lazy(() => import('./pages/Transactions/WDTransactionList'));
 const Profile = lazy(() => import('./pages/Profile'));
 const Settings = lazy(() => import('./pages/Settings'));
 const PageRecoverCover = lazy(() => import('./pages/PageRecoverCover'));
@@ -122,6 +123,7 @@ const Routes = (props) => {
                   <AppRoute path="/BuySell" component={BuySell}  LeftSidebar/>
                   <AppRoute path="/fiat" component={Fiat}  LeftSidebar/>
                   <AppRoute path="/Transactions" component={Transactions}  LeftSidebar/>
+                  <AppRoute path="/WDTransactions" component={WDTransactions}  LeftSidebar/>
                   <AppRoute path="/Profile" component={Profile}  LeftSidebar/>
                   <AppRoute path="/Settings" component={Settings}  LeftSidebar />
                   <AppRoute path="/PageRecoverCover" component={PageRecoverCover} MinimalLayout />

@@ -7,7 +7,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import {  useDispatch } from 'react-redux'
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
-import {addWDTransaction} from "../../../reduxs/actions/wdtransactions/wdtransactions"
+import {addWDTransaction} from "../../../reduxs/actions/transactions/wdtransactions"
 function WithdrawDepositModal(props) {
     const [anchorEl, setAnchorEl] = useState(null);
     const {statusModal, statusModalSetting , choosedfiat,modalCssSetting} = props;

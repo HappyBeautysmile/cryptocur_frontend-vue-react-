@@ -1,12 +1,12 @@
-import {Apirequest} from "../index"
-import * as Types from "../../types"
+import {Apirequest} from "../../index"
+import * as Types from "../../../types"
 // import {history} from '../../../history'
-import {Notification} from "../index"
-
-export const WDTransactionList = (wdtransactionsData) =>{
+import {Notification} from "../../index"
+ 
+export const WDTransaction = (wdtransactionlistData) =>{
     return async dispatch =>{
         // console.log("fiatsData : " + fiatsData);
-        var outdata =  await Apirequest("wdtransactions/allwdtransactions",wdtransactionsData);
+        var outdata =  await Apirequest("wdtransactions/onwerwdtransactions",wdtransactionlistData);
         // console.log(outdata);
         if(outdata.status === "get_success"){
             var data = outdata.data;
@@ -15,26 +15,26 @@ export const WDTransactionList = (wdtransactionsData) =>{
             for(var i in data){
                 data[i]["id"] = data[i]._id;
             }
-            dispatch({ type : Types.GET_ALLWDTRANSACTIONSLIST, data});
+            dispatch({ type : Types.GET_OWNERWDTRANSACTIONSLIST, data});
         }
         else{
-
         }
     }
 }
 
-
-export const addWDTransaction = (wdtransaction) =>{
+export const addWDTransaction = (wdrequesttransactionsData) =>{
     return async dispatch =>{
-        var outdata =  await Apirequest("wdtransactions/add",wdtransaction);
+        var outdata =  await Apirequest("wdtransactions/add",wdrequesttransactionsData);
         if(outdata.status){
             Notification("Success","New Withdraw/Deposite transaction was successfully added.","success")
-            // dispatch(UserFiatList(wdtransaction));
+            // dispatch(UserFiatList(wdrequesttransactionsData));
         }else{
             Notification("Error","Sorry...The Withdraw/Deposite transaction already exists.","danger")
         }
     }
 }
+
+
 
 // export const editFiat = (fiat) =>{
 //     return async dispatch =>{

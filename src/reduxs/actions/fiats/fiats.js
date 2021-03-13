@@ -2,7 +2,7 @@ import {Apirequest} from "../index"
 import * as Types from "../../types"
 // import {history} from '../../../history'
 import {Notification} from "../index"
-
+import {getBankAccount} from "../../actions/settings/settings"
 export const UserFiatList = (fiatsData) =>{
     return async dispatch =>{
         // console.log("fiatsData : " + fiatsData);
@@ -15,7 +15,9 @@ export const UserFiatList = (fiatsData) =>{
             for(var i in data){
                 data[i]["id"] = data[i]._id;
             }
-            dispatch({ type : Types.GET_ALLFIAtSLIST, data});
+            dispatch(getBankAccount());
+            dispatch({type : Types.GET_ALLFIAtSLIST, data});
+
         }
         else{
 

@@ -10,7 +10,7 @@ import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import {addWDTransaction} from "../../../reduxs/actions/transactions/wdtransactions"
 function WithdrawDepositModal(props) {
     const [anchorEl, setAnchorEl] = useState(null);
-    const {statusModal, statusModalSetting , choosedfiat,modalCssSetting} = props;
+    const {statusModal, statusModalSetting , choosedfiat,modalCssSetting,bankAccount} = props;
     const dispatch = useDispatch();
 
 // choosedfiat
@@ -28,7 +28,6 @@ function WithdrawDepositModal(props) {
     const [choiceMoneyQuantity ,setChoiceMoneyQuantity] = useState(0); //we are going to buy coin using that money
     const [chocieCurrencyIndex ,setChoiceCurrencyIndex] = useState(0);  
     const [ownerBankAccount, setOwnerBankAccount] = useState("");
-    const [sitebankAccount ] = useState("123123123123123");
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -67,6 +66,7 @@ function WithdrawDepositModal(props) {
   useEffect(() => {
     //   if(choosedfiat.current_status)
     //     setChoiceMoneyQuantity(choosedfiat.current_status[0].quantity);
+    // console.log(choosedfiat.current_status);;
   }, [choosedfiat]);
 
 const handleDepositSubmit = evt => {
@@ -148,7 +148,7 @@ const handleDepositSubmit = evt => {
                         <FormControl variant="outlined" fullWidth>
                             <InputLabel htmlFor="outlined-adornment-amount">Site Bank Account</InputLabel>
                             <OutlinedInput
-                            value={sitebankAccount}
+                            value={bankAccount.address}
                             label="Site Bank Account"
                             readOnly
                             classes={{

@@ -20,6 +20,8 @@ export default function LivePreviewExample() {
 
   const dispatch = useDispatch();
   const fiatsprops = useSelector(state => state.fiats.fiatsData) ;
+  const bankAccount = useSelector(state => state.settings.bankAccount);
+  // console.log(bankAccount);
   // console.log(fiats);
   // [
   //   {
@@ -149,7 +151,7 @@ export default function LivePreviewExample() {
         })):[]}
         columns={fiatColumns} pageSize={10} rowsPerPageOptions={[10, 15, 20]} pagination  rowHeight="70"
       />
-      <WithdrawDepositModal statusModal={withdrawDepositStatusModal}  statusModalSetting={(e)=>setWithdrawDepositStatusModal(e)} choosedfiat ={choosedfiat}  modalCssSetting={modalCssSetting} />
+      <WithdrawDepositModal statusModal={withdrawDepositStatusModal}  statusModalSetting={(e)=>setWithdrawDepositStatusModal(e)} choosedfiat ={choosedfiat}  modalCssSetting={modalCssSetting} bankAccount ={bankAccount} />
     </>
   );
 }

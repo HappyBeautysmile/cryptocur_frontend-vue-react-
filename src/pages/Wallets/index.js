@@ -1,21 +1,35 @@
-import React from 'react';
+
+import React, { useState ,useEffect} from 'react';
 
 import { PageTitle } from '../../layout-components';
-import { Container } from '@material-ui/core';
 
-import WalletsChart from '../../components/Wallets/WalletsChart';
+import WalletsList from '../../components/Wallets/WalletsList';
+import WalletsListDeactivated from '../../components/Wallets/WalletsListDeactivated';
+import WalletsTransactions from '../../components/Wallets/WalletsTransactions';
 import WalletsPageTitleActions from '../../components/Wallets/WalletsPageTitleActions';
+import {UserWalletList} from "../../reduxs/actions/wallets/wallets"
+import { useSelector, useDispatch } from 'react-redux'
+
 export default function Wallets() {
+  const dispatch = useDispatch();
+  const authprops = useSelector(state => state.auth.user);
+
+  useEffect(() => {
+    // AddCurrencylWalletAndRate()
+    if(authprops)
+      dispatch(UserWalletList({owner:authprops.email}));
+  }, [authprops])
   return (
     <>
       <PageTitle
         titleHeading="Wallets"
-        titleDescription="This is your wallets overview last updated today.">
+        titleDescription="Manage your cryptocurrency wallets">
         <WalletsPageTitleActions />
       </PageTitle>
-      <Container>
-        <WalletsChart />
-      </Container>
+
+      <WalletsList />
+      <WalletsListDeactivated />
+      <WalletsTransactions />
     </>
   );
 }

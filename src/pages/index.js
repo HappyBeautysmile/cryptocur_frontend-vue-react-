@@ -1,7 +1,7 @@
 export { default as Homepage } from './Homepage';
 export { default as Overview } from './Overview';
-export { default as Accounts } from './Accounts';
-export { default as Wallets } from './Wallets';
+export { default as Accounts } from './Wallets';
+export { default as Wallets } from './Wallets_';
 export { default as BuySell } from './BuySell';
 export { default as Transactions } from './Transactions';
 export { default as Profile } from './Profile';

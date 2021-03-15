@@ -34,6 +34,17 @@ export const addWallet = (wallet) =>{
         }
     }
 }
+export const selectWallet = (wallet) =>{
+    return async dispatch =>{
+        var outdata =  await Apirequest("wallets/selectwallet",wallet);
+        if(outdata.status){
+            Notification("Success","Selected Wallet.","success")
+            dispatch(UserWalletList(wallet));
+        }else{
+            Notification("Error","Sorry...unfortunately it is impossible.","danger")
+        }
+    }
+}
 
 // export const editFiat = (fiat) =>{
 //     return async dispatch =>{

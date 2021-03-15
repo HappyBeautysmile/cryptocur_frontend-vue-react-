@@ -12,10 +12,12 @@ import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 import TrendingDownTwoToneIcon from '@material-ui/icons/TrendingDownTwoTone';
 import TrendingUpTwoToneIcon from '@material-ui/icons/TrendingUpTwoTone';
 import { useSelector, useDispatch } from 'react-redux'
+import {selectWallet} from "../../../reduxs/actions/wallets/wallets"
 
 export default function LivePreviewExample() {
   const [anchorEl, setAnchorEl] = useState(null);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const authprops = useSelector(state => state.auth.user);
   const walletlist = useSelector(state => state.wallets.walletsData);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -28,7 +30,18 @@ export default function LivePreviewExample() {
 
   useEffect(() => {
   }, [])
-
+  
+  const handleCoin =(evt)=>()=>{
+    if(evt.event ==="chooseCoinUse")
+    {
+      let fpdata = {
+        walletName : evt.item.walletName,
+        owner : authprops.email,
+      }
+      dispatch(selectWallet(fpdata));
+    }
+    // alert(evt.event);
+  }
 
  console.log("walletlist");
  console.log(walletlist);
@@ -40,8 +53,8 @@ export default function LivePreviewExample() {
       <Grid container spacing={6}>
 
         {walletlist ? walletlist.filter(item => item.status === true).map((item,i)=>(
-            <Grid item md={4} key = {i}>
-              <Card className={item.use === true ? "card-box card-box-hover-rise p-4 card-box-border-bottom bg-primary text-white border-primary mb-5" : "card-box card-box-hover-rise p-4 card-box-border-bottom border-warning mb-5"}>
+            <Grid item md={4} key = {i} onClick={handleCoin({item:item,event:"chooseCoinUse"})}>
+              <Card className={item.use === true ? "card-box card-box-hover-rise p-4 card-box-border-bottom bg-primary text-white border-primary mb-5" : "card-box card-box-hover-rise p-4 card-box-border-bottom border-warning mb-5"} >
                 {item.newMessage > 0 && 
                   <div style={{float:"right" ,paddingRight:"30px"}}>
                     <FontAwesomeIcon
@@ -98,15 +111,6 @@ export default function LivePreviewExample() {
                             </div>
                             <span className="font-size-md">Edit</span>
                           </ListItem>
-                          <ListItem
-                            button
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}>
-                            <div className="mr-2">
-                              <StarTwoToneIcon />
-                            </div>
-                            <span className="font-size-md">Make primary</span>
-                          </ListItem>
                         </List>
                         <div className="divider" />
                         <List className="nav-neutral-danger nav-pills-rounded flex-column p-3">
@@ -143,7 +147,7 @@ export default function LivePreviewExample() {
                   </div>
                 </div>
                 <div>
-                  <Button
+                  <Button onClick={handleCoin({item:item,event:"chooseCoinUse"})}
                     className={item.use === true ? "mr-3 shadow-none btn-outline-secondary" : "mr-3 btn-outline-primary"}
                     size="small">
                     Sell

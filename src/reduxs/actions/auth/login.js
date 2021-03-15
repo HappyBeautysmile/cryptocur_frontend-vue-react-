@@ -1,6 +1,7 @@
 import {Apirequest,setSession,fake_session} from "../index"
 import {history} from "../../../history"
 import {Notification} from "../../../reduxs/actions/index"
+import {UserWalletList} from "../../../reduxs/actions/wallets/wallets"
 import {getBankAccount} from "../../../reduxs/actions/settings/settings"
 export const sign = (user) =>{
     return async dispatch =>{
@@ -10,6 +11,7 @@ export const sign = (user) =>{
         if(outdata.status){
             setSession(outdata.data);
             Notification("Success","Login Success!","success")
+            // alert(user.email)
             window.location.assign("/Fund");
             // history.push("/Fund")
 

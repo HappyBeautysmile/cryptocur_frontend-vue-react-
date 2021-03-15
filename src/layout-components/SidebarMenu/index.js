@@ -91,16 +91,17 @@ const SidebarMenu = (props) => {
                 onClick={toggleSidebarMobile}
                 activeClassName="active"
                 className="nav-link-simple"
-                to="/WDTransactions">
+                to="/Wallets">
                 <span className="sidebar-icon">
-                  <TimelineIcon />
+                  <PeopleAltTwoToneIcon />
                 </span>
-                W/D Transactions
+                Wallets
                 <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
                   <ChevronRightTwoToneIcon />
                 </span>
               </NavLink>
             </li>
+           
             <li>
               <NavLink
                 onClick={toggleSidebarMobile}
@@ -143,6 +144,21 @@ const SidebarMenu = (props) => {
                 <AccountBalanceIcon/>
                 </span>
                 Fiat
+                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
+                  <ChevronRightTwoToneIcon />
+                </span>
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                onClick={toggleSidebarMobile}
+                activeClassName="active"
+                className="nav-link-simple"
+                to="/WDTransactions">
+                <span className="sidebar-icon">
+                  <TimelineIcon />
+                </span>
+                W/D Transactions
                 <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
                   <ChevronRightTwoToneIcon />
                 </span>
@@ -229,21 +245,7 @@ const SidebarMenu = (props) => {
               </NavLink>
             </li>
            
-            <li>
-              <NavLink
-                onClick={toggleSidebarMobile}
-                activeClassName="active"
-                className="nav-link-simple"
-                to="/Accounts">
-                <span className="sidebar-icon">
-                  <PeopleAltTwoToneIcon />
-                </span>
-                Accounts
-                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
-                  <ChevronRightTwoToneIcon />
-                </span>
-              </NavLink>
-            </li>
+           
              */}
            
             {/* <li>

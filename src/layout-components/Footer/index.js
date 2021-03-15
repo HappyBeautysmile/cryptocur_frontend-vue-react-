@@ -26,13 +26,13 @@ const Footer = (props) => {
               className="rounded-sm">
               Home
             </ListItem>
-            <ListItem
+            {/* <ListItem
               button
               component={Link}
               to="/Overview"
               className="rounded-sm">
               Overview
-            </ListItem>
+            </ListItem> */}
             <ListItem
               button
               component={Link}
@@ -43,14 +43,14 @@ const Footer = (props) => {
           </List>
         </div>
         <div className="app-footer--second">
-          <span>Bamburgh React Crypto Application with Material-UI PRO</span> ©
-          2020 - crafted with <span className="text-danger px-1">❤</span> by{' '}
+          <span>Thank you for using our site</span> ©
+          2020 - created with <span className="text-danger px-1">❤</span> by{' '}
           <a
-            href="https://uifort.com"
+            href="https://zecoin.org"
             target="_blank"
             rel="noopener noreferrer"
             title="UiFort.com">
-            UiFort.com
+            zecoin.org
           </a>
         </div>
       </div>

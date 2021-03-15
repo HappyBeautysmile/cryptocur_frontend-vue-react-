@@ -14,7 +14,7 @@ import 'react-notifications-component/dist/theme.css'
 const Homepage = lazy(() => import('./pages/Homepage'));
 // const Users = lazy(() => import('./pages/Users'));
 const Overview = lazy(() => import('./pages/Overview'));
-const Accounts = lazy(() => import('./pages/Accounts'));
+const Accounts = lazy(() => import('./pages/Wallets'));
 const Wallets = lazy(() => import('./pages/Wallets'));
 const BuySell = lazy(() => import('./pages/BuySell'));
 const Fiat = lazy(() => import('./pages/Fiat'));
@@ -118,7 +118,6 @@ const Routes = (props) => {
                   <AppRoute path="/Fund" component={Fund} LeftSidebar />
                   <AppRoute path="/Withdraw" component={Withdraw} LeftSidebar />
                   <AppRoute path="/Overview" component={Overview} LeftSidebar />
-                  <AppRoute path="/Accounts" component={Accounts}  LeftSidebar/>
                   <AppRoute path="/Wallets" component={Wallets}  LeftSidebar/>
                   <AppRoute path="/BuySell" component={BuySell}  LeftSidebar/>
                   <AppRoute path="/fiat" component={Fiat}  LeftSidebar/>

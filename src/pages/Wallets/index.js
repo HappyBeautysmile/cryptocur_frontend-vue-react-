@@ -6,14 +6,14 @@ import { PageTitle } from '../../layout-components';
 import WalletsList from '../../components/Wallets/WalletsList';
 import WalletsListDeactivated from '../../components/Wallets/WalletsListDeactivated';
 import WalletsTransactions from '../../components/Wallets/WalletsTransactions';
-import WalletsPageTitleActions from '../../components/Wallets/WalletsPageTitleActions';
+import EditWalletAction from '../../components/Wallets/EditWalletAction';
 import {UserWalletList} from "../../reduxs/actions/wallets/wallets"
 import { useSelector, useDispatch } from 'react-redux'
 
 export default function Wallets() {
   const dispatch = useDispatch();
   const authprops = useSelector(state => state.auth.user);
-
+  const [newWallet, setNewWallet] = useState({})
   useEffect(() => {
     // AddCurrencylWalletAndRate()
     if(authprops)
@@ -24,7 +24,7 @@ export default function Wallets() {
       <PageTitle
         titleHeading="Wallets"
         titleDescription="Manage your cryptocurrency wallets">
-        <WalletsPageTitleActions />
+        <EditWalletAction curwallet ={newWallet}  setDetailPartAction = {null}  actionType="ADD" />
       </PageTitle>
 
       <WalletsList />

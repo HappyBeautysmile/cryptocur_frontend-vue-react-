@@ -46,24 +46,25 @@ export const selectWallet = (wallet) =>{
     }
 }
 
-// export const editFiat = (fiat) =>{
-//     return async dispatch =>{
-//         var outdata =  await Apirequest("fiats/edit",fiat);
-//         if(outdata.status){
-//             Notification("Success","Changed Fiat information.","success")
-//             dispatch(UserFiatList(fiat));
-//         }else{
-//             Notification("Error","Sorry...unfortunately it is impossible.","danger")
-//         }
-//     }
-// }
-// export const deleteFiat = (fiat) =>{
-//     return async dispatch =>{
-//         var outdata =  await Apirequest("fiats/delete",fiat);
-//         if(outdata.status){
-//             Notification("Success","Fiat was deleted.","success")
-//             dispatch(UserFiatList(fiat));   
-//         }else{
-//         }
-//     }
-// }
+export const editWallet = (wallet) =>{
+    return async dispatch =>{
+        var outdata =  await Apirequest("wallets/edit",wallet);
+        if(outdata.status){
+            Notification("Success","Changed Wallet information.","success")
+            dispatch(UserWalletList(wallet));
+        }else{
+            Notification("Error","Sorry...unfortunately it is impossible.","danger")
+        }
+    }
+}
+export const deleteWallet = (wallet) =>{
+    return async dispatch =>{
+        // alert("delete");
+        var outdata =  await Apirequest("wallets/delete",wallet);
+        if(outdata.status){
+            Notification("Success","Wallet was deleted.","success")
+            dispatch(UserWalletList(wallet));   
+        }else{
+        }
+    }
+}

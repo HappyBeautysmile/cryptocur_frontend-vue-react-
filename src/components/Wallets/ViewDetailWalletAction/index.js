@@ -101,13 +101,6 @@ function ViewDetailWalletAction(props) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-
-
-
-
-
-
   
   return (
     <>
@@ -142,7 +135,7 @@ function ViewDetailWalletAction(props) {
                     <div className="d-block d-lg-flex text-center text-lg-left align-items-center justify-content-between mb-4">
                       <div className="d-flex align-items-center justify-content-center justify-content-lg-start">
                         <div className="display-4 line-height-1 font-weight-bold mr-3">
-                          {curwallet.walletName} Balance
+                          <span className=" text-success">{curwallet.walletName}</span> Balance
                         </div>
                         <div>
                           <Button
@@ -233,7 +226,7 @@ function ViewDetailWalletAction(props) {
                     <Grid container spacing={6}>
                       <Grid item xl={4}>
                         <Card className="card-box mb-4 p-3">
-                          <div className="display-3 text-black font-weight-bold">19</div>
+                          <div className="display-3 text-black font-weight-bold">{curwallet.failedTransfers}</div>
                           <div className="divider mt-2 mb-3 border-2 w-25 bg-first rounded border-first" />
                           <div className="font-weight-bold opacity-7 text-uppercase">
                             Failed transfers
@@ -242,16 +235,16 @@ function ViewDetailWalletAction(props) {
                       </Grid>
                       <Grid item xl={4}>
                         <Card className="card-box mb-4 p-3">
-                          <div className="display-3 text-black font-weight-bold">35</div>
+                          <div className="display-3 text-black font-weight-bold">{curwallet.successfulTransfers}</div>
                           <div className="divider mt-2 mb-3 border-2 w-25 bg-success rounded border-success" />
                           <div className="font-weight-bold opacity-7 text-uppercase">
-                            Successful deposits
+                            Successful transfers
                           </div>
                         </Card>
                       </Grid>
                       <Grid item xl={4}>
                         <Card className="card-box mb-4 p-3">
-                          <div className="display-3 text-black font-weight-bold">546</div>
+                          <div className="display-3 text-black font-weight-bold">{curwallet.transactions}</div>
                           <div className="divider mt-2 mb-3 border-2 w-25 bg-warning rounded border-warning" />
                           <div className="font-weight-bold opacity-7 text-uppercase">
                             Transactions

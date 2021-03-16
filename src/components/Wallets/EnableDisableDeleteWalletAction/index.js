@@ -42,7 +42,7 @@ function EnalbeDisableDeleteWalletAction(props) {
   }, [curwallet])
   return (
     <>
-      {actionType ==="Diable" &&
+      {actionType ==="Disable" &&
         <ListItem
           button
           onClick={addToggle} >
@@ -53,7 +53,7 @@ function EnalbeDisableDeleteWalletAction(props) {
         </ListItem>
       }
      
-        {actionType === "Delete" &&
+      {actionType === "Delete" &&
           <Button
           className="btn-danger" style={{marginLeft:"5px"}}
           onClick={addToggle}>

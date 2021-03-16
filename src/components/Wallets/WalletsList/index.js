@@ -26,7 +26,7 @@ export default function LivePreviewExample() {
     iconForm:"far",
     textColor:"text-white",
     iconType:"dot-circle",
-    actionStr1 :"Double checking you options?",
+    actionStr1 :"Do you want to disable this wallet?",
     actionStr2 :"Use the helper classes to style these paragraphs!",
     submitBtnStr:"Yes do it",
     submitBtnColor:"btn-outline-warning",

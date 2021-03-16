@@ -13,6 +13,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import {selectWallet} from "../../../reduxs/actions/wallets/wallets"
 import EditWalletAction from "../EditWalletAction";
 import ViewDetailWalletAction from "../ViewDetailWalletAction";
+import EnalbeDisableDeleteWalletAction from "../EnableDisableDeleteWalletAction";
 
 export default function LivePreviewExample() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -20,6 +21,17 @@ export default function LivePreviewExample() {
   const dispatch = useDispatch();
   const authprops = useSelector(state => state.auth.user);
   const walletlist = useSelector(state => state.wallets.walletsData);
+  const disableModalCss ={
+    iconColor:"bg-warning",
+    iconForm:"far",
+    textColor:"text-white",
+    iconType:"dot-circle",
+    actionStr1 :"Double checking you options?",
+    actionStr2 :"Use the helper classes to style these paragraphs!",
+    submitBtnStr:"Yes do it",
+    submitBtnColor:"btn-outline-warning",
+    submitBtnPosition:"left"
+  }
   const handleClick = () =>(event) => {
     // console.log("sssss");
     event.preventDefault();
@@ -136,6 +148,7 @@ export default function LivePreviewExample() {
                             <span className="font-size-md">Edit</span>
                           </ListItem> */}
                           <EditWalletAction curwallet ={curWallet} setDetailPartAction = {(e) =>setAnchorEl(e)}   actionType="Edit" />
+                          <EnalbeDisableDeleteWalletAction curwallet ={curWallet} setDetailPartAction = {(e) =>setAnchorEl(e)}   actionType="Disable" modalCss ={disableModalCss} />
                         </List>
                         <div className="divider" />
                         

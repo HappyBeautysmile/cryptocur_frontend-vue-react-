@@ -6,12 +6,36 @@ import { Grid, Dialog, Card, Button } from '@material-ui/core';
 import TrendingUpTwoToneIcon from '@material-ui/icons/TrendingUpTwoTone';
 import TrendingDownTwoToneIcon from '@material-ui/icons/TrendingDownTwoTone';
 import { useSelector, useDispatch } from 'react-redux'
+import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 
+import EnalbeDisableDeleteWalletAction from "../EnableDisableDeleteWalletAction"
 export default function LivePreviewExample() {
   const [modalConfirmDelete, setConfirmDelete] = useState(false);
   const toggleConfirmDelete = () => setConfirmDelete(!modalConfirmDelete);
   const walletlist = useSelector(state => state.wallets.walletsData);
-
+  const [anchorEl , setAnchorEl] = useState({});
+  const deleteModalCss ={
+    iconColor:"bg-danger",
+    iconType:"times",
+    textColor:"text-white",
+    iconForm:"fas",
+    actionStr1 :"Are you sure you want to delete this entry?",
+    actionStr2 :"You cannot undo this operation.",
+    submitBtnStr:"Delete",
+    submitBtnColor:"btn-outline-danger",
+    submitBtnPosition:"left",
+  }
+  const enableModalCss ={
+    iconColor:"bg-neutral-success",
+    iconType:"lightbulb",
+    textColor:"text-success",
+    iconForm:"far",
+    actionStr1 :"  Do you want to enable this?",
+    actionStr2 :"You can later review your options.",
+    submitBtnStr:"Enable",
+    submitBtnColor:"btn-outline-success",
+    submitBtnPosition:"left",
+  }
   return (
     <>
       <Card className="mb-5">
@@ -38,8 +62,22 @@ export default function LivePreviewExample() {
                     className="p-4 card-img-wrapper rounded">
                     <div className="img-wrapper-overlay">
                       <div className="overlay-btn-wrapper">
+                        <EnalbeDisableDeleteWalletAction curwallet ={item} setDetailPartAction = {(e) =>setAnchorEl(e)}   actionType="Enable" modalCss ={enableModalCss}  />
+                        <EnalbeDisableDeleteWalletAction curwallet ={item} setDetailPartAction = {(e) =>setAnchorEl(e)}   actionType="Delete"  modalCss ={deleteModalCss} />
+
+                        {/* <Button
+                          className="btn-success" style={{marginRight:"5px"}}
+                          // onClick={addToggle}
+                          >
+                          <span className="btn-wrapper--icon">
+                            <DoneOutlineIcon fontSize="small"/>
+                          </span>
+                          <span className="btn-wrapper--label text-uppercase">
+                            <small className="font-weight-bold">Enable</small>
+                          </span>
+                        </Button>
                         <Button
-                          className="btn-danger"
+                          className="btn-danger" style={{marginLeft:"5px"}}
                           onClick={toggleConfirmDelete}>
                           <span className="btn-wrapper--icon">
                             <FontAwesomeIcon icon={['far', 'trash-alt']} />
@@ -47,11 +85,11 @@ export default function LivePreviewExample() {
                           <span className="btn-wrapper--label text-uppercase">
                             <small className="font-weight-bold">Delete</small>
                           </span>
-                        </Button>
+                        </Button> */}
                       </div>
                     </div>
                     <div className="card-badges card-badges-bottom">
-                      <div className="badge-pill badge badge-danger">OLD</div>
+                      <div className="badge-pill badge badge-danger" style={{opacity:"0.7"}}>Disabled</div>
                     </div>
                     <div className="d-flex align-items-center mr-4 text-black">
                       {/* <div className="d-40 text-white d-flex align-items-center justify-content-center rounded-pill mr-3 bg-dark">

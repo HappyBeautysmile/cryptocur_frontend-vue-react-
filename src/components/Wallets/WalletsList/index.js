@@ -6,20 +6,24 @@ import {  Grid,  Card,  Menu,  Button,  List,  ListItem,  Tooltip} from '@materi
 import AttachMoneyTwoToneIcon from '@material-ui/icons/AttachMoneyTwoTone';
 import StarTwoToneIcon from '@material-ui/icons/StarTwoTone';
 
-import DeleteTwoToneIcon from '@material-ui/icons/DeleteTwoTone';
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 import TrendingDownTwoToneIcon from '@material-ui/icons/TrendingDownTwoTone';
 import TrendingUpTwoToneIcon from '@material-ui/icons/TrendingUpTwoTone';
 import { useSelector, useDispatch } from 'react-redux'
 import {selectWallet} from "../../../reduxs/actions/wallets/wallets"
+import EditWalletAction from "../EditWalletAction";
 
 export default function LivePreviewExample() {
   const [anchorEl, setAnchorEl] = useState(null);
+  const [curWallet , setCurWallet] = useState({});
   const dispatch = useDispatch();
   const authprops = useSelector(state => state.auth.user);
   const walletlist = useSelector(state => state.wallets.walletsData);
-  const handleClick = (event) => {
+  const handleClick = () =>(event) => {
+    // console.log("sssss");
+    event.preventDefault();
+    event.stopPropagation();
     setAnchorEl(event.currentTarget);
   };
 
@@ -31,30 +35,47 @@ export default function LivePreviewExample() {
   useEffect(() => {
   }, [])
   
-  const handleCoin =(evt)=>()=>{
-    if(evt.event ==="chooseCoinUse")
+  const handleCoin =(event)=>(evt)=>{
+    evt.preventDefault();
+    evt.stopPropagation();
+    if(event.eventaction !=="changeWallet")
     {
+      // console.log("AAAA");
+      if(event.eventaction ==="detail")        
+      {
+        setCurWallet(event.item);
+        setAnchorEl(evt.currentTarget);
+      }
+    }
+    // alert("evt.event");
+    // evt.preventDefault();
+   
+    if(event.eventaction ==="changeWallet")
+    {
+      // console.log("BBBBB");
+    // alert("wow");
       let fpdata = {
-        walletName : evt.item.walletName,
+        walletName : event.item.walletName,
         owner : authprops.email,
       }
       dispatch(selectWallet(fpdata));
     }
-    // alert(evt.event);
+
   }
 
- console.log("walletlist");
- console.log(walletlist);
- console.log("walletlist");
+//  console.log("walletlist");
+//  console.log(walletlist);
+//  console.log("walletlist");
 
   return (
     <>
       <h3 className="font-size-xl font-weight-bold mb-4">Active Wallets</h3>
-      <Grid container spacing={6}>
+      <Grid container spacing={6} >
 
         {walletlist ? walletlist.filter(item => item.status === true).map((item,i)=>(
-            <Grid item md={4} key = {i} onClick={handleCoin({item:item,event:"chooseCoinUse"})}>
-              <Card className={item.use === true ? "card-box card-box-hover-rise p-4 card-box-border-bottom bg-primary text-white border-primary mb-5" : "card-box card-box-hover-rise p-4 card-box-border-bottom border-warning mb-5"} >
+          //  onClick={handleCoin({item:item,event:"chooseCoinUse"})}
+            <Grid item md={4} key = {i} > 
+              <Card    onClick={handleCoin({item:item , eventaction:"changeWallet"})} className={item.use === true ? "card-box card-box-hover-rise p-4 card-box-border-bottom bg-primary text-white border-primary mb-5" : "card-box card-box-hover-rise p-4 card-box-border-bottom border-warning mb-5"} >
                 {item.newMessage > 0 && 
                   <div style={{float:"right" ,paddingRight:"30px"}}>
                     <FontAwesomeIcon
@@ -66,11 +87,11 @@ export default function LivePreviewExample() {
                       </div>
                   </div>
                   }
-                  <div className="card-tr-actions">
+                  <div className="card-tr-actions"  onClick={handleCoin({item:item , eventaction:"detailarea"})}>
                   <div>
                     <Button
-                      onClick={handleClick}
-                      className={ item.use === true ?"btn-link d-30 border-0 p-0 text-left d-flex text-white justify-content-center align-items-center" : "btn-neutral-primary d-30 border-0 p-0 text-left d-flex justify-content-center align-items-center"}>
+                      onClick={handleCoin({item:item , eventaction:"detail"})}
+                      className={ item.use === true ? "btn-link d-30 border-0 p-0 text-left d-flex text-white justify-content-center align-items-center" : "btn-neutral-primary d-30 border-0 p-0 text-left d-flex justify-content-center align-items-center"}>
                       <FontAwesomeIcon
                         icon={['fas', 'ellipsis-h']}
                         className="font-size-lg"
@@ -96,13 +117,13 @@ export default function LivePreviewExample() {
                           <ListItem
                             button
                             href="#/"
-                            onClick={(e) => e.preventDefault()}>
+                            onClick={handleCoin({item:item , eventaction:"details"})}>
                             <div className="mr-2">
                               <SearchTwoToneIcon />
                             </div>
                             <span className="font-size-md">View details</span>
                           </ListItem>
-                          <ListItem
+                          {/* <ListItem
                             button
                             href="#/"
                             onClick={(e) => e.preventDefault()}>
@@ -110,20 +131,13 @@ export default function LivePreviewExample() {
                               <EditTwoToneIcon />
                             </div>
                             <span className="font-size-md">Edit</span>
-                          </ListItem>
+                          </ListItem> */}
+                          <EditWalletAction curwallet ={curWallet} setDetailPartAction = {(e) =>setAnchorEl(e)}   actionType="Edit" />
                         </List>
                         <div className="divider" />
-                        <List className="nav-neutral-danger nav-pills-rounded flex-column p-3">
-                          <ListItem
-                            button
-                            href="#/"
-                            onClick={(e) => e.preventDefault()}>
-                            <div className="mr-2">
-                              <DeleteTwoToneIcon />
-                            </div>
-                            <span>Delete</span>
-                          </ListItem>
-                        </List>
+                        
+                        <EditWalletAction curwallet ={curWallet}  setDetailPartAction = {(e) =>setAnchorEl(e)}  actionType="Delete" />
+
                       </div>
                     </Menu>
                   </div>
@@ -146,13 +160,13 @@ export default function LivePreviewExample() {
                     <div className={item.use === true ? "text-white opacity-5 font-size-lg" :"text-success opacity-5 font-size-lg"}>$0</div>
                   </div>
                 </div>
-                <div>
-                  <Button onClick={handleCoin({item:item,event:"chooseCoinUse"})}
+                <div  style={{zIndex:"10"}}>
+                  <Button onClick={handleCoin({item:item , eventaction:"sell"})}
                     className={item.use === true ? "mr-3 shadow-none btn-outline-secondary" : "mr-3 btn-outline-primary"}
                     size="small">
                     Sell
                   </Button>
-                  <Button
+                  <Button  onClick={handleCoin({item:item , eventaction:"buy"})}
                     className={item.use === true ? "mr-3 shadow-none btn-outline-secondary" : "mr-3 btn-outline-primary"}
                     size="small">
                     Buy
@@ -164,6 +178,8 @@ export default function LivePreviewExample() {
                   </Tooltip> */}
                 </div>
               </Card>
+              {/* <div className={item.use === true ? "card-box card-box-hover-rise p-4 card-box-border-bottom bg-primary text-white border-primary mb-5" : "card-box card-box-hover-rise p-4 card-box-border-bottom border-warning mb-5"} style={{width:"100%",height:"100%" , backgroundColor:"red",}}></div> */}
+            
             </Grid>
         )):[]}
       </Grid>

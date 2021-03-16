@@ -7,12 +7,12 @@ import AttachMoneyTwoToneIcon from '@material-ui/icons/AttachMoneyTwoTone';
 import StarTwoToneIcon from '@material-ui/icons/StarTwoTone';
 
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
-import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
 import TrendingDownTwoToneIcon from '@material-ui/icons/TrendingDownTwoTone';
 import TrendingUpTwoToneIcon from '@material-ui/icons/TrendingUpTwoTone';
 import { useSelector, useDispatch } from 'react-redux'
 import {selectWallet} from "../../../reduxs/actions/wallets/wallets"
 import EditWalletAction from "../EditWalletAction";
+import ViewDetailWalletAction from "../ViewDetailWalletAction";
 
 export default function LivePreviewExample() {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -114,7 +114,7 @@ export default function LivePreviewExample() {
                       onClose={handleClose}>
                       <div className="dropdown-menu-lg overflow-hidden p-0">
                         <List className="nav-neutral-first nav-pills-rounded flex-column p-3">
-                          <ListItem
+                          {/* <ListItem
                             button
                             href="#/"
                             onClick={handleCoin({item:item , eventaction:"details"})}>
@@ -122,7 +122,10 @@ export default function LivePreviewExample() {
                               <SearchTwoToneIcon />
                             </div>
                             <span className="font-size-md">View details</span>
-                          </ListItem>
+                          </ListItem> */}
+                          
+                          <ViewDetailWalletAction curwallet ={curWallet} setDetailPartAction = {(e) =>setAnchorEl(e)}    />
+
                           {/* <ListItem
                             button
                             href="#/"

@@ -48,12 +48,30 @@ export const selectWallet = (wallet) =>{
 
 export const editWallet = (wallet) =>{
     return async dispatch =>{
+        console.log("wallet");
+        console.log(wallet);
+        console.log("wallet");
         var outdata =  await Apirequest("wallets/edit",wallet);
         if(outdata.status){
             Notification("Success","Changed Wallet information.","success")
             dispatch(UserWalletList(wallet));
         }else{
             Notification("Error","Sorry...unfortunately it is impossible.","danger")
+        }
+    }
+}
+
+
+export const changestatusaction = (wallet) =>{
+    return async dispatch =>{
+        // alert("delete");
+        var outdata =  await Apirequest("wallets/changestatusaction",wallet);
+        if(outdata.status){
+            Notification("Success","Wallet was changed.","success")
+            dispatch(UserWalletList(wallet));   
+        }else{
+            Notification("Error","It is impossible.","danger")
+
         }
     }
 }

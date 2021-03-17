@@ -1,6 +1,6 @@
 import React, { useState ,lazy ,useEffect} from 'react';
 import { Grid,Container, Dialog, Button, TextField,ListItem ,List} from '@material-ui/core';
-import {addWallet,editWallet,deleteWallet} from "../../../reduxs/actions/wallets/wallets"
+import {addWallet,changestatusaction,deleteWallet} from "../../../reduxs/actions/wallets/wallets"
 import {  useSelector, useDispatch } from 'react-redux'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import DeleteTwoToneIcon from '@material-ui/icons/DeleteTwoTone';
@@ -18,7 +18,7 @@ function EnalbeDisableDeleteWalletAction(props) {
   const addToggle =() =>
   {
     ToggleChange();
-    if(actionType ==="Disable")
+    if(actionType ==="Disable" || actionType === "Delete_enalbe" )
       setDetailPartAction(null);
   }
   const handleEditSubmit = evt => {
@@ -27,16 +27,21 @@ function EnalbeDisableDeleteWalletAction(props) {
     let fpdata = {
       walletName : name,
       owner : authprops.email,
-      status:false
     }
-    dispatch(editWallet(fpdata));
-   
+    if(actionType === "Delete" || actionType === "Delete_enalbe")
+    {
+      dispatch(deleteWallet(fpdata));
+    } 
+    if(actionType ==="Disable" || actionType ==="Enable")
+    {
+      dispatch(changestatusaction(fpdata));
+    }
+    
     addToggle();
   };
   useEffect(() => {
-    if((actionType==="Edit"  || actionType ==="Delete") && curwallet)
+    if(curwallet)
     {
-      // console.log(curwallet.walletName);
       setName(curwallet.walletName);
     }
   }, [curwallet])
@@ -52,7 +57,20 @@ function EnalbeDisableDeleteWalletAction(props) {
           <span className="font-size-md">Disalbe</span>
         </ListItem>
       }
-     
+      {
+        actionType ==="Delete_enalbe" &&
+          <List className="nav-neutral-danger nav-pills-rounded flex-column p-3">
+            <ListItem
+              button
+              href="#/"
+              onClick={addToggle}>
+              <div className="mr-2">
+                <DeleteTwoToneIcon />
+              </div>
+              <span>Delete</span>
+            </ListItem>
+          </List>
+      }
       {actionType === "Delete" &&
           <Button
           className="btn-danger" style={{marginLeft:"5px"}}

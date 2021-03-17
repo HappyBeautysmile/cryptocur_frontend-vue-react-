@@ -32,6 +32,17 @@ export default function LivePreviewExample() {
     submitBtnColor:"btn-outline-warning",
     submitBtnPosition:"left"
   }
+  const deleteModalCss ={
+    iconColor:"bg-danger",
+    iconType:"times",
+    textColor:"text-white",
+    iconForm:"fas",
+    actionStr1 :"Are you sure you want to delete this entry?",
+    actionStr2 :"You cannot undo this operation.",
+    submitBtnStr:"Delete",
+    submitBtnColor:"btn-outline-danger",
+    submitBtnPosition:"left",
+  }
   const handleClick = () =>(event) => {
     // console.log("sssss");
     event.preventDefault();
@@ -151,8 +162,9 @@ export default function LivePreviewExample() {
                           <EnalbeDisableDeleteWalletAction curwallet ={curWallet} setDetailPartAction = {(e) =>setAnchorEl(e)}   actionType="Disable" modalCss ={disableModalCss} />
                         </List>
                         <div className="divider" />
+                          <EnalbeDisableDeleteWalletAction curwallet ={curWallet} setDetailPartAction = {(e) =>setAnchorEl(e)}   actionType="Delete_enalbe" modalCss ={deleteModalCss} />
                         
-                        <EditWalletAction curwallet ={curWallet}  setDetailPartAction = {(e) =>setAnchorEl(e)}  actionType="Delete" />
+                          {/* <EditWalletAction curwallet ={curWallet}  setDetailPartAction = {(e) =>setAnchorEl(e)}  actionType="Delete" /> */}
 
                       </div>
                     </Menu>

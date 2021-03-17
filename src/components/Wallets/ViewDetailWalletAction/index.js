@@ -33,15 +33,6 @@ function ViewDetailWalletAction(props) {
     }
   }, [curwallet])
 
-
-
-
-
-
-
-
-
-
   const chart6Options = {
     chart: {
       toolbar: {

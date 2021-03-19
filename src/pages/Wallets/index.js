@@ -27,7 +27,7 @@ export default function Wallets() {
         <EditWalletAction curwallet ={newWallet}  setDetailPartAction = {null}  actionType="ADD" />
       </PageTitle>
 
-      <WalletsList />
+      <WalletsList parentPosition="Wallets"/>
       <WalletsListDeactivated />
       <WalletsTransactions />
     </>

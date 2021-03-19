@@ -46,11 +46,11 @@ const Footer = (props) => {
           <span>Thank you for using our site</span> ©
           2020 - created with <span className="text-danger px-1">❤</span> by{' '}
           <a
-            href="https://zecoin.org"
+            href="https://zedcoin.org"
             target="_blank"
             rel="noopener noreferrer"
             title="UiFort.com">
-            zecoin.org
+            zedcoin.org
           </a>
         </div>
       </div>

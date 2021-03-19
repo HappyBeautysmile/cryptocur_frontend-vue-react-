@@ -17,7 +17,6 @@ export const UserFiatList = (fiatsData) =>{
             }
             dispatch(getBankAccount());
             dispatch({type : Types.GET_ALLFIAtSLIST, data});
-
         }
         else{
 
@@ -59,3 +58,17 @@ export const deleteFiat = (fiat) =>{
         }
     }
 }
+
+export const selectFiat = (fiat) =>{
+    return async dispatch =>{
+        var outdata =  await Apirequest("fiats/selectfiat",fiat);
+        if(outdata.status){
+            Notification("Success","Selected Fiat.","success")
+            dispatch(UserFiatList({email:fiat.owner}));
+
+        }else{
+            Notification("Error","Sorry...unfortunately it is impossible.","danger")
+        }
+    }
+}
+

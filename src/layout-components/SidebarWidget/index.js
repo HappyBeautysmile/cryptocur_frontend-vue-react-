@@ -3,6 +3,7 @@ import React from 'react';
 import { Button } from '@material-ui/core';
 
 import TrendingDownTwoToneIcon from '@material-ui/icons/TrendingDownTwoTone';
+import { NavLink } from 'react-router-dom';
 
 import Chart from 'react-apexcharts';
 const SidebarWidget = () => {
@@ -74,17 +75,17 @@ const SidebarWidget = () => {
         <div className="sidebar-header align-items-center font-weight-bold d-flex justify-content-between text-primary">
           <span>Watch list</span>
           <div>
-            <a
-              href="#/"
-              onClick={(e) => e.preventDefault()}
+            <NavLink
+              to="/BuySell"
+              // onClick={(e) => e.preventDefault()}
               className="text-capitalize font-weight-normal text-first"
               title="View details">
               See all
-            </a>
+            </NavLink>
           </div>
         </div>
         <div className="app-sidebar-spacer">
-          <div className="d-flex justify-content-between mt-2 mb-1">
+          {/* <div className="d-flex justify-content-between mt-2 mb-1">
             <div className="d-flex">
               <div className="font-size-lg text-danger">
                 <TrendingDownTwoToneIcon />
@@ -99,28 +100,28 @@ const SidebarWidget = () => {
                 <div className="text-black opacity-4 font-size-sm">$16,497</div>
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="d-flex mt-3 justify-content-between">
-            <Button className="px-4 py-2 text-uppercase btn-danger">
+            <Button className="px-4 py-2 text-uppercase btn-warning">
               <span className="font-size-xs font-weight-bold px-1">
-                Deposit
+                 Sell Coin
               </span>
             </Button>
             <Button className="px-4 py-2 text-uppercase btn-success">
               <span className="font-size-xs font-weight-bold px-1">
-                Withdraw
+                 Buy Coin
               </span>
             </Button>
           </div>
         </div>
-        <div>
+        {/* <div>
           <Chart
             options={chart33Options}
             series={chart33Data}
             type="area"
             height={80}
           />
-        </div>
+        </div> */}
       </div>
     </>
   );

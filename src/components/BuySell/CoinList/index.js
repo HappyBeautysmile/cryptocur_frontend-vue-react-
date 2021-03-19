@@ -11,15 +11,26 @@ import TrendingDownTwoToneIcon from '@material-ui/icons/TrendingDownTwoTone';
 import { DataGrid } from '@material-ui/data-grid';
 import {config} from "../../../config"
 import BuySellModal from "../BuySellModal"
+import {allCoinList} from "../../../reduxs/actions/coins/coins"
+import { useSelector, useDispatch } from 'react-redux'
+
 const CoinImgUrl = config.CoinImgUrl;
 
 export default function BuySell() {
     
+    const dispatch = useDispatch();
+    const coinsprops = useSelector(state => state.coins.coinsData) ;
     const [statusModal, setStatusModal] = useState(false);
     const [currentWalletAndRate , setCurrentWalletAndRate] = useState([]);
     const [initialChoiceMoney,setinitialChoiceMoney] =useState([]);
     const [modalCssSetting,setModalCssSetting] = useState([]);
     const statusToggle = () => setStatusModal(!statusModal);
+
+    useEffect(() => {
+        dispatch(allCoinList());
+        // usersprops = useSelector(state => state)
+        // const userTableRows = usersprops.data
+      }, [dispatch])
     const coinList=[
         {iconType : "fab", iconName: "bitcoin", marketCap: 112314 , coinFullName:"Bitcoin", coinName:"BTC", coinPrice:48465.20, currencyType:"$", trending:"up",backgroundColor:"bg-warning"},
         {iconType : "fab", iconName: "ethereum", marketCap: 8000 , coinFullName:"Ethereum", coinName:"ETH", coinPrice:1506.29, currencyType:"$", trending:"up",backgroundColor:"bg-first"},
@@ -114,26 +125,9 @@ export default function BuySell() {
             renderCell: (params) => (
                 <div className="d-flex justify-content-between align-items-center py-3">
                 <div className="d-flex align-items-center mr-4">
-                    <div className={"d-40 text-white d-flex align-items-center justify-content-center rounded-pill mr-3 " +  `${params.value.backgroundColor}`}    >
-                    {
-                        params.value.coinName !=="ZDC" &&
-                        <FontAwesomeIcon
-                        icon={[params.value.iconType, params.value.iconName]}
-                        className="font-size-lg"
-                    />
-                    }
-                    {
-                        params.value.coinName ==="ZDC" &&
-                        <img style ={{width:"40px",height:"40px",borderRadius:"50%" }}
-                        alt="Bamburgh React Crypto Application with Material-UI PRO"
-                        src={CoinImgUrl +"/zedcoin.png" }
-                        />
-                        
-                    }
-                    </div>
                     <div>
-                    <div className="font-weight-bold">{params.value.coinName}</div>
-                    <span className="text-warning d-block">{params.value.coinFullName}</span>
+                        <div className="font-weight-bold">{params.value.coinName}</div>
+                        <span className="text-warning d-block">{params.value.coinFullName}</span>
                     </div>
                 </div>
                 </div>
@@ -143,29 +137,20 @@ export default function BuySell() {
             renderCell: (params) => (
             <div className="text-right mr-3">
                 <div className="font-weight-bold font-size-lg text-black opacity-4">
-                {params.value.currencyType + " "+ params.value.coinPrice }
+                {params.value.coinPrice + " " + params.value.currency.name}
                 </div>
             </div>
             ),
         },
-        {field:"marketCap", headerName:"MARKET CAP" , flex:2,
-        renderCell: (params) => (
-            <div className="text-right mr-3">
-            <div className="font-weight-bold font-size-lg text-black" style={{color:"#40456e"}}>
-                {params.value.marketCapCurrency + " " +  params.value.marketCap }
-            </div>
-        </div>
-        ),
-        },
         { field: 'during', headerName: "1W" ,  flex:1,
         renderCell: (params) => (
             <div className="d-flex align-items-center mr-4">
-                { params.value === "up" &&
+                { params.value === true &&
                 <div className="font-size-lg text-success">
                     <TrendingUpTwoToneIcon />
                 </div>
                 }
-                { params.value !== "up" &&
+                { params.value === false &&
                     <div className="font-size-lg text-danger">
                     <TrendingDownTwoToneIcon />
                     </div>
@@ -203,12 +188,11 @@ export default function BuySell() {
     <>
         <PerfectScrollbar>
             <DataGrid 
-            rows={coinList ? coinList.map((item,i)=>({
+            rows={coinsprops ? coinsprops.map((item,i)=>({
                 id: i+1, 
                 cryptoCurrency:item,
-                price:{coinPrice:item.coinPrice ,currencyType:item.currencyType},
+                price:{coinPrice:item.coinPrice ,currency:item.currency},
                 during:item.trending,
-                marketCap: {marketCapCurrency: item.currencyType,marketCap:item.marketCap},
                 action: item
             })):[]}
             columns={columns} pageSize={10} rowsPerPageOptions={[10, 15, 20]} pagination  rowHeight="20"

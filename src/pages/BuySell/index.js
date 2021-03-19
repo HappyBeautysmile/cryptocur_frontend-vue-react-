@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState ,useEffect} from 'react';
 import { Card, Button, Tooltip } from '@material-ui/core';
 import CoinList from "../../components/BuySell/CoinList"
+import WalletsList from '../../components/Wallets/WalletsList';
+import {UserWalletList} from "../../reduxs/actions/wallets/wallets"
+import { useSelector, useDispatch } from 'react-redux'
+import SlideFiatList from '../../components/BuySell/SlideFiatList';
 
 export default function BuySell() {
-  
-
+  const dispatch = useDispatch();
+  const authprops = useSelector(state => state.auth.user);
+  useEffect(() => {
+    // AddCurrencylWalletAndRate()
+    if(authprops)
+      dispatch(UserWalletList({owner:authprops.email}));
+  }, [authprops])
   return (
     <>
+    <WalletsList parentPosition="BuySell"/>
+    <SlideFiatList/>
      <Card className="w-100 mb-5" >
         <div className="card-header d-flex align-items-center justify-content-between card-header-alt p-4">
           <div>

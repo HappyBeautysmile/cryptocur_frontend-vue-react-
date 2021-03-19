@@ -1,15 +1,18 @@
 import * as  Types from "../../types"
   const initialState = {
-    fiatsData : null
+    fiatsData : null,
+    selectedFiat :null,
   }
-    
+
 const fiats = (state = initialState, action) => {
   switch (action.type) {
     case Types.GET_ALLFIAtSLIST:
-        return {
+      return {
         ...state,
-        fiatsData: action.data
-        };
+        fiatsData: action.data,
+        selectedFiat: action.selectedData
+
+      };
     default:
       return state
   }

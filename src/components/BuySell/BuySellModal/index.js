@@ -18,6 +18,9 @@ function WithdrawDepositModal(props) {
     const modalClose =() =>{
         statusModalSetting(!statusModal);
     }
+    // console.log("initialChoiceMoney");
+    // console.log(initialChoiceMoney);
+    // console.log("initialChoiceMoney");
     /*
         tempchocieMoney =
             { 
@@ -41,7 +44,7 @@ function WithdrawDepositModal(props) {
         // console.log(evt)
     }
     const handleChangeChoicePrice =(event)=>{
-
+        // console.log(event)
         const changePirce =event;
         let tempconvertCoinPrice = 0;
         if( changePirce && choiceMoney.wantedCoin)

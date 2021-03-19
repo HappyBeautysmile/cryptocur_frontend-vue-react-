@@ -23,7 +23,7 @@ export const authinstance = axios.create({
 
 export const Apirequest = async (url,inputdata) =>{
     try{
-        console.log(inputdata)
+        // console.log(inputdata)
 		var	Response =  await authinstance.post( url , inputdata );
 		if(Response.data){
 			if(Response.data.session){

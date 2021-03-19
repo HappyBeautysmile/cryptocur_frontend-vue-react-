@@ -15,8 +15,10 @@ export const UserFiatList = (fiatsData) =>{
             for(var i in data){
                 data[i]["id"] = data[i]._id;
             }
+            var selectedData = outdata.selectedFiat ;
             dispatch(getBankAccount());
-            dispatch({type : Types.GET_ALLFIAtSLIST, data});
+            dispatch({type : Types.GET_ALLFIAtSLIST, data,selectedData});
+
         }
         else{
 
@@ -63,6 +65,7 @@ export const selectFiat = (fiat) =>{
     return async dispatch =>{
         var outdata =  await Apirequest("fiats/selectfiat",fiat);
         if(outdata.status){
+            var selectedData = outdata.data;
             Notification("Success","Selected Fiat.","success")
             dispatch(UserFiatList({email:fiat.owner}));
 

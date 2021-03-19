@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState ,useEffect} from 'react';
+
 import { Grid } from '@material-ui/core';
 import { Card, Button} from '@material-ui/core';
 import PerfectScrollbar from 'react-perfect-scrollbar';
+import { useSelector, useDispatch } from 'react-redux'
 
 // import { PageTitle } from '../../layout-components';
 // import { Container } from '@material-ui/core';
@@ -10,9 +12,19 @@ import PerfectScrollbar from 'react-perfect-scrollbar';
 // import BuySellBankAccount from '../../components/BuySell/BuySellBankAccount';
 import FiatList from '../../components/Fiat/FiatList';
 import FiatAdd from "../../components/Fiat/FiatAdd";
+import {UserFiatList} from "../../reduxs/actions/fiats/fiats"
+
 export default function Fiat() {
+  const dispatch = useDispatch();
+  const authprops = useSelector(state => state.auth.user);
+
+  useEffect(() => {
+    dispatch(UserFiatList({email:authprops.email}));
+  }, [])
+  
   return (
     <>
+        {/* <SlideFiatList/> */}
           <Card className="card-box mb-spacing-6-x2"   style={{width:"100%",margin:"auto"}}>
             <div className="card-header d-flex align-items-center justify-content-between card-header-alt p-4">
               <div>

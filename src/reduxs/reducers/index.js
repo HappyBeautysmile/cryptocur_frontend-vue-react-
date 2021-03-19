@@ -12,6 +12,7 @@ import currencies from "./currencies"
 import wdtransactions from "./transactions/wdtransactions"
 import settings from "./settings"
 import wallets from "./wallets"
+import coins from "./coins"
 
 
 const rootReducer = combineReducers({
@@ -26,7 +27,8 @@ const rootReducer = combineReducers({
   currencies: currencies,
   wdtransactions:wdtransactions,
   settings:settings,
-  wallets : wallets
+  wallets : wallets,
+  coins : coins
 })
 
 export default rootReducer

@@ -20,6 +20,7 @@ export default function BuySell() {
     
     const dispatch = useDispatch();
     const coinsprops = useSelector(state => state.coins.coinsData) ;
+    const selectedFiat = useSelector(state => state.fiats.selectedFiat) ;
     const [statusModal, setStatusModal] = useState(false);
     const [currentWalletAndRate , setCurrentWalletAndRate] = useState([]);
     const [initialChoiceMoney,setinitialChoiceMoney] =useState([]);
@@ -31,54 +32,12 @@ export default function BuySell() {
         // usersprops = useSelector(state => state)
         // const userTableRows = usersprops.data
       }, [dispatch])
-    const coinList=[
-        {iconType : "fab", iconName: "bitcoin", marketCap: 112314 , coinFullName:"Bitcoin", coinName:"BTC", coinPrice:48465.20, currencyType:"$", trending:"up",backgroundColor:"bg-warning"},
-        {iconType : "fab", iconName: "ethereum", marketCap: 8000 , coinFullName:"Ethereum", coinName:"ETH", coinPrice:1506.29, currencyType:"$", trending:"up",backgroundColor:"bg-first"},
-        {iconType : "fas", iconName: "dollar-sign",  marketCap: 10000 ,coinFullName:"Dollar", coinName:"USD", coinPrice:1, currencyType:"$", trending:"down",backgroundColor:"bg-success"},
-        {iconType : "fas", iconName: "dollar-sign",  marketCap: 200000 ,coinFullName:"ZedCoin", coinName:"ZDC", coinPrice:50, currencyType:"$", trending:"up",backgroundColor:"bg-success"}
-    ]
-    const currentFiat =[
-        { name:"USD" , quantity:3500 },
-        { name:"EUR" , quantity:2300 },
-        { name:"YEN" , quantity:15000 },
-        { name:"GBP" , quantity:0}
-    ]
-
-    const currencyRate =[
-        { name:"USD" , exchange_rate: 1},
-        { name:"EUR" , exchange_rate: 1.2},
-        { name:"YEN" , exchange_rate: 0.0092},
-        { name:"GBP" , quantity:1.38 }
-    ]
-
-    const AddCurrencylWalletAndRate =() =>{
-        let tempWalletAndRate =[];
-        for(var i = 0 ; i < currencyRate.length ; i++)
-        {
-            tempWalletAndRate[i] = currencyRate[i] ;
-            for(var t = 0 ; t < currentFiat.length ; t++)
-            {
-                if(tempWalletAndRate[i].name === currentFiat[t].name)
-                {
-                    tempWalletAndRate[i].quantity = currentFiat[t].quantity ; //exchange money
-                    tempWalletAndRate[i].totalQuantity = currentFiat[t].quantity ; //total money
-                    break ;
-                }
-            }
-            if(t === currentFiat.length )
-            {
-                tempWalletAndRate[i].quantity = 0;
-            }
-        }
-        setCurrentWalletAndRate(tempWalletAndRate);
-    // console.log(currentWalletAndRate);
-    }   
-
+    
     const modalSettingFunc =(cryptoCoin) =>{
         let curMoney =[] ;
         curMoney.wantedCoin = cryptoCoin;
-        curMoney.choiceCurrency =currentWalletAndRate[0] ;
-        curMoney.convertCoinPrice =  currentWalletAndRate[0].quantity/cryptoCoin.coinPrice;
+        curMoney.choiceCurrency =selectedFiat.current_status[0] ; 
+        curMoney.convertCoinPrice =  selectedFiat.current_status[0].quantity/cryptoCoin.coinPrice;
         /*
                 curMoney =
                     { 
@@ -94,12 +53,10 @@ export default function BuySell() {
     }
     const  buyCryptoFunc =(cryptoCoin)=>() =>
     {
-
-        modalSettingFunc(cryptoCoin)
+        modalSettingFunc(cryptoCoin);
         //We can choose buy modal .
         setModalCssSetting({modalTitle:"Buy",modalFormBtnBgColor:"btn-success"});
         statusToggle();
-
     }
 
     const  sellCryptoFunc =(cryptoCoin)=>() =>
@@ -181,7 +138,7 @@ export default function BuySell() {
     ]
 
   useEffect(() => {
-    AddCurrencylWalletAndRate();
+    // AddCurrencylWalletAndRate();
     }, []);
   
   return (
@@ -198,7 +155,7 @@ export default function BuySell() {
             columns={columns} pageSize={10} rowsPerPageOptions={[10, 15, 20]} pagination  rowHeight="20"
             />
         </PerfectScrollbar>
-        <BuySellModal statusModal={statusModal} initialChoiceMoney ={initialChoiceMoney} currentWalletAndRate={currentWalletAndRate} statusModalSetting={(e)=>setStatusModal(e)} modalCssSetting={modalCssSetting} />
+        <BuySellModal statusModal={statusModal} initialChoiceMoney ={initialChoiceMoney} currentWalletAndRate={selectedFiat ? selectedFiat.current_status : []} statusModalSetting={(e)=>setStatusModal(e)} modalCssSetting={modalCssSetting} />
     </>
   );
 }

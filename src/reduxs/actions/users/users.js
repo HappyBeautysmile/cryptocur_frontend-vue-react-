@@ -42,7 +42,7 @@ export const editUser = (user) =>{
     return async dispatch =>{
         // console.log("guess user adm in I");
         var outdata =  await Apirequest("users/edit_user",user);
-        console.log(outdata);
+        // console.log(outdata);
 
         if(outdata.status){
             // setSession(outdata.data);

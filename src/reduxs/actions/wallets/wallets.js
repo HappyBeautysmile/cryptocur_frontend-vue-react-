@@ -17,7 +17,6 @@ export const UserWalletList = (walletsData) =>{
             dispatch({type : Types.GET_WALLETLIST, data});
         }
         else{
-            console.log("heee");
         }
     }
 }
@@ -48,9 +47,9 @@ export const selectWallet = (wallet) =>{
 
 export const editWallet = (wallet) =>{
     return async dispatch =>{
-        console.log("wallet");
-        console.log(wallet);
-        console.log("wallet");
+        // console.log("wallet");
+        // console.log(wallet);
+        // console.log("wallet");
         var outdata =  await Apirequest("wallets/edit",wallet);
         if(outdata.status){
             Notification("Success","Changed Wallet information.","success")

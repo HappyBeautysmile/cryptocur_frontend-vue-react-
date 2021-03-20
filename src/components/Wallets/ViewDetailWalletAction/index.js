@@ -13,6 +13,7 @@ import Chart from 'react-apexcharts';
 
 function ViewDetailWalletAction(props) {
   const [addModal, setaddModal] = useState(false);
+  const [showCoinIndex, setShowCoinIndex] = useState(0);
   const [name , setName] = useState("");
   // const [email ,setEmail] = useState("");
   const { actionType,curwallet , setDetailPartAction } = props;
@@ -23,16 +24,16 @@ function ViewDetailWalletAction(props) {
   {
     ToggleChange();
     setDetailPartAction(null);
+    setShowCoinIndex(0);
   }
   
   useEffect(() => {
     if(curwallet)
     {
-      // console.log(curwallet.walletName);
       setName(curwallet.walletName);
     }
   }, [curwallet])
-
+// console.log(curwallet);
   const chart6Options = {
     chart: {
       toolbar: {
@@ -88,7 +89,11 @@ function ViewDetailWalletAction(props) {
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+  const changeCurrentCoinFunc =(i) =>()=>{
+    setShowCoinIndex(i);
+    setAnchorEl(null);
 
+  }
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -133,7 +138,7 @@ function ViewDetailWalletAction(props) {
                             onClick={handleClick}
                             size="small"
                             className="btn-neutral-dark d-flex align-items-center">
-                            <span className="btn-wrapper--label">ZedCoin</span>
+                            <span className="btn-wrapper--label">{curwallet.coinList ? curwallet.coinList[showCoinIndex].coinName :""}</span>
                             <span className="btn-wrapper--icon d-flex">
                               <FontAwesomeIcon
                                 icon={['fas', 'chevron-down']}
@@ -141,7 +146,7 @@ function ViewDetailWalletAction(props) {
                               />
                             </span>
                           </Button>
-                          {/* <Menu
+                          <Menu
                             anchorEl={anchorEl}
                             keepMounted
                             getContentAnchorEl={null}
@@ -160,28 +165,19 @@ function ViewDetailWalletAction(props) {
                               <List
                                 component="div"
                                 className="nav-pills nav-neutral-dark flex-column">
-                                <ListItem
-                                  button
-                                  href="#/"
-                                  onClick={(e) => e.preventDefault()}
-                                  selected>
-                                  <span>USD</span>
-                                </ListItem>
-                                <ListItem
-                                  button
-                                  href="#/"
-                                  onClick={(e) => e.preventDefault()}>
-                                  <span>Euro</span>
-                                </ListItem>
-                                <ListItem
-                                  button
-                                  href="#/"
-                                  onClick={(e) => e.preventDefault()}>
-                                  <span>Yen</span>
-                                </ListItem>
+                                  {curwallet.coinList ? curwallet.coinList.map((item , i) =>(
+                                    <ListItem
+                                      key = {i}
+                                      button
+                                      href="#/"
+                                      onClick={changeCurrentCoinFunc(i)}
+                                      selected>
+                                      <span>{item.coinName}</span>
+                                  </ListItem>
+                                  )):[]}
                               </List>
                             </div>
-                          </Menu> */}
+                          </Menu>
                         </div>
                       </div>
                     </div>
@@ -206,7 +202,7 @@ function ViewDetailWalletAction(props) {
                                 decimal="."
                               />
                             </span>
-                            <small className="opacity-6 pr-1"> zedcoins</small>
+                            <small className="opacity-6 pr-1"> {curwallet.coinList ? curwallet.coinList[showCoinIndex].coinName :""}</small>
                           </div>
                         </Grid>
                         <Grid item md={4}>

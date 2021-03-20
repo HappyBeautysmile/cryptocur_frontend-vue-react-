@@ -284,7 +284,7 @@ export default function LivePreviewExample(props) {
                           <TrendingUpTwoToneIcon className="d-30" />
                         </div> */}
                         <div className="text-left"> 
-                          <div className="font-size-xxl line-height-1">{item.coin.quantity + " " + item.coin.coinName}</div>
+                          <div className="font-size-xxl line-height-1">{item.coinList[0].quantity + " " + item.coinList[0].coinName}</div>
                           <div className={item.use === true ? "text-white opacity-5 font-size-lg" :"text-success opacity-5 font-size-lg"}>$0</div>
                         </div>
                       </div>

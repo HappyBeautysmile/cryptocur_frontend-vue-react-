@@ -184,7 +184,7 @@ export default function LivePreviewExample() {
                       <Button
                         component={NavLink}
                         // onClick={()=>history.push("/Users")}
-                        to="/Fund"
+                        to="/Wallets"
                         size="large"
                         className="rounded-sm font-weight-bold shadow-second-sm btn-first">
                         <span className="btn-wrapper--label">

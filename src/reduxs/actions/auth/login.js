@@ -12,7 +12,7 @@ export const sign = (user) =>{
             setSession(outdata.data);
             Notification("Success","Login Success!","success")
             // alert(user.email)
-            window.location.assign("/Fund");
+            window.location.assign("/Wallets");
             // history.push("/Fund")
 
         }else{

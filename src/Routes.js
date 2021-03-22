@@ -20,11 +20,11 @@ const BuySell = lazy(() => import('./pages/BuySell'));
 const Fiat = lazy(() => import('./pages/Fiat'));
 const Transactions = lazy(() => import('./pages/Transactions'));
 const WDTransactions = lazy(() => import('./pages/Transactions/WDTransactionList'));
+const BuySellTransactions = lazy(() => import('./pages/Transactions/BuySellTransactionList'));
 const Profile = lazy(() => import('./pages/Profile'));
 const Settings = lazy(() => import('./pages/Settings'));
 const PageRecoverCover = lazy(() => import('./pages/PageRecoverCover'));
 const PageError404 = lazy(() => import('./pages/PageError404'));
-const Fund = lazy(() =>import('./pages/Fund'));
 const Withdraw = lazy(() =>import('./pages/Withdraw'));
 
 
@@ -115,13 +115,13 @@ const Routes = (props) => {
                 <AppRoute exact path="/Homepage" component={Homepage} PresentationLayout />
                 <RequireAuth location={history.location}>
                   {/* <AppRoute path="/Users" component={Users} LeftSidebar /> */}
-                  <AppRoute path="/Fund" component={Fund} LeftSidebar />
                   <AppRoute path="/Withdraw" component={Withdraw} LeftSidebar />
                   <AppRoute path="/Overview" component={Overview} LeftSidebar />
                   <AppRoute path="/Wallets" component={Wallets}  LeftSidebar/>
                   <AppRoute path="/BuySell" component={BuySell}  LeftSidebar/>
                   <AppRoute path="/fiat" component={Fiat}  LeftSidebar/>
                   <AppRoute path="/Transactions" component={Transactions}  LeftSidebar/>
+                  <AppRoute path="/BuySellTransactions" component={BuySellTransactions}  LeftSidebar/>
                   <AppRoute path="/WDTransactions" component={WDTransactions}  LeftSidebar/>
                   <AppRoute path="/Profile" component={Profile}  LeftSidebar/>
                   <AppRoute path="/Settings" component={Settings}  LeftSidebar />

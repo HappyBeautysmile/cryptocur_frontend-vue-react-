@@ -67,8 +67,10 @@ export const GET_CURRENCYLIST = "THEME_OPTIONS/GET_CURRENCYLIST";
 // WDTansactions : withdrawDepositeTransactions
 
 
-// transactions
+// wdtransactions
 export const GET_OWNERWDTRANSACTIONSLIST = "THEME_OPTIONS/GET_OWNERWDTRANSACTIONSLIST";
+// buyselltransactions
+export const GET_OWNERBUYELLTRANSACTIONSLIST = "THEME_OPTIONS/GET_OWNERBUYELLTRANSACTIONSLIST";
 
 
 // settings

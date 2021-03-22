@@ -3,11 +3,15 @@ import { Grid,Container, Dialog, Button,Card, TextField,ListItem,  FormControl,M
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import OutlinedInput from '@material-ui/core/OutlinedInput';
 import {Notification} from "../../../reduxs/actions"
+import { useSelector, useDispatch } from 'react-redux'
 
+import {addBuySellTransaction} from "../../../reduxs/actions/transactions/buyselltransactions"
 function WithdrawDepositModal(props) {
+    const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = useState(null);
     const {statusModal, statusModalSetting , currentWalletAndRate,initialChoiceMoney,modalCssSetting} = props;
     const [choiceMoney ,setChoiceMoney] = useState({}); //we are going to buy coin using that money
+    const authprops = useSelector(state => state.auth.user);
 
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -31,6 +35,41 @@ function WithdrawDepositModal(props) {
                 }
             },
     */
+   console.log("currentWalletAndRate") ;
+   console.log(currentWalletAndRate) ;
+   console.log("currentWalletAndRate") ;
+    const  handleBuySellSubmit =() =>{
+
+        let fpdata = {
+            owner: authprops.email,
+            fiatInformation :{
+                fiatName : "hot",
+                selectedCurrency : {
+                    name :choiceMoney.choiceCurrency.name,
+                    exchange_rate :choiceMoney.choiceCurrency.exchange_rate,
+                    quantity :choiceMoney.choiceCurrency.quantity
+                }
+            },
+            walletInformation :{
+                walletName : "Bee",
+                selectedCoin :{
+                    coinName : choiceMoney.wantedCoin.coinName,
+                    coinFullName : choiceMoney.wantedCoin.coinFullName,
+                    quantity :choiceMoney.convertCoinPrice
+                }
+            },
+            actiontype : modalCssSetting.modalTitle
+        }
+        if(fpdata.fiatInformation.selectedCurrency.quantity === 0)
+        {
+            Notification("Warning","Please input corectly.","warning");
+
+        }
+        else{
+            dispatch(addBuySellTransaction(fpdata));
+            modalClose();
+        }
+    }
     const handleCurrentChange = (evt)=>()=>{
         let tempchocieMoney = choiceMoney ;
         if( evt.quantity)
@@ -154,7 +193,7 @@ function WithdrawDepositModal(props) {
                                         <List
                                             component="div"
                                             className="nav-pills p-0 m-0 nav-neutral-dark flex-column">
-                                                {currentWalletAndRate.length ? currentWalletAndRate.map((item, i)=>(
+                                                {currentWalletAndRate ? currentWalletAndRate.map((item, i)=>(
                                                     <ListItem
                                                         key={i}
                                                         button
@@ -205,7 +244,7 @@ function WithdrawDepositModal(props) {
                     </div>
                     <Grid container >
                         <Grid item lg={6} >
-                            <Button
+                            <Button onClick ={handleBuySellSubmit}
                                 className={modalCssSetting.modalFormBtnBgColor ==="btn-success" ? "btn-success py-2 mt-3 px-5 font-weight-bold font-size-lg" : "btn-warning py-2 mt-3 px-5 font-weight-bold font-size-lg"} style={{width:"80%",marginLeft:"10%",marginRight:"10%"}}
                                 >
                                     {modalCssSetting.modalTitle +" " }

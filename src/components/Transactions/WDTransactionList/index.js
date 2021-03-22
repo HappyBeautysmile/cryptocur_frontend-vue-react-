@@ -21,6 +21,7 @@ export default function WDTransactionList() {
 
   const dispatch = useDispatch();
   const wdtransactionlistData = useSelector(state => state.wdtransactions.wdtransactionlistData) ;
+  
   const authprops = useSelector(state => state.auth.user);
 
   useEffect(() => {
@@ -62,7 +63,6 @@ export default function WDTransactionList() {
           <div className="font-size-sm opacity-7">
             {params.value.createdAt}
            </div>
-
          </div>
        </div>
       ),

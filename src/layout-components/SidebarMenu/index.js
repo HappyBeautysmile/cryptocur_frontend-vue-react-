@@ -71,21 +71,7 @@ const SidebarMenu = (props) => {
                 </span>
               </NavLink>
             </li>
-            <li>
-              <NavLink
-                onClick={toggleSidebarMobile}
-                activeClassName="active"
-                className="nav-link-simple"
-                to="/fund">
-                <span className="sidebar-icon">
-                  <AttachMoneyIcon/>
-                </span>
-                Fund
-                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
-                  <ChevronRightTwoToneIcon />
-                </span>
-              </NavLink>
-            </li>
+            
             <li>
               <NavLink
                 onClick={toggleSidebarMobile}
@@ -102,7 +88,7 @@ const SidebarMenu = (props) => {
               </NavLink>
             </li>
            
-            <li>
+            {/* <li>
               <NavLink
                 onClick={toggleSidebarMobile}
                 activeClassName="active"
@@ -116,7 +102,7 @@ const SidebarMenu = (props) => {
                   <ChevronRightTwoToneIcon />
                 </span>
               </NavLink>
-            </li>
+            </li> */}
             
             <li>
               <NavLink
@@ -164,6 +150,22 @@ const SidebarMenu = (props) => {
                 </span>
               </NavLink>
             </li>
+            <li>
+              <NavLink
+                onClick={toggleSidebarMobile}
+                activeClassName="active"
+                className="nav-link-simple"
+                to="/BuySellTransactions">
+                <span className="sidebar-icon">
+                  <TimelineIcon />
+                </span>
+                Buy/Sell Transactions
+                <span className="sidebar-icon-indicator sidebar-icon-indicator-right">
+                  <ChevronRightTwoToneIcon />
+                </span>
+              </NavLink>
+            </li>
+
             {/* <ul>
               <li>
                 <NavLink

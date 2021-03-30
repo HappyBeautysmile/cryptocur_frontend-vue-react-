@@ -153,6 +153,7 @@ export default function LivePreviewExample() {
                 <div className="font-weight-bold mt-2">USD Wallet</div>
                 <div className="opacity-6">$1589.29</div>
               </a>
+              {/* console.log("") */}
               <a
                 href="#/"
                 onClick={(e) => e.preventDefault()}

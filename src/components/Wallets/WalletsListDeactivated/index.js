@@ -108,7 +108,7 @@ export default function LivePreviewExample() {
                       </div> */}
                       <div className="text-left">
                         <div className="font-size-xxl line-height-1">
-                          {item.coin.quantity + " " + item.coin.coinName}
+                        {item.coinList[0].quantity + " " + item.coinList[0].coinName}
                         </div>
                         <div className="opacity-5 font-size-lg">$ 0</div>
                       </div>

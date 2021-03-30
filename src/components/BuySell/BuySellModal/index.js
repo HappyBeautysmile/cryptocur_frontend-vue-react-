@@ -10,7 +10,7 @@ import {addBuySellTransaction} from "../../../reduxs/actions/transactions/buysel
 function BuySellModal(props) {
     const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = useState(null);
-    const {buySellModal, statusModalSetting , currentWalletAndRate,initialChoiceMoney,modalCssSetting} = props;
+    const {buySellModal, statusModalSetting , currentFiatAndRate,initialChoiceMoney,modalCssSetting} = props;
     const [choiceMoney ,setChoiceMoney] = useState({}); //we are going to buy coin using that money
     const authprops = useSelector(state => state.auth.user);
     const selectedWallet = useSelector(state => state.wallets.selectedWallet);
@@ -23,7 +23,7 @@ function BuySellModal(props) {
     const modalClose =() =>{
         statusModalSetting(!buySellModal);
     }
-
+    //  just seconds .
     /*
         tempchocieMoney =
             { 
@@ -147,7 +147,7 @@ function BuySellModal(props) {
         */
     //    console.log("sell start");
        var convertCoinPrice = initialChoiceMoney.convertCoinPrice;
-       if(modalCssSetting.modalTitle ==='Sell')
+       if(modalCssSetting.modalTitle ==='Sell' && selectedWallet)
        {
             choiceCurrency.totalQuantity = 0 ;
             choiceCurrency.quantity = 0 ;
@@ -156,12 +156,17 @@ function BuySellModal(props) {
                 if(selectedWallet.coinList[i].coinFullName === initCMoney.wantedCoin.coinFullName && selectedWallet.coinList[i].coinName === initCMoney.wantedCoin.coinName)
                 {
                     // selectedcoin = selectedWallet.coinList[i];
-                    choiceCurrency.totalQuantity = (selectedWallet.coinList[i].quantity * initCMoney.wantedCoin.coinPrice * initCMoney.wantedCoin.currency.exchange_rate)/initCMoney.choiceCurrency.exchange_rate ;
-                    choiceCurrency.quantity = choiceCurrency.totalQuantity ;
-                    convertCoinPrice = selectedWallet.coinList[i].quantity ;
+                    if(initCMoney.choiceCurrency){
+
+                        choiceCurrency.totalQuantity = (selectedWallet.coinList[i].quantity * initCMoney.wantedCoin.coinPrice * initCMoney.wantedCoin.currency.exchange_rate)/initCMoney.choiceCurrency.exchange_rate ;
+                        choiceCurrency.quantity = choiceCurrency.totalQuantity ;
+                        convertCoinPrice = selectedWallet.coinList[i].quantity ;
+                    }
+
                 }
             }
             //e.log( finally)
+            //e.log( final) btw , what account use now in upwork? wait 1 oka
             // setChoiceMoney({...initCMoney, choiceCurrency:{...initCMoney.choiceCurrency, quantity: changePirce} ,convertCoinPrice:tempconvertCoinPrice});            
         }
         // console.log("sell end");
@@ -238,7 +243,7 @@ function BuySellModal(props) {
                                         <List
                                             component="div"
                                             className="nav-pills p-0 m-0 nav-neutral-dark flex-column">
-                                                {currentWalletAndRate ? currentWalletAndRate.map((item, i)=>(
+                                                {currentFiatAndRate ? currentFiatAndRate.map((item, i)=>(
                                                     <ListItem
                                                         key={i}
                                                         button

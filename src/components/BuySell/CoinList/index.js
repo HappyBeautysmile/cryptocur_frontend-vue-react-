@@ -13,6 +13,7 @@ import {config} from "../../../config"
 import BuySellModal from "../BuySellModal"
 import {allCoinList} from "../../../reduxs/actions/coins/coins"
 import { useSelector, useDispatch } from 'react-redux'
+import {Notification} from "../../../reduxs/actions"
 
 const CoinImgUrl = config.CoinImgUrl;
 
@@ -59,18 +60,29 @@ export default function BuySell() {
         modalSettingFunc(cryptoCoin);
         //We can choose buy modal .
         setModalCssSetting({modalTitle:"Buy",modalFormBtnBgColor:"btn-success"});
-        buySellModalToggle();
+        if(selectedFiat)
+        {
+            buySellModalToggle();
+        }
+        else{
+            Notification("Warning","Fiat doesn't exit." ,"warning");
+        }
     }
 
     const  sellCryptoFunc =(cryptoCoin)=>() =>
     {
-
         modalSettingFunc(cryptoCoin)
         //We can choose buy modal .
         setModalCssSetting({modalTitle:"Sell",modalFormBtnBgColor:"btn-warning"});
-        buySellModalToggle();
-
+        if(selectedFiat)
+        {
+            buySellModalToggle();
+        }
+        else{
+            Notification("Warning","Fiat doesn't exit." ,"warning");
+        }
     }
+
     const columns = [
         { field: 'id', headerName: 'ID', flex: 0.8,
             renderCell: (params) => (
@@ -158,7 +170,7 @@ export default function BuySell() {
             columns={columns} pageSize={10} rowsPerPageOptions={[10, 15, 20]} pagination  rowHeight="20"
             />
         </PerfectScrollbar>
-        <BuySellModal buySellModal={buySellModal} initialChoiceMoney ={initialChoiceMoney} currentWalletAndRate={selectedFiat ? selectedFiat.current_status : []} statusModalSetting={(e)=>setBuySellModal(e)} modalCssSetting={modalCssSetting} />
+        <BuySellModal buySellModal={buySellModal} initialChoiceMoney ={initialChoiceMoney} currentFiatAndRate={selectedFiat ? selectedFiat.current_status : []} statusModalSetting={(e)=>setBuySellModal(e)} modalCssSetting={modalCssSetting} />
     </>
   );
 }

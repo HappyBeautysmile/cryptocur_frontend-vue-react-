@@ -6,13 +6,14 @@ import {Notification} from "../../../reduxs/actions"
 import { useSelector, useDispatch } from 'react-redux'
 
 import {addBuySellTransaction} from "../../../reduxs/actions/transactions/buyselltransactions"
-function WithdrawDepositModal(props) {
+
+function BuySellModal(props) {
     const dispatch = useDispatch();
     const [anchorEl, setAnchorEl] = useState(null);
-    const {statusModal, statusModalSetting , currentWalletAndRate,initialChoiceMoney,modalCssSetting} = props;
+    const {buySellModal, statusModalSetting , currentWalletAndRate,initialChoiceMoney,modalCssSetting} = props;
     const [choiceMoney ,setChoiceMoney] = useState({}); //we are going to buy coin using that money
     const authprops = useSelector(state => state.auth.user);
-
+    const selectedWallet = useSelector(state => state.wallets.selectedWallet);
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -20,11 +21,9 @@ function WithdrawDepositModal(props) {
         setAnchorEl(null);
     };
     const modalClose =() =>{
-        statusModalSetting(!statusModal);
+        statusModalSetting(!buySellModal);
     }
-    // console.log("initialChoiceMoney");
-    // console.log(initialChoiceMoney);
-    // console.log("initialChoiceMoney");
+
     /*
         tempchocieMoney =
             { 
@@ -35,9 +34,7 @@ function WithdrawDepositModal(props) {
                 }
             },
     */
-   console.log("currentWalletAndRate") ;
-   console.log(currentWalletAndRate) ;
-   console.log("currentWalletAndRate") ;
+  
     const  handleBuySellSubmit =() =>{
 
         let fpdata = {
@@ -70,20 +67,28 @@ function WithdrawDepositModal(props) {
             modalClose();
         }
     }
+    
     const handleCurrentChange = (evt)=>()=>{
         let tempchocieMoney = choiceMoney ;
+        tempchocieMoney.choiceCurrency = evt;
+       if(modalCssSetting.modalTitle ==='Buy')
+       {
         if( evt.quantity)
             tempchocieMoney.convertCoinPrice = evt.quantity * evt.exchange_rate / tempchocieMoney.wantedCoin.coinPrice;
         else{
             tempchocieMoney.convertCoinPrice = 0;
         }
-        tempchocieMoney.choiceCurrency = evt;
-        setChoiceMoney(tempchocieMoney);
-        setAnchorEl(null);
-        // console.log(evt)
+       }
+       else{
+        tempchocieMoney.choiceCurrency.totalQuantity = choiceMoney.convertCoinPrice * choiceMoney.wantedCoin.coinPrice / choiceMoney.choiceCurrency.exchange_rate ;
+        tempchocieMoney.choiceCurrency.quantity =  choiceMoney.choiceCurrency.totalQuantity ;
+       }
+       setChoiceMoney(tempchocieMoney);
+       setAnchorEl(null);
+
     }
+
     const handleChangeChoicePrice =(event)=>{
-        // console.log(event)
         const changePirce =event;
         let tempconvertCoinPrice = 0;
         if( changePirce && choiceMoney.wantedCoin)
@@ -100,16 +105,16 @@ function WithdrawDepositModal(props) {
         if(changePirce >=0 && changePirce <= choiceMoney.choiceCurrency.totalQuantity)
         {
             setChoiceMoney({...choiceMoney, choiceCurrency:{...choiceMoney.choiceCurrency, quantity: changePirce} ,convertCoinPrice:tempconvertCoinPrice});
-                // setChoiceMoney({...choiceMoney, choiceCurrency:{name:choiceMoney.choiceCurrency.name ,exchange_rate:choiceMoney.choiceCurrency.exchange_rate , quantity: changePirce} ,convertCoinPrice:tempconvertCoinPrice});
+            // setChoiceMoney({...choiceMoney, choiceCurrency:{name:choiceMoney.choiceCurrency.name ,exchange_rate:choiceMoney.choiceCurrency.exchange_rate , quantity: changePirce} ,convertCoinPrice:tempconvertCoinPrice});
         }
-        // console.log(choiceMoney);
+        //consolde.log("")
     }
     const handleChangeChoiceCoinPrice =(event)=>{
         const changeCoinPirce =event;
-        let tempconvertChanePrice = 0;
+        let tempconvertChangePrice = 0;
         if( changeCoinPirce && choiceMoney.wantedCoin)
-            tempconvertChanePrice = changeCoinPirce * choiceMoney.wantedCoin.coinPrice / choiceMoney.choiceCurrency.exchange_rate ;
-        if(tempconvertChanePrice > choiceMoney.choiceCurrency.totalQuantity)
+            tempconvertChangePrice = changeCoinPirce * choiceMoney.wantedCoin.coinPrice / choiceMoney.choiceCurrency.exchange_rate ;
+        if(tempconvertChangePrice > choiceMoney.choiceCurrency.totalQuantity)
         {
             Notification("Warning","Total is " + choiceMoney.choiceCurrency.totalQuantity,"warning");
         }   
@@ -117,13 +122,53 @@ function WithdrawDepositModal(props) {
         {
             Notification("Warning","Please input correctly. Price is Essence Number" ,"warning");
         }
-        if(tempconvertChanePrice >=0 && tempconvertChanePrice <= choiceMoney.choiceCurrency.totalQuantity)
+        if(tempconvertChangePrice >=0 && tempconvertChangePrice <= choiceMoney.choiceCurrency.totalQuantity)
         {
-            setChoiceMoney({...choiceMoney, choiceCurrency:{...choiceMoney.choiceCurrency,quantity: tempconvertChanePrice} ,convertCoinPrice:changeCoinPirce});
+            setChoiceMoney({...choiceMoney, choiceCurrency:{...choiceMoney.choiceCurrency,quantity: tempconvertChangePrice} ,convertCoinPrice:changeCoinPirce});
         }
     }
+
   useEffect(() => {
-    if(initialChoiceMoney) setChoiceMoney(initialChoiceMoney);
+    if(initialChoiceMoney) 
+    {   
+        // console.log(initialChoiceMoney)
+        let initCMoney = initialChoiceMoney;
+        let choiceCurrency = Object.assign({},initCMoney.choiceCurrency ? initCMoney.choiceCurrency : {});
+        // var wantedcoinName =initCMoney.wantedCoin ? initCMoney.wantedCoin.coinName : "";
+        // selectedcoin = {"coinName" : wantedcoinName}  
+        /*
+        It's not too late.
+        Since now is the beginning of eating meat.
+        There are many pieces of meat.
+
+        >Now that I am very sadder because for 5 years , I never focused another. So I have only ever ate that meat. 
+        >If not so , I am not so bad very well such like now that
+
+        */
+    //    console.log("sell start");
+       var convertCoinPrice = initialChoiceMoney.convertCoinPrice;
+       if(modalCssSetting.modalTitle ==='Sell')
+       {
+            choiceCurrency.totalQuantity = 0 ;
+            choiceCurrency.quantity = 0 ;
+            for(let i = 0 ; i < selectedWallet.coinList.length  ; i++)
+            {
+                if(selectedWallet.coinList[i].coinFullName === initCMoney.wantedCoin.coinFullName && selectedWallet.coinList[i].coinName === initCMoney.wantedCoin.coinName)
+                {
+                    // selectedcoin = selectedWallet.coinList[i];
+                    choiceCurrency.totalQuantity = (selectedWallet.coinList[i].quantity * initCMoney.wantedCoin.coinPrice * initCMoney.wantedCoin.currency.exchange_rate)/initCMoney.choiceCurrency.exchange_rate ;
+                    choiceCurrency.quantity = choiceCurrency.totalQuantity ;
+                    convertCoinPrice = selectedWallet.coinList[i].quantity ;
+                }
+            }
+            //e.log( finally)
+            // setChoiceMoney({...initCMoney, choiceCurrency:{...initCMoney.choiceCurrency, quantity: changePirce} ,convertCoinPrice:tempconvertCoinPrice});            
+        }
+        // console.log("sell end");
+        // console.log(initCMoney);
+        setChoiceMoney({...initCMoney,convertCoinPrice : convertCoinPrice,choiceCurrency:{...choiceCurrency ,totalQuantity:choiceCurrency.totalQuantity , quantity: choiceCurrency.quantity}});
+    }
+
   }, [initialChoiceMoney]);
 
 // console.log("initialChoiceMoney : " + initialChoiceMoney);
@@ -135,7 +180,7 @@ function WithdrawDepositModal(props) {
         <Dialog
           scroll="body"
           maxWidth="md"
-          open={statusModal}
+          open={buySellModal}
         //   onClose={statusToggle}
           classes={{
             paper: 'w-100 rounded border-0 shadow-sm-dark bg-white p-3 p-xl-0'
@@ -227,7 +272,7 @@ function WithdrawDepositModal(props) {
                             classes={{
                                 input: 'font-size-lg font-weight-bold p-4 h-auto',
                                 notchedOutline: 'border-2'
-                            }}
+                            }} //
                             endAdornment={
                                 <InputAdornment position="end">
                                 <Button
@@ -265,4 +310,4 @@ function WithdrawDepositModal(props) {
 }
 
 
-export default WithdrawDepositModal;
+export default BuySellModal;

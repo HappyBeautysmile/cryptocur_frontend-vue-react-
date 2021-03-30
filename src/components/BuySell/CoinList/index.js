@@ -21,12 +21,12 @@ export default function BuySell() {
     const dispatch = useDispatch();
     const coinsprops = useSelector(state => state.coins.coinsData) ;
     const selectedFiat = useSelector(state => state.fiats.selectedFiat) ;
-    const [statusModal, setStatusModal] = useState(false);
+    const [buySellModal, setBuySellModal] = useState(false);
     const [currentWalletAndRate , setCurrentWalletAndRate] = useState([]);
     const [initialChoiceMoney,setinitialChoiceMoney] =useState([]);
     const [modalCssSetting,setModalCssSetting] = useState([]);
-    const statusToggle = () => setStatusModal(!statusModal);
-
+    const buySellModalToggle = () => setBuySellModal(!buySellModal);
+  
     useEffect(() => {
         dispatch(allCoinList());
         // usersprops = useSelector(state => state)
@@ -36,18 +36,21 @@ export default function BuySell() {
     const modalSettingFunc =(cryptoCoin) =>{
         let curMoney =[] ;
         curMoney.wantedCoin = cryptoCoin;
-        curMoney.choiceCurrency =selectedFiat.current_status[0] ; 
-        curMoney.convertCoinPrice =  selectedFiat.current_status[0].quantity/cryptoCoin.coinPrice;
+        if(selectedFiat && selectedFiat.current_status)
+        {
+            curMoney.choiceCurrency =selectedFiat.current_status[0] ; 
+            curMoney.convertCoinPrice =  selectedFiat.current_status[0].quantity/cryptoCoin.coinPrice;
+        }
         /*
-                curMoney =
-                    { 
-                        choiceCurrency: {name:"USD" , quantity:3500 ,exchange_rate: 1 }
-                        ,convertCoinPrice:121.212,
-                        wantedCoin : {
-                            iconType : "fab", iconName: "bitcoin", marketCap: 112314 , coinFullName:"Bitcoin", coinName:"BTC", coinPrice:48465.20, currencyType:"$", trending:"up",backgroundColor:"bg-warning"
-                        }
-                    },
-            */
+            curMoney =
+            { 
+                choiceCurrency: {name:"USD" , quantity:3500 ,exchange_rate: 1 }
+                ,convertCoinPrice:121.212,
+                wantedCoin : {
+                    iconType : "fab", iconName: "bitcoin", marketCap: 112314 , coinFullName:"Bitcoin", coinName:"BTC", coinPrice:48465.20, currencyType:"$", trending:"up",backgroundColor:"bg-warning"
+                }
+            },
+        */
         // setinitialChoiceMoney(curMoney);
         setinitialChoiceMoney(curMoney);
     }
@@ -56,7 +59,7 @@ export default function BuySell() {
         modalSettingFunc(cryptoCoin);
         //We can choose buy modal .
         setModalCssSetting({modalTitle:"Buy",modalFormBtnBgColor:"btn-success"});
-        statusToggle();
+        buySellModalToggle();
     }
 
     const  sellCryptoFunc =(cryptoCoin)=>() =>
@@ -65,7 +68,7 @@ export default function BuySell() {
         modalSettingFunc(cryptoCoin)
         //We can choose buy modal .
         setModalCssSetting({modalTitle:"Sell",modalFormBtnBgColor:"btn-warning"});
-        statusToggle();
+        buySellModalToggle();
 
     }
     const columns = [
@@ -155,7 +158,7 @@ export default function BuySell() {
             columns={columns} pageSize={10} rowsPerPageOptions={[10, 15, 20]} pagination  rowHeight="20"
             />
         </PerfectScrollbar>
-        <BuySellModal statusModal={statusModal} initialChoiceMoney ={initialChoiceMoney} currentWalletAndRate={selectedFiat ? selectedFiat.current_status : []} statusModalSetting={(e)=>setStatusModal(e)} modalCssSetting={modalCssSetting} />
+        <BuySellModal buySellModal={buySellModal} initialChoiceMoney ={initialChoiceMoney} currentWalletAndRate={selectedFiat ? selectedFiat.current_status : []} statusModalSetting={(e)=>setBuySellModal(e)} modalCssSetting={modalCssSetting} />
     </>
   );
 }

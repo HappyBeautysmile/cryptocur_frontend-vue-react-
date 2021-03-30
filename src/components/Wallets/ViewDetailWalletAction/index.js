@@ -194,7 +194,7 @@ function ViewDetailWalletAction(props) {
                             <span>
                               <CountUp
                                 start={0}
-                                end={34.543}
+                                end={curwallet.coinList ? curwallet.coinList[showCoinIndex].quantity :0}
                                 duration={6}
                                 deplay={2}
                                 separator=""

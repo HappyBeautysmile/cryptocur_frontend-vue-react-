@@ -70,6 +70,9 @@ function BuySellModal(props) {
     
     const handleCurrentChange = (evt)=>()=>{
         let tempchocieMoney = choiceMoney ;
+        console.log("choiceMoney") ;
+        console.log(choiceMoney) ;
+        console.log("choiceMoney") ;
         tempchocieMoney.choiceCurrency = evt;
        if(modalCssSetting.modalTitle ==='Buy')
        {
@@ -80,9 +83,28 @@ function BuySellModal(props) {
         }
        }
        else{
-        tempchocieMoney.choiceCurrency.totalQuantity = choiceMoney.convertCoinPrice * choiceMoney.wantedCoin.coinPrice / choiceMoney.choiceCurrency.exchange_rate ;
-        tempchocieMoney.choiceCurrency.quantity =  choiceMoney.choiceCurrency.totalQuantity ;
+
+            if(selectedWallet)
+            {
+                tempchocieMoney.choiceCurrency.totalQuantity = 0 ;
+                tempchocieMoney.choiceCurrency.quantity = 0 ;
+                for(let i = 0 ; i < selectedWallet.coinList.length  ; i++)
+                {
+                    if(selectedWallet.coinList[i].coinFullName === choiceMoney.wantedCoin.coinFullName && selectedWallet.coinList[i].coinName === choiceMoney.wantedCoin.coinName)
+                    {   
+                        // selectedcoin = selectedWallet.coinList[i];
+                        if(choiceMoney.choiceCurrency){
+                            tempchocieMoney.choiceCurrency.totalQuantity = (selectedWallet.coinList[i].quantity * choiceMoney.wantedCoin.coinPrice * choiceMoney.wantedCoin.currency.exchange_rate)/choiceMoney.choiceCurrency.exchange_rate ;
+                            tempchocieMoney.choiceCurrency.quantity = tempchocieMoney.choiceCurrency.totalQuantity ;
+                            tempchocieMoney.convertCoinPrice = selectedWallet.coinList[i].quantity ;
+                        }
+                    }
+                }
+            }
+            // tempchocieMoney.choiceCurrency.totalQuantity = choiceMoney.convertCoinPrice * choiceMoney.wantedCoin.coinPrice / choiceMoney.choiceCurrency.exchange_rate ;
+            // tempchocieMoney.choiceCurrency.quantity =  choiceMoney.choiceCurrency.totalQuantity ;
        }
+
        setChoiceMoney(tempchocieMoney);
        setAnchorEl(null);
 
@@ -93,7 +115,6 @@ function BuySellModal(props) {
         let tempconvertCoinPrice = 0;
         if( changePirce && choiceMoney.wantedCoin)
             tempconvertCoinPrice = changePirce * choiceMoney.choiceCurrency.exchange_rate / choiceMoney.wantedCoin.coinPrice;
-
         if(changePirce > choiceMoney.choiceCurrency.totalQuantity)
         {
             Notification("Warning","Total is " + choiceMoney.choiceCurrency.totalQuantity,"warning");
@@ -151,24 +172,23 @@ function BuySellModal(props) {
        {
             choiceCurrency.totalQuantity = 0 ;
             choiceCurrency.quantity = 0 ;
+            convertCoinPrice = 0;
             for(let i = 0 ; i < selectedWallet.coinList.length  ; i++)
             {
                 if(selectedWallet.coinList[i].coinFullName === initCMoney.wantedCoin.coinFullName && selectedWallet.coinList[i].coinName === initCMoney.wantedCoin.coinName)
                 {
                     // selectedcoin = selectedWallet.coinList[i];
                     if(initCMoney.choiceCurrency){
-
                         choiceCurrency.totalQuantity = (selectedWallet.coinList[i].quantity * initCMoney.wantedCoin.coinPrice * initCMoney.wantedCoin.currency.exchange_rate)/initCMoney.choiceCurrency.exchange_rate ;
                         choiceCurrency.quantity = choiceCurrency.totalQuantity ;
                         convertCoinPrice = selectedWallet.coinList[i].quantity ;
                     }
-
+                    
                 }
             }
-            //e.log( finally)
-            //e.log( final) btw , what account use now in upwork? wait 1 oka
-            // setChoiceMoney({...initCMoney, choiceCurrency:{...initCMoney.choiceCurrency, quantity: changePirce} ,convertCoinPrice:tempconvertCoinPrice});            
+
         }
+
         // console.log("sell end");
         // console.log(initCMoney);
         setChoiceMoney({...initCMoney,convertCoinPrice : convertCoinPrice,choiceCurrency:{...choiceCurrency ,totalQuantity:choiceCurrency.totalQuantity , quantity: choiceCurrency.quantity}});

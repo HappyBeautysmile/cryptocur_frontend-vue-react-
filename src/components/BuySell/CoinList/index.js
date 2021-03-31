@@ -119,12 +119,12 @@ export default function BuySell() {
             <div className="d-flex align-items-center mr-4">
                 { params.value === true &&
                 <div className="font-size-lg text-success">
-                    <TrendingUpTwoToneIcon />
+                    <TrendingUpTwoToneIcon/>
                 </div>
                 }
                 { params.value === false &&
                     <div className="font-size-lg text-danger">
-                    <TrendingDownTwoToneIcon />
+                    <TrendingDownTwoToneIcon/>
                     </div>
                 }
             </div>
@@ -133,20 +133,20 @@ export default function BuySell() {
         { field: 'action', headerName: "ACTION" ,  flex:2,
             renderCell: (params) => (
                 <div className="d-flex align-items-center mr-4">
-                <Tooltip
-                    classes={{ tooltip: 'text-center p-3 tooltip-success' }}
-                    arrow
-                    placement="top"
-                    title="We can buy coin we want !">
-                    <Button className="btn-success m-2"  onClick={buyCryptoFunc(params.value)}>Buy</Button>
-                </Tooltip>
-                <Tooltip
-                    classes={{ tooltip: 'text-center p-3 tooltip-warning' }}
-                    arrow
-                    placement="top"
-                    title="We can sell coin we want !">
-                    <Button className="btn-warning m-2" onClick={sellCryptoFunc(params.value)}>Sell</Button>
-                </Tooltip>
+                    <Tooltip
+                        classes={{ tooltip: 'text-center p-3 tooltip-success' }}
+                        arrow
+                        placement="top"
+                        title="We can buy coin we want !">
+                        <Button className="btn-success m-2"  onClick={buyCryptoFunc(params.value)}>Buy</Button>
+                    </Tooltip>
+                    <Tooltip
+                        classes={{ tooltip: 'text-center p-3 tooltip-warning' }}
+                        arrow
+                        placement="top"
+                        title="We can sell coin we want !">
+                        <Button className="btn-warning m-2" onClick={sellCryptoFunc(params.value)}>Sell</Button>
+                    </Tooltip>
                 </div>
             ),
         }

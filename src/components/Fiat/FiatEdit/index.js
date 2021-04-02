@@ -91,6 +91,7 @@ function FiatEdit(props) {
     ),
   },
   ]
+  //  
   return (
     <>
       <div className="d-flex align-items-center justify-content-center flex-wrap">
@@ -109,7 +110,7 @@ function FiatEdit(props) {
             className="font-size-sm"
           />
         </Button>
-       
+        
         <Dialog
           scroll="body"
           maxWidth="md"
@@ -125,7 +126,7 @@ function FiatEdit(props) {
                     <span className="text-first">{curFiat.name}</span> Fiat Information
                   </h5>
                   <p className="text-black-50 mb-4">
-                    
+                    {/*  */}
                   </p>
                   <Grid container spacing={6}>
                     <Grid item md={12}>

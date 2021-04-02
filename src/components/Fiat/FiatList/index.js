@@ -22,7 +22,7 @@ export default function LivePreviewExample() {
   const fiatsprops = useSelector(state => state.fiats.fiatsData) ;
   const bankAccount = useSelector(state => state.settings.bankAccount);
   // console.log(bankAccount);
-  // console.log(fiats);
+  // 
   // [
   //   {
   //     createdAt: 2021-03-06T11:54:36.648Z,
@@ -38,6 +38,9 @@ export default function LivePreviewExample() {
   //     }
   //   },
   // ]
+
+  /*
+  */
   const authprops = useSelector(state => state.auth.user);
   
   //withdraw and deposite part ******************************************* start ****************************
@@ -68,7 +71,6 @@ export default function LivePreviewExample() {
 
   //withdraw and deposite part ******************************************* end ****************************
   // dispatch(UserFiatList({email:authprops.email}));
-
   useEffect(() => {
     // AddCurrencylWalletAndRate()
     if(authprops)

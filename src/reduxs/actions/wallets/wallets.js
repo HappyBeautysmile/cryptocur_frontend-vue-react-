@@ -3,10 +3,12 @@ import * as Types from "../../types"
 // import {history} from '../../../history'
 import {Notification} from "../index"
 import {getBankAccount} from "../settings/settings"
+import {BuySellTransaction} from "../transactions/buyselltransactions"
 
 export const UserWalletList = (walletsData) =>{
     return async dispatch =>{
         var outdata =  await Apirequest("wallets/getownerwalletlist",walletsData);
+
         // console.log("outdata");
         if(outdata.status === true){
         var data = outdata.data;
@@ -15,6 +17,8 @@ export const UserWalletList = (walletsData) =>{
                 data[i]["id"] = data[i]._id;
             }
             dispatch({type : Types.GET_WALLETLIST, data});
+            // console.log("owner owner : " + walletsData.owner);
+            dispatch(BuySellTransaction({owner:walletsData.owner}));
         }
         else{
         }

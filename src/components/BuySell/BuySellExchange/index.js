@@ -106,7 +106,8 @@ export default function LivePreviewExample() {
                 </div>
                 <div className="d-30 text-white d-flex align-items-center justify-content-center rounded-pill bg-warning">
                   <FontAwesomeIcon icon={['fab', 'bitcoin']} />
-                </div>
+              {/* console.log("need to sleep. bye.ok") */}
+              </div>
                 <div className="font-weight-bold mt-2">Bitcoin</div>
                 <div className="opacity-6">$7856.44</div>
               </a>
@@ -152,8 +153,7 @@ export default function LivePreviewExample() {
                 </div>
                 <div className="font-weight-bold mt-2">USD Wallet</div>
                 <div className="opacity-6">$1589.29</div>
-              </a>
-              {/* console.log("") */}
+              </a>                                            
               <a
                 href="#/"
                 onClick={(e) => e.preventDefault()}

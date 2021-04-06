@@ -24,7 +24,7 @@ export default function LivePreviewExample(props) {
       dispatch(BuySellTransaction({owner:authprops.email}));
   }, [authprops])
 
-// console.log(buyselltransactionlistData);
+console.log(buyselltransactionlistData);
 // console.log(usedWallet);
 
 const usedWalletColumns = [
@@ -66,12 +66,12 @@ const usedWalletColumns = [
               Pendding       
           </div>
         }
-        {params.value === 1 &&
+        {params.value === 2 &&
           <div className="px-4 py-1 h-auto text-success border-1 border-success badge badge-neutral-success">
               Completed          
           </div>
         }
-        {params.value === 2 &&
+        {params.value === 1 &&
           <div className="px-4 py-1 h-auto text-danger border-1 border-danger badge badge-neutral-danger">
               Rejected         
           </div>
@@ -158,32 +158,31 @@ const ownerWalletListColumns = [
 ]
   return (
     <>
-    
-      { buyselltransactionlistData  && transactionListType === "usedWalletTransactionList" &&
-        <DataGrid 
-          rows={buyselltransactionlistData.walletInformation ? buyselltransactionlistData.filter(item=>item.walletInformation.walletName === usedWallet.walletName).map((item,i)=>({
-            id: i+1, 
-            currency : item,
-            status : item.process,
-            amount : item
-          })):[]}
-          columns={usedWalletColumns} pageSize={5} rowsPerPageOptions={[5, 10, 20]} pagination  rowHeight="25" 
-        />
-      }
-        { buyselltransactionlistData  && transactionListType === "ownerWalletTransactionList" &&
-        <DataGrid 
-          rows={buyselltransactionlistData.walletInformation ? buyselltransactionlistData.map((item,i)=>({
-            id: i+1, 
-            walletName : item ,
-            currency : item,
-            source : item,
-            status : item.process,
-            amount : item
-          })):[]}
-          columns={ownerWalletListColumns} pageSize={10} rowsPerPageOptions={[10, 15, 20]} pagination  rowHeight="25" 
-        />
-      }
-    
-    </>
+    { transactionListType === "usedWalletTransactionList" &&
+      <DataGrid 
+        rows={buyselltransactionlistData ? buyselltransactionlistData.filter(item=>item.walletInformation.walletName === usedWallet.walletName && item.owner ===authprops.email).map((item,i)=>({
+          id: i+1, 
+          currency : item,
+          status : item.process,
+          amount : item
+        })):[]}
+        columns={usedWalletColumns} pageSize={5} rowsPerPageOptions={[5, 10, 20]} pagination  rowHeight="25" 
+      />
+    }
+      { transactionListType === "ownerWalletTransactionList" &&
+      <DataGrid 
+        rows={buyselltransactionlistData ? buyselltransactionlistData.filter(item=>item.owner ===authprops.email).map((item,i)=>({
+          id: i+1, 
+          walletName : item ,
+          currency : item,
+          source : item,
+          status : item.process,
+          amount : item
+        })):[]}
+        columns={ownerWalletListColumns} pageSize={10} rowsPerPageOptions={[10, 15, 20]} pagination  rowHeight="25" 
+      />
+    }
+  
+  </>
   );
 }

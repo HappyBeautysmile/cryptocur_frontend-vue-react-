@@ -33,7 +33,9 @@ function ViewDetailWalletAction(props) {
       setName(curwallet.walletName);
     }
   }, [curwallet])
-// console.log(curwallet);
+console.log("curwallet");
+console.log(curwallet);
+console.log("curwallet");
   const chart6Options = {
     chart: {
       toolbar: {
@@ -209,7 +211,32 @@ function ViewDetailWalletAction(props) {
                         </Grid>
                       </Grid>
                     </div>
-
+                    <Grid container spacing={1}>
+                      <Grid item xl={12}>
+                          <TextField
+                            variant="outlined"
+                            className="m-3"
+                            fullWidth
+                            id="standard-multiline-flexible"
+                            label="Public Key"
+                            multiline
+                            rowsMax="4"
+                            value={curwallet.keyInformation ? curwallet.keyInformation.publicKey : ""}
+                          />
+                      </Grid>
+                      <Grid item xl={12}>
+                          <TextField
+                            variant="outlined"
+                            className="m-3"
+                            fullWidth
+                            id="standard-multiline-flexible"
+                            label="Secret Key"
+                            multiline
+                            rowsMax="4"
+                            value={curwallet.keyInformation ? curwallet.keyInformation.secretKey : ""}
+                          />
+                      </Grid>
+                    </Grid>
                     <Grid container spacing={6}>
                       <Grid item xl={4}>
                         <Card className="card-box mb-4 p-3">
@@ -239,7 +266,7 @@ function ViewDetailWalletAction(props) {
                         </Card>
                       </Grid>
                     </Grid>
-
+                    
                     {/* <Chart
                       options={chart6Options}
                       series={chart6Data}

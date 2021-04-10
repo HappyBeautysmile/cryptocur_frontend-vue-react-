@@ -158,7 +158,7 @@ const ownerWalletListColumns = [
 ]
   return (
     <>
-    { transactionListType === "usedWalletTransactionList" &&
+    { transactionListType === "usedWalletTransactionList" && usedWallet &&
       <DataGrid 
         rows={buyselltransactionlistData ? buyselltransactionlistData.filter(item=>item.walletInformation.walletName === usedWallet.walletName && item.owner ===authprops.email).map((item,i)=>({
           id: i+1, 

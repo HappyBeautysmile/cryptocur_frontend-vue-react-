@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import EditTwoToneIcon from '@material-ui/icons/EditTwoTone';
 import DeleteTwoToneIcon from '@material-ui/icons/DeleteTwoTone';
 import SearchTwoToneIcon from '@material-ui/icons/SearchTwoTone';
-
+import DashboardIcon from '@material-ui/icons/Dashboard';
 import CountUp from 'react-countup';
 import Chart from 'react-apexcharts';
 
@@ -174,6 +174,7 @@ console.log("curwallet");
                                       href="#/"
                                       onClick={changeCurrentCoinFunc(i)}
                                       selected>
+                                        
                                       <span>{item.coinName}</span>
                                   </ListItem>
                                   )):[]}

@@ -1,5 +1,6 @@
 import React, { useState ,lazy ,useEffect} from 'react';
-import { Grid, Dialog, Button, TextField,ListItem } from '@material-ui/core';
+import { Grid, Dialog, Button, TextField,ListItem ,Switch} from '@material-ui/core';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {regist} from "../../../reduxs/actions/auth/register"
 import {addUser} from "../../../reduxs/actions/users/users"
@@ -9,7 +10,11 @@ import VerifiedUserTwoToneIcon from '@material-ui/icons/VerifiedUserTwoTone';
 import {  useDispatch } from 'react-redux'
 // import { useSelector, useDispatch } from 'react-redux'
 import {Notification} from "../../../reduxs/actions/index"
+import { withStyles } from '@material-ui/core/styles';
 
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormControl from '@material-ui/core/FormControl';
 const AvatarImage = lazy(() => import('../AvatarImage'));
 
 function RegisterModal(props) {
@@ -44,7 +49,13 @@ function RegisterModal(props) {
     }
     return true;
   }
+  //password setting -start-
 
+
+  //password setting -end-
+  
+
+  
   const handleSubmit = evt => {
     
     evt.preventDefault();
@@ -216,36 +227,41 @@ function RegisterModal(props) {
                         </div>
                       </Grid>
                     </Grid>
-                    <div className="mb-3" style={{paddingTop:"10px"}}>
-                      <div className="d-flex justify-content-between">
-                        <label className="font-weight-bold mb-2">Password</label>
+                    {
+                      <div>
+                        <div className="mb-3" style={{paddingTop:"10px"}}>
+                        
+                          <div className="d-flex justify-content-between">
+                            <label className="font-weight-bold mb-2">Password</label>
+                          </div>
+                          <TextField
+                            variant="outlined"
+                            size="small"
+                            fullWidth
+                            placeholder="Enter your password"
+                            type="password"
+                            value={password}
+                            required
+                            onChange={(e)=>setPassword(e.target.value)}
+                          />
+                        </div>
+                        <div className="mb-3" style={{paddingTop:"10px"}}>
+                          <div className="d-flex justify-content-between">
+                            <label className="font-weight-bold mb-2">Confirm Password</label>
+                          </div>
+                          <TextField
+                            variant="outlined"
+                            size="small"
+                            fullWidth
+                            placeholder="Enter your confirm password"
+                            type="password"
+                            value={confirmPassword}
+                            required
+                            onChange={(e)=>setConfirmPassword(e.target.value)}
+                          />
+                        </div>
                       </div>
-                      <TextField
-                        variant="outlined"
-                        size="small"
-                        fullWidth
-                        placeholder="Enter your password"
-                        type="password"
-                        value={password}
-                        required
-                        onChange={(e)=>setPassword(e.target.value)}
-                      />
-                    </div>
-                    <div className="mb-3" style={{paddingTop:"10px"}}>
-                      <div className="d-flex justify-content-between">
-                        <label className="font-weight-bold mb-2">Confirm Password</label>
-                      </div>
-                      <TextField
-                        variant="outlined"
-                        size="small"
-                        fullWidth
-                        placeholder="Enter your confirm password"
-                        type="password"
-                        value={confirmPassword}
-                        required
-                        onChange={(e)=>setConfirmPassword(e.target.value)}
-                      />
-                    </div>
+                    }
                     {/* <div className="form-group my-3">
                       By clicking the <strong>Create account</strong> button below
                       you agree to our terms of service and privacy statement.

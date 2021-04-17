@@ -54,7 +54,7 @@ function EnalbeDisableDeleteWalletAction(props) {
           <div className="mr-2">
             <ExploreOffIcon />
           </div>
-          <span className="font-size-md">Disalbe</span>
+          <span className="font-size-md">Disable</span>
         </ListItem>
       }
       {

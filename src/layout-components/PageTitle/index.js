@@ -35,9 +35,9 @@ const PageTitle = (props) => {
             <div className="app-page-title--heading">
               <h1>{titleHeading}</h1>
               {pageTitleDescription && (
-                <div className="app-page-title--description">
+                <span style={{color:"rgb(129, 104, 239)"}}>
                   {titleDescription}
-                </div>
+                </span>
               )}
             </div>
           </div>

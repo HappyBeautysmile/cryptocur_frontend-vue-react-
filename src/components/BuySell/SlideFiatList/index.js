@@ -164,7 +164,7 @@ export default function LivePreviewExample(props) {
           { fiatsprops.map((item,i)=>(
             //  onClick={handleCoin({item:item,event:"chooseCoinUse"})}
               <div  key = {i} > 
-                <Card   style={{height:"225px", margin:"0 10px"}} className={item.use === true ? "card-box card-box-hover-rise p-4 card-box-border-bottom bg-success text-white border-primary mb-5" : "card-box card-box-hover-rise p-4 card-box-border-bottom border-warning mb-5"} >
+                <Card   style={{height:"225px", margin:"0 10px",}} className={item.use === true ? "card-box card-box-hover-rise p-4 card-box-border-bottom bg-success text-white border-primary mb-5" : "card-box card-box-hover-rise p-4 card-box-border-bottom border-warning mb-5"} >
                   <div className="d-flex align-items-center mr-4">
                     <div className="font-weight-bold font-size-lg">
                       {item.name}

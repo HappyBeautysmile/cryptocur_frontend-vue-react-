@@ -99,11 +99,11 @@ function LivePreviewExample(props) {
           </StyledBadge>
         </div>
         <div className="d-none d-xl-block pl-2">
-          <span className="text-success">
+          <span >
             <small>Account verified</small>
           </span>
           {autherdata !=null &&
-          <div className="font-weight-bold">{autherdata.firstName} {autherdata.lastName}</div>
+          <div className="font-weight-bold ">{autherdata.firstName} {autherdata.lastName}</div>
           }
 
         </div>

@@ -7,13 +7,55 @@ import TrendingUpTwoToneIcon from '@material-ui/icons/TrendingUpTwoTone';
 import TrendingDownTwoToneIcon from '@material-ui/icons/TrendingDownTwoTone';
 import { useSelector, useDispatch } from 'react-redux'
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
+import Slider from 'react-slick';
 
 import EnalbeDisableDeleteWalletAction from "../EnableDisableDeleteWalletAction"
+
+function SliderArrowNext(props) {
+  const { className, onClick } = props;
+  return (
+    <div className={className} onClick={onClick}>
+      <FontAwesomeIcon icon={['fas', 'chevron-right']} />
+    </div>
+  );
+}
+
+function SliderArrowPrev(props) {
+  const { className, onClick } = props;
+  return (
+    <div className={className} onClick={onClick}>
+      <FontAwesomeIcon icon={['fas', 'chevron-left']} />
+    </div>
+  );
+}
 export default function LivePreviewExample() {
   const [modalConfirmDelete, setConfirmDelete] = useState(false);
   const toggleConfirmDelete = () => setConfirmDelete(!modalConfirmDelete);
   const walletlist = useSelector(state => state.wallets.walletsData);
   const [anchorEl , setAnchorEl] = useState({});
+  const [widgetsCarousels2A ,setWidgetsCarousels2A] = useState({
+    dots: true,
+    speed: 500,
+    slidesToShow:  1  ,
+    slidesToScroll: 1,
+    arrows: true,
+    nextArrow: <SliderArrowNext />,
+    prevArrow: <SliderArrowPrev />,
+    responsive: [
+      {
+        breakpoint: 1450,
+        settings: { slidesToShow: 1, slidesToScroll: 1 }
+      },
+      {
+        breakpoint: 1100,
+        settings: { slidesToShow: 1, slidesToScroll: 1 }
+      },
+      {
+        breakpoint: 900,
+        settings: { slidesToShow: 1, slidesToScroll: 1 }
+      }
+    ]
+  });
   const deleteModalCss ={
     iconColor:"bg-danger",
     iconType:"times",
@@ -38,88 +80,60 @@ export default function LivePreviewExample() {
   }
   return (
     <>
-      <Card className="mb-5">
-        <div className="card-header d-flex align-items-center justify-content-between card-header-alt p-4">
-          <div>
-            <h6 className="font-weight-bold font-size-lg mb-1">
-              Deactivated wallets
-            </h6>
-            <p className="text-danger opacity-6 mb-0">
-              These walllets are old and cannot be used anymore.
-            </p>
-          </div>
-        </div>
-        <div className="divider" />
-        <div className="divider" />
-        <div className="p-2">
-          <Grid container spacing={0}>
-            {walletlist ? walletlist.filter(item => item.status===false).map((item , i) =>(
-               <Grid item md={4} key={i}>
-                <Card className="card-box shadow-none bg-secondary m-3">
-                  <a
-                    href="#/"
-                    onClick={(e) => e.preventDefault()}
-                    className="p-4 card-img-wrapper rounded">
-                    <div className="img-wrapper-overlay">
-                      <div className="overlay-btn-wrapper">
-                        <EnalbeDisableDeleteWalletAction curwallet ={item} setDetailPartAction = {(e) =>setAnchorEl(e)}   actionType="Enable" modalCss ={enableModalCss}  />
-                        <EnalbeDisableDeleteWalletAction curwallet ={item} setDetailPartAction = {(e) =>setAnchorEl(e)}   actionType="Delete"  modalCss ={deleteModalCss} />
+      <Card className="mb-spacing-6-x2 wallet_activeWallet">
+        <div className="py-3">
 
-                        {/* <Button
-                          className="btn-success" style={{marginRight:"5px"}}
-                          // onClick={addToggle}
-                          >
-                          <span className="btn-wrapper--icon">
-                            <DoneOutlineIcon fontSize="small"/>
-                          </span>
-                          <span className="btn-wrapper--label text-uppercase">
-                            <small className="font-weight-bold">Enable</small>
-                          </span>
-                        </Button>
-                        <Button
-                          className="btn-danger" style={{marginLeft:"5px"}}
-                          onClick={toggleConfirmDelete}>
-                          <span className="btn-wrapper--icon">
-                            <FontAwesomeIcon icon={['far', 'trash-alt']} />
-                          </span>
-                          <span className="btn-wrapper--label text-uppercase">
-                            <small className="font-weight-bold">Delete</small>
-                          </span>
-                        </Button> */}
-                      </div>
-                    </div>
-                    <div className="card-badges card-badges-bottom">
-                      <div className="badge-pill badge badge-danger" style={{opacity:"0.7"}}>Disabled</div>
-                    </div>
-                    <div className="d-flex align-items-center mr-4 text-black">
-                      {/* <div className="d-40 text-white d-flex align-items-center justify-content-center rounded-pill mr-3 bg-dark">
-                        <FontAwesomeIcon
-                          icon={['fab', 'bitcoin']}
-                          className="font-size-xl"
-                        />
-                      </div> */}
-                      <div className="font-weight-bold font-size-lg">
-                        {item.walletName}
-                      </div>
-                    </div>
-                    <div className="d-flex mt-4 text-black">
-                      {/* <div className="d-30 text-success mr-2">
-                        <TrendingUpTwoToneIcon className="d-30" />
-                      </div> */}
-                      <div className="text-left">
-                        <div className="font-size-xxl line-height-1">
-                        {item.coinList[0].quantity + " " + item.coinList[0].coinName}
+          <div className="card-header d-flex align-items-center justify-content-between card-header-alt p-4 wallet_activeWallet">
+            <div>
+              <h6 className="font-weight-bold font-size-lg mb-1" style={{color:"white"}}>
+                Deactivated wallets
+              </h6>
+              <p className="text-danger opacity-6 mb-0">
+                These walllets are old and cannot be used anymore.
+              </p>
+            </div>
+          </div>
+          <div className="customizeGradientLine" ></div>
+          <Slider className="overflow-hidden" {...widgetsCarousels2A}>
+              {walletlist ? walletlist.filter(item => item.status===false).map((item , i) =>(
+                <Grid container spacing={0}>
+                  <Grid item md={4} key={i}>
+                    <Card className="card-box shadow-none m-3" >
+                      <a
+                        href="#/"
+                        onClick={(e) => e.preventDefault()}
+                        className="p-4 card-img-wrapper rounded" style={{backgroundColor:"#5b6491!important"}}> 
+                        <div className="img-wrapper-overlay">
+                          <div className="overlay-btn-wrapper">
+                            <EnalbeDisableDeleteWalletAction curwallet ={item} setDetailPartAction = {(e) =>setAnchorEl(e)}   actionType="Enable" modalCss ={enableModalCss}  />
+                            <EnalbeDisableDeleteWalletAction curwallet ={item} setDetailPartAction = {(e) =>setAnchorEl(e)}   actionType="Delete"  modalCss ={deleteModalCss} />
+                          </div>
                         </div>
-                        <div className="opacity-5 font-size-lg">$ 0</div>
-                      </div>
-                    </div>
-                  </a>
-                </Card>
-              </Grid>
-            )):[]}
-          </Grid>
+                        <div className="card-badges card-badges-bottom">
+                          <div className="badge-pill badge badge-danger" style={{opacity:"0.7"}}>Disabled</div>
+                        </div>
+                        <div className="d-flex align-items-center mr-4 text-black">
+                          <div className="font-weight-bold font-size-lg">
+                            {item.walletName}
+                          </div>
+                        </div>
+                        <div className="d-flex mt-4 text-black">
+                          <div className="text-left">
+                            <div className="font-size-xxl line-height-1">
+                            {item.coinList[0].quantity + " " + item.coinList[0].coinName}
+                            </div>
+                            <div className="opacity-5 font-size-lg">$ 0</div>
+                          </div>
+                        </div>
+                      </a>
+                    </Card>
+                  </Grid>
+                </Grid>
+              )):[]}
+          </Slider>
         </div>
       </Card>
+
       <Dialog open={modalConfirmDelete} onClose={toggleConfirmDelete}>
         <div className="text-center p-5">
           <div className="avatar-icon-wrapper rounded-circle m-0">

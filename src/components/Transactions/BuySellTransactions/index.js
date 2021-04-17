@@ -159,18 +159,18 @@ const ownerWalletListColumns = [
   return (
     <>
     { transactionListType === "usedWalletTransactionList" && usedWallet &&
-      <DataGrid 
+      <DataGrid   className="MuiDataGrid-root"
         rows={buyselltransactionlistData ? buyselltransactionlistData.filter(item=>item.walletInformation.walletName === usedWallet.walletName && item.owner ===authprops.email).map((item,i)=>({
           id: i+1, 
           currency : item,
           status : item.process,
           amount : item
         })):[]}
-        columns={usedWalletColumns} pageSize={5} rowsPerPageOptions={[5, 10, 20]} pagination  rowHeight="25" 
+        columns={usedWalletColumns} pageSize={5} rowsPerPageOptions={[5, 10, 20]} pagination   rowHeight="35" 
       />
     }
       { transactionListType === "ownerWalletTransactionList" &&
-      <DataGrid 
+      <DataGrid  className="MuiDataGrid-root"
         rows={buyselltransactionlistData ? buyselltransactionlistData.filter(item=>item.owner ===authprops.email).map((item,i)=>({
           id: i+1, 
           walletName : item ,
@@ -179,7 +179,7 @@ const ownerWalletListColumns = [
           status : item.process,
           amount : item
         })):[]}
-        columns={ownerWalletListColumns} pageSize={10} rowsPerPageOptions={[10, 15, 20]} pagination  rowHeight="25" 
+        columns={ownerWalletListColumns} pageSize={10} rowsPerPageOptions={[10, 15, 20]} pagination  rowHeight="35" 
       />
     }
   

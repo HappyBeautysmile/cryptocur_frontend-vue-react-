@@ -16,5 +16,7 @@ const local = {
     CoinImgUrl: "http://localhost:3030/upload/coin_img/"
 }
 ///
-export const config = local;
+// export const config = local;
+export const config = process.env.NODE_ENV === "development" ? local : prod;
+
 

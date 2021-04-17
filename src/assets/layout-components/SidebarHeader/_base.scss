@@ -78,7 +78,7 @@
       display: block;
       text-transform: uppercase;
       font-size: $font-size-sm / 1.2;
-      color: $white;
+      color: black;
       opacity: .7;
       padding: 4px 0;
     }
@@ -86,7 +86,7 @@
     b {
       font-size: $font-size-lg * 1.1;
       font-weight: bold;
-      color: $white;
+      color: #242D59 ;
       text-transform: lowercase;
     }
   }

@@ -156,7 +156,7 @@ export default function LivePreviewExample(props) {
   return (
     <>
       <h3 className="font-size-xl font-weight-bold mb-4">Active Fiats</h3>
-      <Card className="mb-spacing-6-x2">
+      <Card className="mb-spacing-6-x2 wallet_activeWallet">
         <div className="py-3">
         {
         fiatsprops &&  
@@ -164,7 +164,7 @@ export default function LivePreviewExample(props) {
           { fiatsprops.map((item,i)=>(
             //  onClick={handleCoin({item:item,event:"chooseCoinUse"})}
               <div  key = {i} > 
-                <Card   style={{height:"225px", margin:"0 10px",}} className={item.use === true ? "card-box card-box-hover-rise p-4 card-box-border-bottom bg-success text-white border-primary mb-5" : "card-box card-box-hover-rise p-4 card-box-border-bottom border-warning mb-5"} >
+                <Card   style={item.use === true  ? {height:"225px", margin:"0 10px"}:{height:"225px", margin:"0 10px" ,backgroundColor:"#bed3c9"}} className={item.use === true ? "card-box card-box-hover-rise p-4 card-box-border-bottom  text-white border-primary mb-5 p-3 bg-grow-early" : "card-box card-box-hover-rise p-4 card-box-border-bottom border-warning mb-5"} >
                   <div className="d-flex align-items-center mr-4">
                     <div className="font-weight-bold font-size-lg">
                       {item.name}

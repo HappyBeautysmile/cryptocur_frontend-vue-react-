@@ -119,12 +119,12 @@ console.log("curwallet");
           open={addModal}
           onClose={addToggle}
           classes={{
-            paper: 'w-100 rounded border-0   p-3 p-xl-0'
+            paper: 'w-100 rounded border-0 shadow-sm-dark bg-white p-3 p-xl-0'
           }}>
             <form>
               <Container>
-                <div className="p-4" style={{color:"black!important"}}>
-                  <h5 className="font-size-xl mb-1 font-weight-bold " style={{color:"#242D59"}}>
+                <div className="p-4">
+                  <h5 className="font-size-xl mb-1 font-weight-bold">
                     View Detail
                   </h5>
                   <p className="text-black-50 mb-4">
@@ -243,7 +243,7 @@ console.log("curwallet");
                         <Card className="card-box mb-4 p-3">
                           <div className="display-3 text-black font-weight-bold">{curwallet.failedTransfers}</div>
                           <div className="divider mt-2 mb-3 border-2 w-25 bg-first rounded border-first" />
-                          <div className="font-weight-bold opacity-7 text-uppercase" style={{color:"black"}}>
+                          <div className="font-weight-bold opacity-7 text-uppercase">
                             Failed transfers
                           </div>
                         </Card>
@@ -252,7 +252,7 @@ console.log("curwallet");
                         <Card className="card-box mb-4 p-3">
                           <div className="display-3 text-black font-weight-bold">{curwallet.successfulTransfers}</div>
                           <div className="divider mt-2 mb-3 border-2 w-25 bg-success rounded border-success" />
-                          <div className="font-weight-bold opacity-7 text-uppercase" style={{color:"black"}}>
+                          <div className="font-weight-bold opacity-7 text-uppercase">
                             Successful transfers
                           </div>
                         </Card>
@@ -261,7 +261,7 @@ console.log("curwallet");
                         <Card className="card-box mb-4 p-3">
                           <div className="display-3 text-black font-weight-bold">{curwallet.transactions}</div>
                           <div className="divider mt-2 mb-3 border-2 w-25 bg-warning rounded border-warning" />
-                          <div className="font-weight-bold opacity-7 text-uppercase" style={{color:"black"}}>
+                          <div className="font-weight-bold opacity-7 text-uppercase">
                             Transactions
                           </div>
                         </Card>
@@ -275,6 +275,9 @@ console.log("curwallet");
                       height={311}
                     /> */}
                   </Card>
+                
+
+
                   <Grid container spacing={6}>
                     <Grid item md={6}>
                     </Grid>

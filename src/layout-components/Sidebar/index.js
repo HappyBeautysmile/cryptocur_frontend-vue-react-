@@ -28,7 +28,7 @@ const Sidebar = (props) => {
       <div
         className={clsx('app-sidebar', sidebarStyle, {
           'app-sidebar--shadow': sidebarShadow
-        })}>
+        })} style={{backgroundColor:"white"}}>
         <SidebarHeader />
         <div className="app-sidebar--content">
           <SidebarMenu />

@@ -52,8 +52,8 @@ const SidebarHeader = (props) => {
                   src={projectLogo }
                 />
             </div>
-            <div className="app-sidebar-logo--text">
-              <span>Crypto</span>
+            <div className="app-sidebar-logo--text" >
+              <span >Crypto</span>
               <b>Zedcoin</b>
             </div>
           </NavLink>

@@ -83,12 +83,12 @@ export default function LivePreviewExample() {
       <Card className="mb-spacing-6-x2 wallet_activeWallet">
         <div className="py-3">
 
-          <div className="card-header d-flex align-items-center justify-content-between card-header-alt p-4 wallet_activeWallet">
+          <div className="card-header d-flex align-items-center justify-content-between card-header-alt p-4 ">
             <div>
-              <h6 className="font-weight-bold font-size-lg mb-1" style={{color:"white"}}>
+              <h6 className="font-weight-bold font-size-lg mb-1" style={{color:"black"}}>
                 Deactivated wallets
               </h6>
-              <p className="text-danger opacity-6 mb-0">
+              <p className="text-danger  mb-0">
                 These walllets are old and cannot be used anymore.
               </p>
             </div>
@@ -98,7 +98,7 @@ export default function LivePreviewExample() {
               {walletlist ? walletlist.filter(item => item.status===false).map((item , i) =>(
                 <Grid container spacing={0}>
                   <Grid item md={4} key={i}>
-                    <Card className="card-box shadow-none m-3" >
+                    <Card className="card-box shadow-none m-3" style={{backgroundColor:"#b5bebd"}} >
                       <a
                         href="#/"
                         onClick={(e) => e.preventDefault()}

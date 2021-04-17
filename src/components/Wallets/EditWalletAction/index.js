@@ -98,16 +98,14 @@ function EditWalletAction(props) {
           open={addModal}
           onClose={addToggle}
           classes={{
-            paper: 'w-100 rounded border-0 shadow-sm-dark   p-3 p-xl-0'
-          }}  >
+            paper: 'w-100 rounded border-0 shadow-sm-dark bg-white p-3 p-xl-0'
+          }}>
             <form>
-              <div className="customizeGradientModalLine"></div>
-              <Container className="customizeModal"> 
+              <Container>
                 <div className="p-4">
                   <h5 className="font-size-xl mb-1 font-weight-bold">
                     ADD
                   </h5>
-                  <br></br>
                   <p className="text-black-50 mb-4">
                     please input here!
                   </p>
@@ -115,11 +113,10 @@ function EditWalletAction(props) {
                     <Grid item md={12}>
                       <TextField
                         fullWidth
-                        placeholder="Name"
+                        label="Name"
                         variant="outlined"
                         onChange ={actionType!=="Delete" ? ((e)=>setName(e.target.value)) :null}
                         value ={name}
-                        className="modalTextStyle"
                         required
                       />
                     </Grid>
@@ -131,14 +128,14 @@ function EditWalletAction(props) {
                       <div>
                         {actionType !=="Delete" && 
                           <div> 
-                            <Button type = "submit" onClick = {handleEditSubmit} className="m-2 text-success" style={{backgroundColor:"white"}}>{actionType}</Button>
-                            <Button onClick={addToggle} className="m-2 btn-neutral-white text-dark"  style={{backgroundColor:"white"}}>Cancel</Button>
+                            <Button type = "submit" onClick = {handleEditSubmit} className="m-2 btn-neutral-success">{actionType}</Button>
+                            <Button onClick={addToggle} className="m-2 btn-neutral-dark">Cancel</Button>
                           </div>
                         }
                         {actionType ==="Delete" &&
                           <div> 
-                            <Button onClick={addToggle} className="m-2 btn-neutral-white text-dark "  style={{backgroundColor:"white"}}>Cancel</Button>
-                            <Button type = "submit" onClick = {handleEditSubmit} className="m-2 btn-neutral-danger text-dark"  style={{backgroundColor:"white"}}>{actionType}</Button>
+                            <Button onClick={addToggle} className="m-2 btn-neutral-dark">Cancel</Button>
+                            <Button type = "submit" onClick = {handleEditSubmit} className="m-2 btn-neutral-danger">{actionType}</Button>
                           </div>
                         }
                       </div>

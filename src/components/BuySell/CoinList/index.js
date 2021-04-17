@@ -168,6 +168,7 @@ export default function BuySell() {
                 action: item
             })):[]}
             columns={columns} pageSize={10} rowsPerPageOptions={[10, 15, 20]} pagination  rowHeight="20"
+           
             />
         </PerfectScrollbar>
         <BuySellModal buySellModal={buySellModal} initialChoiceMoney ={initialChoiceMoney} currentFiatAndRate={selectedFiat ? selectedFiat.current_status : []} statusModalSetting={(e)=>setBuySellModal(e)} modalCssSetting={modalCssSetting} />

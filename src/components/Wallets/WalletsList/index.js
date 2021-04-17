@@ -1,7 +1,7 @@
 import React, { useState ,useEffect} from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  Grid,  Card,  Menu,  Button,  List,  ListItem,  Tooltip,Container} from '@material-ui/core';
+import {  Grid, CardContent, Card,  Menu,  Button,  List,  ListItem,  Tooltip,Container} from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
 
 import StarTwoToneIcon from '@material-ui/icons/StarTwoTone';
@@ -206,9 +206,9 @@ export default function LivePreviewExample(props) {
 
         <Card className="mb-spacing-6-x2 wallet_activeWallet">
           <div className="py-3">
-            <div className="card-header d-flex align-items-center justify-content-between card-header-alt p-4 wallet_activeWallet">
+            <div className="card-header d-flex align-items-center justify-content-between card-header-alt p-4 ">
               <div>
-                <h6 className="font-weight-bold font-size-lg mb-1" style={{color:"white"}}>
+                <h6 className="font-weight-bold font-size-lg mb-1" style={{color:"black"}}>
                   Active Wallets
                 </h6>
                 {/* <p className="text-danger opacity-6 mb-0">
@@ -224,7 +224,7 @@ export default function LivePreviewExample(props) {
 
                   <Grid container spacing={0}>
                       <Grid item key = {i} md ={12}> 
-                        <Card  style={item.use === true ? {height:"225px", margin:"0 10px" ,backgroundColor:"rgb(86 191 227)"}: {height:"225px", margin:"0 10px",backgroundColor:"whilte",border:'3px solid whitle!important',boxShadow: "0 0 20pt 0pt #b45999!important"}} className={item.use === true ? "card-box card-box-hover-rise p-4 card-box-border-bottom text-white border-primary mb-5 m-3" : "card-box card-box-hover-rise p-4 card-box-border-bottom border-warning mb-5 m-3"} >
+                        <Card  style={item.use === true ? {height:"225px", margin:"0 10px"}: {height:"225px", margin:"0 10px",backgroundColor:"#b0c7ee",border:'3px solid whitle!important',boxShadow: "0 0 20pt 0pt #b45999!important"}} className={item.use === true ? "card bg-white card-box bg-night-sky text-white card-box card-box-hover-rise p-4 card-box-border-bottom mb-5 m-3" : "card-box card-box-hover-rise p-4 card-box-border-bottom border-warning mb-5 m-3"} >
                           {item.newMessage > 0 && 
                             <div style={{float:"right" ,paddingRight:"30px"}}>
                               <FontAwesomeIcon
@@ -262,7 +262,7 @@ export default function LivePreviewExample(props) {
                                 open={Boolean(anchorEl)}
                                 classes={{ list: 'p-0' }}
                                 onClose={handleClose}>
-                                <div className="dropdown-menu-lg overflow-hidden p-0"  style={{backgroundColor:"#242D59"}}>
+                                <div className="dropdown-menu-lg overflow-hidden p-0"  >
                                   <List className="nav-neutral-first nav-pills-rounded flex-column p-3">
                                     <ViewDetailWalletAction curwallet ={curWallet} setDetailPartAction = {(e) =>setAnchorEl(e)}    />
                                     <EditWalletAction curwallet ={curWallet} setDetailPartAction = {(e) =>setAnchorEl(e)}   actionType="Edit" />
@@ -304,7 +304,7 @@ export default function LivePreviewExample(props) {
                             </div>
                           </div>
                             {item.use === true && parentPosition !== "BuySell" &&
-                              <Button className="m-2 btn-success"  onClick={handleCoin({item:item , eventaction:"Null"})}>
+                              <Button className="m-2 btn-success"  onClick={handleCoin({item:item , eventaction:"Null"})} style={{width:"30%"}}>
                                 <NavLink to="/BuySell">
                                   <span className="text-white" style={{fontWeight:"bold",fontSize:"18px"}}>
                                     Buy/Sell

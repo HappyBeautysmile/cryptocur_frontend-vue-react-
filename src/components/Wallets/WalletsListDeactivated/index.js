@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Grid, Dialog, Card, Button } from '@material-ui/core';
@@ -33,7 +33,7 @@ export default function LivePreviewExample() {
   const toggleConfirmDelete = () => setConfirmDelete(!modalConfirmDelete);
   const walletlist = useSelector(state => state.wallets.walletsData);
   const [anchorEl , setAnchorEl] = useState({});
-  const [widgetsCarousels2A ,setWidgetsCarousels2A] = useState({
+  const [widgetsUnactiveCarousels2A ,setWidgetsUnactiveCarousels2A] = useState({
     dots: true,
     speed: 500,
     slidesToShow:  1  ,
@@ -78,6 +78,75 @@ export default function LivePreviewExample() {
     submitBtnColor:"btn-outline-success",
     submitBtnPosition:"left",
   }
+  
+  useEffect(() => {
+    var liveWalletValue = 0 ;
+    if(walletlist)
+    {
+      liveWalletValue = walletlist.length  ;
+      for(var i = 0 ; i < walletlist.length ; i++)
+      {
+        if(walletlist[i].status === true) liveWalletValue--;
+      }
+    }
+    if(liveWalletValue > 2)
+    {
+      setWidgetsUnactiveCarousels2A({...widgetsUnactiveCarousels2A,slidesToShow:3,
+        responsive: [
+          {
+            breakpoint: 1450,
+            settings: { slidesToShow: 3, slidesToScroll: 1 }
+          },
+          {
+            breakpoint: 1100,
+            settings: { slidesToShow: 2, slidesToScroll: 1 }
+          },
+          {
+            breakpoint: 900,
+            settings: { slidesToShow: 1, slidesToScroll: 1 }
+          }
+        ]
+      });
+    }
+    if(liveWalletValue  === 2)
+    {
+      setWidgetsUnactiveCarousels2A({...widgetsUnactiveCarousels2A,slidesToShow:2,
+        responsive: [
+          {
+            breakpoint: 1450,
+            settings: { slidesToShow: 2, slidesToScroll: 1 }
+          },
+          {
+            breakpoint: 1100,
+            settings: { slidesToShow: 2, slidesToScroll: 1 }
+          },
+          {
+            breakpoint: 900,
+            settings: { slidesToShow: 2, slidesToScroll: 1 }
+          }
+        ]
+      });
+    }
+    if(liveWalletValue  === 1)
+    {
+      setWidgetsUnactiveCarousels2A({...widgetsUnactiveCarousels2A,slidesToShow:1,
+        responsive: [
+          {
+            breakpoint: 1450,
+            settings: { slidesToShow: 1, slidesToScroll: 1 }
+          },
+          {
+            breakpoint: 1100,
+            settings: { slidesToShow: 1, slidesToScroll: 1 }
+          },
+          {
+            breakpoint: 900,
+            settings: { slidesToShow: 1, slidesToScroll: 1 }
+          }
+        ]
+      });
+    }
+  }, [walletlist])
   return (
     <>
       <Card className="mb-spacing-6-x2 wallet_activeWallet">
@@ -94,11 +163,11 @@ export default function LivePreviewExample() {
             </div>
           </div>
           <div className="customizeGradientLine" ></div>
-          <Slider className="overflow-hidden" {...widgetsCarousels2A}>
+          <Slider className="overflow-hidden" {...widgetsUnactiveCarousels2A}>
               {walletlist ? walletlist.filter(item => item.status===false).map((item , i) =>(
                 <Grid container spacing={0}>
-                  <Grid item md={4} key={i}>
-                    <Card className="card-box shadow-none m-3" style={{backgroundColor:"#b5bebd"}} >
+                  <Grid item md={12} key={i}>
+                    <Card className="card-box shadow-none bg-secondary m-3" style={{border:"1px solid #c5c5c5" }}>
                       <a
                         href="#/"
                         onClick={(e) => e.preventDefault()}

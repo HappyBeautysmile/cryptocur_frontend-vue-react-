@@ -16,6 +16,7 @@ import ViewDetailWalletAction from "../ViewDetailWalletAction";
 import EnalbeDisableDeleteWalletAction from "../EnableDisableDeleteWalletAction";
 
 import Slider from 'react-slick';
+import { Message } from '@material-ui/icons';
 
 function SliderArrowNext(props) {
   const { className, onClick } = props;
@@ -190,7 +191,6 @@ export default function LivePreviewExample(props) {
     if(event.eventaction ==="changeWallet")
     {
       // console.log("BBBBB");
-    // alert("wow");
       let fpdata = {
         walletName : event.item.walletName,
         owner : authprops.email,
@@ -207,24 +207,16 @@ export default function LivePreviewExample(props) {
         <Card className="mb-spacing-6-x2 wallet_activeWallet">
           <div className="py-3">
             <div className="card-header d-flex align-items-center justify-content-between card-header-alt p-4 ">
-              <div>
-                <h6 className="font-weight-bold font-size-lg mb-1" style={{color:"black"}}>
-                  Active Wallets
-                </h6>
-                {/* <p className="text-danger opacity-6 mb-0">
-                  These walllets are old and cannot be used anymore.
-                </p> */}
-              </div>
+              <h6 className="font-size-xl font-weight-bold mb-4">
+                Active Wallets
+              </h6>
             </div>
             <div className="customizeGradientLine" ></div>
-            <Slider className="overflow-hidden" {...widgetsCarousels2A}>
-
+              <Slider className="overflow-hidden" {...widgetsCarousels2A}>
                 {walletlist.filter(item => item.status === true).map((item,i)=>(
-                //  onClick={handleCoin({item:item,event:"chooseCoinUse"})}
-
                   <Grid container spacing={0}>
                       <Grid item key = {i} md ={12}> 
-                        <Card  style={item.use === true ? {height:"225px", margin:"0 10px"}: {height:"225px", margin:"0 10px",backgroundColor:"#b0c7ee",border:'3px solid whitle!important',boxShadow: "0 0 20pt 0pt #b45999!important"}} className={item.use === true ? "card bg-white card-box bg-night-sky text-white card-box card-box-hover-rise p-4 card-box-border-bottom mb-5 m-3" : "card-box card-box-hover-rise p-4 card-box-border-bottom border-warning mb-5 m-3"} >
+                        <Card  style={item.use === true ? {height:"225px", margin:"0 10px"}: {height:"225px", margin:"0 10px" ,border:"3px solid #2e4482"}} className={item.use === true ? "card  card-box bg-night-sky text-white card-box card-box-hover-rise p-4 card-box-border-bottom mb-5 m-3" : "card-box card-box-hover-rise p-4 card-box-border-bottom mb-5 m-3"} >
                           {item.newMessage > 0 && 
                             <div style={{float:"right" ,paddingRight:"30px"}}>
                               <FontAwesomeIcon
@@ -236,7 +228,6 @@ export default function LivePreviewExample(props) {
                                 </div>
                             </div>
                           }
-
                           <div className="card-tr-actions"  onClick={handleCoin({item:item , eventaction:"detailarea"})}>
                             <div>
                               <Button
@@ -281,22 +272,27 @@ export default function LivePreviewExample(props) {
                                 className="font-size-xl"
                               />
                             </div> */}
+                            {/*
+                            */}
                             <div className="font-weight-bold font-size-lg">{item.walletName}</div>
+                            
                           </div>
                           {
                             item.use === false &&
                             <Tooltip
-                              classes={{ tooltip: 'text-center p-3 tooltip-first' }}
+                              classes={{ tooltip: 'text-center p-3 bg-night-sky ' }}
                               arrow
                               placement="top"
                               title="We can use this fiat.">
-                              <Button className="btn-first m-2" style={{fontSize:"16px",float:"right" }} onClick={handleCoin({item:item , eventaction:"changeWallet"})} >Use</Button>
+                              <Button className="bg-night-sky btn-outline-secondary UseBtn" onClick={handleCoin({item:item , eventaction:"changeWallet"})} >Use</Button>
                             </Tooltip>                       
                           }
                           <div className="d-flex my-4">
                             {/* <div className="d-30 text-success mr-2">
                               <TrendingUpTwoToneIcon className="d-30" />
-                            </div> */}
+                            </div>
+                            you'd better. Because your wife is very beautiful
+  */}
                             
                             <div className="text-left"> 
                               <div className="font-size-xxl line-height-1">{item.coinList[0].quantity + " " + item.coinList[0].coinName}</div>
@@ -304,7 +300,7 @@ export default function LivePreviewExample(props) {
                             </div>
                           </div>
                             {item.use === true && parentPosition !== "BuySell" &&
-                              <Button className="m-2 btn-success"  onClick={handleCoin({item:item , eventaction:"Null"})} style={{width:"30%"}}>
+                              <Button className="m-2 bg-night-sky btn-outline-secondary"  onClick={handleCoin({item:item , eventaction:"Null"})} style={{width:"30%" }}>
                                 <NavLink to="/BuySell">
                                   <span className="text-white" style={{fontWeight:"bold",fontSize:"18px"}}>
                                     Buy/Sell
@@ -315,9 +311,11 @@ export default function LivePreviewExample(props) {
                         </Card>
                       </Grid>
                   </Grid>
-
                 ))}
             </Slider>
+            {/*
+            */}
+
           </div>
         </Card>
       }

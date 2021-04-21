@@ -83,7 +83,7 @@ function EditWalletAction(props) {
         </Button> */}
         {
           actionType ==='ADD' &&
-          <Button onClick={addToggle} variant="contained" color="primary">
+          <Button onClick={addToggle} variant="contained" color="primary" className="bg-night-sky">
             <span className="btn-wrapper--icon">
               <FontAwesomeIcon icon={['fas', 'plus']} />
             </span>

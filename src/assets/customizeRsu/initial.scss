@@ -1,6 +1,7 @@
 .wallet_activeWallet{
     background-color: white!important;
-    box-shadow: 0 0 15pt 1pt #8168EF!important;
+    // box-shadow: 0 0 15pt 1pt gray!important;
+    box-shadow: 3pt 3pt 15pt gray!important;
 }
 .customizeGradientLine{
     width: 100% ;
@@ -15,4 +16,12 @@
     height: 3px ;
     top:55px;
     background:linear-gradient(to right, red,#8168EF,#242D59)
+}
+.UseBtn:hover{
+    color:white!important;
+}
+.UseBtn{
+    font-size:16px;
+    float: right;
+    border-radius: 10px!important;
 }

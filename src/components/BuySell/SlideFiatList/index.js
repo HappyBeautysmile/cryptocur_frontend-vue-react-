@@ -155,46 +155,53 @@ export default function LivePreviewExample(props) {
   
   return (
     <>
-      <h3 className="font-size-xl font-weight-bold mb-4">Active Fiats</h3>
       <Card className="mb-spacing-6-x2 wallet_activeWallet">
         <div className="py-3">
-        {
-        fiatsprops &&  
-         <Slider className="overflow-hidden" {...widgetsCarousels2A}>
-          { fiatsprops.map((item,i)=>(
-            //  onClick={handleCoin({item:item,event:"chooseCoinUse"})}
-              <div  key = {i} > 
-                <Card   style={item.use === true  ? {height:"225px", margin:"0 10px"}:{height:"225px", margin:"0 10px" ,backgroundColor:"#bed3c9"}} className={item.use === true ? "card-box card-box-hover-rise p-4 card-box-border-bottom  text-white border-primary mb-5 p-3 bg-grow-early" : "card-box card-box-hover-rise p-4 card-box-border-bottom border-warning mb-5"} >
-                  <div className="d-flex align-items-center mr-4">
-                    <div className="font-weight-bold font-size-lg">
-                      {item.name}
-                    </div>
-                  </div>
-                  {
-                    item.use === false &&
-                    <Tooltip
-                      classes={{ tooltip: 'text-center p-3 tooltip-success' }}
-                      arrow
-                      placement="top"
-                      title="We can use this fiat.">
-                      <Button className="btn-success m-2" style={{fontSize:"16px",float:"right" }} onClick={handleCoin({item:item , eventaction:"changeWallet"})} >Use</Button>
-                    </Tooltip>                       
-                  }
-                  <div className="d-flex my-4">
-                    <div className="text-left"> 
-                      <div className={item.use === true ? "text-white opacity-5 font-size-lg" :"text-success opacity-5 font-size-lg"}>$0</div>
-                    </div>
-                  </div> <div className="d-flex my-4">
-                    <div className="text-left"> 
-                    <div className={item.use === true ? "text-white opacity-5 font-size-lg" :"text-success opacity-9 font-size-lg"}>{item.createdAt}</div>
-                    </div>
-                  </div>
-                </Card>
-              </div>
-            ))}
-        </Slider>
-        }
+          <div className="card-header d-flex align-items-center justify-content-between card-header-alt p-4 ">
+            <h6 className="font-size-xl font-weight-bold mb-4" >
+              Active Fiats
+            </h6>
+          </div>
+          <div className="customizeGradientLine" ></div>
+          {
+            fiatsprops &&  
+            <Slider className="overflow-hidden" {...widgetsCarousels2A}>
+              { fiatsprops.map((item,i)=>(
+                  <Grid container spacing={0}>
+                    <Grid item key = {i} md ={12}> 
+                      <Card   style={item.use === true  ? {height:"225px", margin:"0 10px"}:{height:"225px", margin:"0 10px" , border:"3px solid #3b3e66"}}  className={item.use === true ? "card  card-box bg-midnight-bloom text-white card-box card-box-hover-rise p-4 card-box-border-bottom mb-5 m-3" : "card-box card-box-hover-rise p-4 card-box-border-bottom mb-5 m-3"}  >
+                      <div className="d-flex align-items-center mr-4">
+                        <div className="font-weight-bold font-size-lg">
+                          {item.name}
+                        </div>
+                      </div>
+                      {
+                        item.use === false &&
+                        <Tooltip
+                          classes={{ tooltip: 'text-center p-3 bg-midnight-bloom' }}
+                          arrow
+                          placement="top"
+                          title="We can use this fiat.">
+                          <Button className="bg-midnight-bloom btn-outline-secondary UseBtn"   onClick={handleCoin({item:item , eventaction:"changeWallet"})} >Use</Button>
+                        </Tooltip>                       
+                      }
+                      <div className="d-flex my-4">
+                        <div className="text-left"> 
+                          <div className={item.use === true ? "text-white opacity-5 font-size-lg" :"text-success opacity-5 font-size-lg"}>$0</div>
+                        </div>
+                      </div> <div className="d-flex my-4">
+                        <div className="text-left"> 
+                        <div className={item.use === true ? "text-white opacity-5 font-size-lg" :"text-success opacity-9 font-size-lg"}>{item.createdAt}</div>
+                        </div>
+                      </div>
+                    </Card>
+                    </Grid>
+                  </Grid>
+                ))}
+            </Slider>
+          }
         </div>
+
       </Card>
     </>
   );

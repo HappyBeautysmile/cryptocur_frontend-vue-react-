@@ -110,19 +110,19 @@ export default function LivePreviewExample() {
       renderCell: (params) => (
           <div className="d-flex align-items-center mr-4">
             <Tooltip
-                classes={{ tooltip: 'text-center p-3 tooltip-success' }}
+                classes={{ tooltip: 'text-center p-3 bg-midnight-bloom' }}
                 arrow
                 placement="top"
                 title="We can deposit coin we want !">
-                <Button className="btn-success m-2" onClick={DepositFunc(params.value)}>DEPOSIT</Button>
+                <Button className="bg-midnight-bloom btn-outline-secondary UseBtn m-2" onClick={DepositFunc(params.value)}>DEPOSIT</Button>
 
             </Tooltip>
             <Tooltip
-                classes={{ tooltip: 'text-center p-3 tooltip-first' }}
+                classes={{ tooltip: 'text-center p-3 tooltip-info' }}
                 arrow
                 placement="top"
                 title="We can withdraw coin we want !">
-                <Button className="btn-first m-2" onClick={WithdrawFunc(params.value)} >WITHDRAW</Button>
+                <Button className="btn-info m-2 UseBtn" onClick={WithdrawFunc(params.value)} >WITHDRAW</Button>
             
             </Tooltip>
             

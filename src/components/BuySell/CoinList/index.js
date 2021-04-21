@@ -134,18 +134,18 @@ export default function BuySell() {
             renderCell: (params) => (
                 <div className="d-flex align-items-center mr-4">
                     <Tooltip
-                        classes={{ tooltip: 'text-center p-3 tooltip-success' }}
+                        classes={{ tooltip: 'text-center p-3 bg-midnight-bloom' }}
                         arrow
                         placement="top"
                         title="We can buy coin we want !">
-                        <Button className="btn-success m-2"  onClick={buyCryptoFunc(params.value)}>Buy</Button>
+                        <Button className="bg-midnight-bloom btn-outline-secondary m-2 UseBtn"  onClick={buyCryptoFunc(params.value)}>Buy</Button>
                     </Tooltip>
                     <Tooltip
-                        classes={{ tooltip: 'text-center p-3 tooltip-warning' }}
+                        classes={{ tooltip: 'text-center p-3 tooltip-info' }}
                         arrow
                         placement="top"
                         title="We can sell coin we want !">
-                        <Button className="btn-warning m-2" onClick={sellCryptoFunc(params.value)}>Sell</Button>
+                        <Button className="btn-info m-2 UseBtn" onClick={sellCryptoFunc(params.value)}>Sell</Button>
                     </Tooltip>
                 </div>
             ),

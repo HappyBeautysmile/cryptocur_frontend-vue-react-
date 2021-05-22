@@ -86,9 +86,9 @@ export default function LivePreviewExample() {
                     <ListItem
                       button
                       component={NavLink}
-                      to="/Overview"
+                      to="/login"
                       className="px-4 d-flex align-items-center">
-                      <span>Overview</span>
+                      <span>Login</span>
                       <FontAwesomeIcon
                         icon={['fas', 'angle-right']}
                         className="opacity-6 ml-auto"
@@ -99,132 +99,14 @@ export default function LivePreviewExample() {
                       component={NavLink}
                       to="/BuySell"
                       className="px-4 d-flex align-items-center">
-                      <span>Buy/Sell</span>
+                      <span>Register</span>
                       <FontAwesomeIcon
                         icon={['fas', 'angle-right']}
                         className="opacity-6 ml-auto"
                       />
                     </ListItem>
-                    <ListItem
-                      button
-                      component={NavLink}
-                      to="/Settings"
-                      className="px-4 d-flex align-items-center">
-                      <span>Settings</span>
-                      <FontAwesomeIcon
-                        icon={['fas', 'angle-right']}
-                        className="opacity-6 ml-auto"
-                      />
-                    </ListItem>
+                  
                   </List>
-                </div>
-                <div className="divider" />
-                <div className="m-3">
-                  <div className="bg-deep-sky px-3 py-4 rounded">
-                    <div className="px-4 text-uppercase pb-2 text-white font-weight-bold font-size-sm">
-                      Individual Apps
-                    </div>
-                    <List
-                      component="div"
-                      className="nav-pills nav-transparent nav-pills-rounded flex-column">
-                      <ListItem
-                        component="a"
-                        button
-                        href="https://demo.uifort.com/bamburgh-react-admin-dashboard-material-ui-pro-demo"
-                        target="_blank"
-                        className="px-4 text-white-50 d-flex align-items-center">
-                        <span>General</span>
-                        <FontAwesomeIcon
-                          icon={['fas', 'angle-right']}
-                          className="opacity-6 ml-auto"
-                        />
-                      </ListItem>
-                      <ListItem
-                        component="a"
-                        button
-                        href="#/"
-                        onClick={(e) => e.preventDefault()}
-                        selected
-                        className="px-4 d-flex text-white-50 align-items-center">
-                        <span>Crypto</span>
-                        <FontAwesomeIcon
-                          icon={['fas', 'angle-right']}
-                          className="opacity-6 ml-auto"
-                        />
-                      </ListItem>
-                      <ListItem
-                        component="a"
-                        button
-                        href="https://demo.uifort.com/bamburgh-react-messenger-application-material-ui-pro-demo"
-                        target="_blank"
-                        className="px-4 d-flex text-white-50 align-items-center">
-                        <span>Messenger</span>
-                        <FontAwesomeIcon
-                          icon={['fas', 'angle-right']}
-                          className="opacity-6 ml-auto"
-                        />
-                      </ListItem>
-                      <ListItem
-                        component="a"
-                        button
-                        href="https://demo.uifort.com/bamburgh-react-commerce-application-material-ui-pro-demo"
-                        target="_blank"
-                        className="px-4 d-flex text-white-50 align-items-center">
-                        <span>Commerce</span>
-                        <FontAwesomeIcon
-                          icon={['fas', 'angle-right']}
-                          className="opacity-6 ml-auto"
-                        />
-                      </ListItem>
-                      <ListItem
-                        component="a"
-                        button
-                        href="#/"
-                        onClick={(e) => e.preventDefault()}
-                        className="px-4 d-flex text-white-50 align-items-center"
-                        disabled>
-                        <span>Learning</span>
-                      </ListItem>
-                      <ListItem
-                        component="a"
-                        button
-                        href="#/"
-                        onClick={(e) => e.preventDefault()}
-                        className="px-4 d-flex text-white-50 align-items-center"
-                        disabled>
-                        <span>Monitoring</span>
-                      </ListItem>
-                      <ListItem
-                        component="a"
-                        button
-                        href="#/"
-                        onClick={(e) => e.preventDefault()}
-                        className="px-4 d-flex text-white-50 align-items-center"
-                        disabled>
-                        <span>Fleet Manager</span>
-                      </ListItem>
-                      <ListItem
-                        component="a"
-                        button
-                        href="#/"
-                        onClick={(e) => e.preventDefault()}
-                        className="px-4 d-flex text-white-50 align-items-center"
-                        disabled>
-                        <span>Banking</span>
-                      </ListItem>
-                    </List>
-                  </div>
-                </div>
-                <div className="divider" />
-                <div className="card-footer bg-secondary text-center p-3">
-                  <Button
-                    component="a"
-                    href="https://uifort.com/template/bamburgh-react-crypto-application-material-ui-pro"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    className="font-weight-bold text-nowrap font-size-sm btn-success">
-                    Buy Now
-                  </Button>
                 </div>
               </div>
             </Collapse>

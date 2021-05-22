@@ -315,14 +315,14 @@ function BuySellModal(props) {
                     <Grid container >
                         <Grid item lg={6} >
                             <Button onClick ={handleBuySellSubmit}
-                                className={modalCssSetting.modalFormBtnBgColor ==="btn-success" ? "btn-success py-2 mt-3 px-5 font-weight-bold font-size-lg" : "btn-warning py-2 mt-3 px-5 font-weight-bold font-size-lg"} style={{width:"80%",marginLeft:"10%",marginRight:"10%"}}
+                                className={modalCssSetting.modalFormBtnBgColor ==="btn-success" ? "bg-midnight-bloom btn-outline-secondary py-2 mt-3 px-5 font-weight-bold font-size-lg" : "btn-info py-2 mt-3 px-5 font-weight-bold font-size-lg"} style={{width:"80%",marginLeft:"10%",marginRight:"10%",borderRadius:"10px"}}
                                 >
                                     {modalCssSetting.modalTitle +" " }
                                     { choiceMoney.wantedCoin ? choiceMoney.wantedCoin.coinFullName : ""} 
                             </Button>
                         </Grid>
                         <Grid item lg={6}>
-                            <Button  onClick={modalClose} className="btn-dark py-2 mt-3 px-5 font-weight-bold font-size-lg" style={{width:"80%",marginLeft:"10%",marginRight:"10%"}}>Cancel</Button>
+                            <Button  onClick={modalClose} className="btn-dark py-2 mt-3 px-5 font-weight-bold font-size-lg" style={{width:"80%",marginLeft:"10%",marginRight:"10%",borderRadius:"10px"}}>Cancel</Button>
                         </Grid>
                     </Grid>
                   

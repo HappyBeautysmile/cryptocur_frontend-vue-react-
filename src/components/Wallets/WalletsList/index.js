@@ -37,10 +37,6 @@ function SliderArrowPrev(props) {
 }
 
 export default function LivePreviewExample(props) {
-
-  
-
-
   const [anchorEl, setAnchorEl] = useState(null);
   const [curWallet , setCurWallet] = useState({});
   const [buySellModal , setBuySellModal] = useState(false);
@@ -294,10 +290,12 @@ export default function LivePreviewExample(props) {
                             you'd better. Because your wife is very beautiful
   */}
                             
-                            <div className="text-left"> 
+                            {/* <div className="text-left"> 
                               <div className="font-size-xxl line-height-1">{item.coinList[0].quantity + " " + item.coinList[0].coinName}</div>
                               <div className={item.use === true ? "text-white opacity-5 font-size-lg" :"text-success opacity-5 font-size-lg"}>$0</div>
-                            </div>
+                            </div> */}
+                            <br/>
+                            <br/>
                           </div>
                             {item.use === true && parentPosition !== "BuySell" &&
                               <Button className="m-2 bg-night-sky btn-outline-secondary"  onClick={handleCoin({item:item , eventaction:"Null"})} style={{width:"30%" }}>
